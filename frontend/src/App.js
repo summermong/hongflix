@@ -10,6 +10,7 @@ import HorrorPage from './pages/HorrorPage';
 import Login from './pages/Login';
 import MyPage from './pages/MyPage';
 import Search from './pages/Search';
+import Footer from './home/Footer';
 
 function App() {
   const isLoggedIn = false; // 로그인 여부 상태
@@ -27,6 +28,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/mypage" element={<MyPage />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );

@@ -69,7 +69,7 @@ const Header = () => {
             </button>
             {dropdownVisible && (
               <div
-                className={`flex justify-center absolute top-8 right-0 -left-4 py-2 w-20 shadow-sm text-indigo-950 bg-white ${
+                className={`flex justify-center absolute top-8 right-0 -left-4 py-2 w-20 text-indigo-950 bg-white ${
                   isScrolled ? 'null' : 'border-gray-950'
                 }`}
               >

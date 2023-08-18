@@ -6,30 +6,9 @@ import 'slick-carousel/slick/slick-theme.css';
 const Main = () => {
   // 캐러셀 이미지 크기 & 타이틀
   const Slide = ({ imageSrc, text }) => (
-    <div style={{ position: 'relative' }}>
-      <img
-        src={imageSrc}
-        alt="carousel"
-        style={{
-          display: 'block',
-          margin: '0 auto',
-          width: '100%',
-        }}
-      />
-      <div
-        className="text-xs md:text-base lg:text-sm"
-        style={{
-          position: 'absolute',
-          bottom: '20px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          backgroundColor: '#1d1b4b',
-          padding: '5px 20px',
-          color: 'white',
-          textAlign: 'center',
-          borderRadius: '20px',
-        }}
-      >
+    <div className="relative">
+      <img className="w-screen h-fit" src={imageSrc} alt="carousel" />
+      <div className="absolute -translate-x-2/4 px-5 py-1.5 rounded-3xl bottom-5 left-2/4 text-xs md:text-base lg:text-sm text-center text-white bg-indigo-950">
         {text}
       </div>
     </div>
@@ -38,20 +17,9 @@ const Main = () => {
   // 오른쪽 화살표
   const NextArrow = ({ onClick }) => (
     <button
+      className="absolute right-2.5 top-1/2 text-4xl font-bold text-black -translate-y-2/4 z-10"
       onClick={onClick}
       type="button"
-      style={{
-        position: 'absolute',
-        right: '10px',
-        top: '50%',
-        transform: 'translateY(-50%)',
-        background: 'none',
-        border: 'none',
-        fontSize: '36px',
-        fontWeight: 'bold',
-        color: 'black',
-        zIndex: 1,
-      }}
     >
       {'>'}
     </button>
@@ -60,20 +28,9 @@ const Main = () => {
   // 왼쪽 화살표
   const PrevArrow = ({ onClick }) => (
     <button
+      className="absolute left-2.5 top-1/2 text-4xl font-bold text-black -translate-y-2/4 z-10"
       onClick={onClick}
       type="button"
-      style={{
-        position: 'absolute',
-        left: '10px',
-        top: '50%',
-        transform: 'translateY(-50%)',
-        background: 'none',
-        border: 'none',
-        fontSize: '36px',
-        fontWeight: 'bold',
-        color: 'black',
-        zIndex: 1,
-      }}
     >
       {'<'}
     </button>
@@ -89,16 +46,9 @@ const Main = () => {
     prevArrow: <PrevArrow />,
   };
 
-  const slideStyle = {
-    position: 'relative',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  };
-
   const slides = [
-    { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpg`, text: '최애의 아이' },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/2.png`, text: '주술회전' },
+    { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg`, text: '최애의 아이' },
+    { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg`, text: '주술회전' },
     // Add more slide objects as needed
   ];
 
@@ -106,7 +56,10 @@ const Main = () => {
     <div>
       <Slider {...settings}>
         {slides.map((slide, index) => (
-          <div key={index} style={slideStyle}>
+          <div
+            key={index}
+            className="relative flex justify-center items-center"
+          >
             <Slide imageSrc={slide.imageSrc} text={slide.text} />
           </div>
         ))}
