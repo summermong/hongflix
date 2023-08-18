@@ -17,8 +17,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Header isLoggedIn={isLoggedIn} />{' '}
-        {/* Header 컴포넌트를 Routes 안에 넣음 */}
+        <Header isLoggedIn={isLoggedIn} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/romance" element={<RomancePage />} />

@@ -1,11 +1,7 @@
 import React from 'react';
 
 const Main = () => {
-  return (
-    <div>
-      <div>dropdownVisible</div>
-    </div>
-  );
+  return <div className="mt-10">Main</div>;
 };
 
 export default Main;
