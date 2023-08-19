@@ -1,13 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const Category = () => {
   // 캐러셀 이미지 크기 & 타이틀
-  const Slide = ({ imageSrc }) => (
-    <div className="relative mx-1">
-      <img className="w-full h-auto" src={imageSrc} alt="carousel" />
+  const Slide = ({ imageSrc, text }) => (
+    <div className="relative mx-1 md:mb-1">
+      <Link to="/">
+        <img
+          className="h-72 w-full object-cover"
+          src={imageSrc}
+          alt="carousel"
+        />
+        <div className="py-2 text-center">{text}</div>
+      </Link>
     </div>
   );
 
@@ -37,7 +45,7 @@ const Category = () => {
     dots: true,
     infinite: true,
     speed: 2000,
-    slidesToShow: 4,
+    slidesToShow: 3,
     slidesToScroll: 1,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
@@ -53,27 +61,27 @@ const Category = () => {
   };
 
   const slides1 = [
-    { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg` },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg` },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg` },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg` },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg` },
+    { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg`, text: '최애의 아이' },
+    { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg`, text: '최애의 아이' },
+    { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg`, text: '최애의 아이' },
+    { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg`, text: '최애의 아이' },
+    { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg`, text: '최애의 아이' },
   ];
 
   const slides2 = [
-    { imageSrc: `${process.env.PUBLIC_URL}/img/2.jpeg` },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/2.jpeg` },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/2.jpeg` },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/2.jpeg` },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/2.jpeg` },
+    { imageSrc: `${process.env.PUBLIC_URL}/img/2.jpeg`, text: '주술회전' },
+    { imageSrc: `${process.env.PUBLIC_URL}/img/2.jpeg`, text: '주술회전' },
+    { imageSrc: `${process.env.PUBLIC_URL}/img/2.jpeg`, text: '주술회전' },
+    { imageSrc: `${process.env.PUBLIC_URL}/img/2.jpeg`, text: '주술회전' },
+    { imageSrc: `${process.env.PUBLIC_URL}/img/2.jpeg`, text: '주술회전' },
   ];
 
   const slides3 = [
-    { imageSrc: `${process.env.PUBLIC_URL}/img/3.jpeg` },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/3.jpeg` },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/3.jpeg` },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/3.jpeg` },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/3.jpeg` },
+    { imageSrc: `${process.env.PUBLIC_URL}/img/3.jpeg`, text: '도쿄 리벤저스' },
+    { imageSrc: `${process.env.PUBLIC_URL}/img/3.jpeg`, text: '도쿄 리벤저스' },
+    { imageSrc: `${process.env.PUBLIC_URL}/img/3.jpeg`, text: '도쿄 리벤저스' },
+    { imageSrc: `${process.env.PUBLIC_URL}/img/3.jpeg`, text: '도쿄 리벤저스' },
+    { imageSrc: `${process.env.PUBLIC_URL}/img/3.jpeg`, text: '도쿄 리벤저스' },
   ];
 
   return (
@@ -87,7 +95,7 @@ const Category = () => {
           <Slider {...settings}>
             {slides1.map((slide, index) => (
               <div key={index}>
-                <Slide imageSrc={slide.imageSrc} />
+                <Slide imageSrc={slide.imageSrc} text={slide.text} />
               </div>
             ))}
           </Slider>
@@ -99,7 +107,7 @@ const Category = () => {
           <Slider {...settings}>
             {slides2.map((slide, index) => (
               <div key={index}>
-                <Slide imageSrc={slide.imageSrc} />
+                <Slide imageSrc={slide.imageSrc} text={slide.text} />
               </div>
             ))}
           </Slider>
@@ -111,7 +119,7 @@ const Category = () => {
           <Slider {...settings}>
             {slides3.map((slide, index) => (
               <div key={index}>
-                <Slide imageSrc={slide.imageSrc} />
+                <Slide imageSrc={slide.imageSrc} text={slide.text} />
               </div>
             ))}
           </Slider>
