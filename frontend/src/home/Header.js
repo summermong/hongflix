@@ -5,17 +5,6 @@ const Header = () => {
   // 로그인 여부 상태
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // 드롭다운
-  const [dropdownVisible, setDropdownVisible] = useState(false);
-
-  const toggleDropdown = () => {
-    setDropdownVisible(!dropdownVisible);
-  };
-
-  const closeDropdown = () => {
-    setDropdownVisible(false);
-  };
-
   // 스크롤 시 헤더 배경색 변경
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -39,60 +28,32 @@ const Header = () => {
 
   return (
     <header
-      className={`p-4 ${isScrolled ? 'bg-indigo-950' : 'bg-transparent'}`}
+      className={`p-4 sticky top-0 z-50  ${
+        isScrolled ? 'bg-indigo-950' : 'bg-transparent'
+      }`}
       style={{
-        position: 'sticky',
-        top: 0,
-        zIndex: 1000,
         borderBottom: isScrolled ? 'none' : '1px solid black',
         transition: 'background-color 0.3s ease-in',
       }}
     >
       <div className="container mx-auto flex justify-between items-center">
-        <div className="flex space-x-6 items-center">
+        <div className="flex space-x-6 items-center font-['Pretendard-Bold'] ">
           <Link
             to="/"
-            className={`text-xl font-semibold ${
+            className={`text-xl font-black  ${
               isScrolled ? 'text-white' : 'text-indigo-950'
             }`}
           >
             Hongflix
           </Link>
-          <div className="relative">
-            <button
-              onClick={toggleDropdown}
-              className={`text-sm ${
-                isScrolled ? 'text-white' : 'text-indigo-950'
-              }`}
-            >
-              카테고리
-            </button>
-            {dropdownVisible && (
-              <div
-                className={`flex justify-center absolute top-8 right-0 -left-4 py-2 w-20 text-indigo-950 bg-white ${
-                  isScrolled ? 'null' : 'border-gray-950'
-                }`}
-              >
-                <ul className="text-sm text-center justify-center px-2">
-                  <li className="py-0.5 px-1">
-                    <Link to="/romance" onClick={closeDropdown}>
-                      로맨스
-                    </Link>
-                  </li>
-                  <li className="py-0.5 px-1">
-                    <Link to="/horror" onClick={closeDropdown}>
-                      호러
-                    </Link>
-                  </li>
-                  <li className="py-0.5 px-1">
-                    <Link to="/action" onClick={closeDropdown}>
-                      액션
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div>
+          <Link
+            to="/category"
+            className={`text-sm ${
+              isScrolled ? 'text-white' : 'text-indigo-950'
+            }`}
+          >
+            카테고리
+          </Link>
           <Link
             to="/search"
             className={`text-sm ${

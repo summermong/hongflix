@@ -8,7 +8,7 @@ const Main = () => {
   const Slide = ({ imageSrc, text }) => (
     <div className="relative">
       <img className="w-screen h-fit" src={imageSrc} alt="carousel" />
-      <div className="absolute -translate-x-2/4 px-5 py-1.5 rounded-3xl bottom-5 left-2/4 text-xs md:text-base lg:text-sm text-center text-white bg-indigo-950">
+      <div className="absolute -translate-x-2/4 px-5 py-1.5 rounded-3xl bottom-5 left-2/4 text-xs md:text-base lg:text-sm text-center text-white  bg-indigo-950">
         {text}
       </div>
     </div>
@@ -56,10 +56,7 @@ const Main = () => {
     <div>
       <Slider {...settings}>
         {slides.map((slide, index) => (
-          <div
-            key={index}
-            className="relative flex justify-center items-center"
-          >
+          <div key={index}>
             <Slide imageSrc={slide.imageSrc} text={slide.text} />
           </div>
         ))}
