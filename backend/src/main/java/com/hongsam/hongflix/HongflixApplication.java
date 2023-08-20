@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
-@Import(MyBatisConfig.class)
+@Import({MyBatisConfig.class})
 public class HongflixApplication {
 
     public static void main(String[] args) {

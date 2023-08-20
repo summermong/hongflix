@@ -2,8 +2,8 @@ package com.hongsam.hongflix.web;
 
 import com.hongsam.hongflix.domain.Movie;
 import com.hongsam.hongflix.service.MovieService;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
