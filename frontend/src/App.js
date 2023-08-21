@@ -16,15 +16,19 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Header isLoggedIn={isLoggedIn} />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/category" element={<Category />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/mypage" element={<MyPage />} />
-        </Routes>
-        <Footer />
+        <div className="flex flex-col h-screen">
+          <div className="flex-1">
+            <Header isLoggedIn={isLoggedIn} />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/category" element={<Category />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/mypage" element={<MyPage />} />
+            </Routes>
+          </div>
+          <Footer />
+        </div>
       </BrowserRouter>
     </div>
   );
