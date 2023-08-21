@@ -7,10 +7,10 @@ import 'slick-carousel/slick/slick-theme.css';
 const Main = () => {
   // 캐러셀 이미지 크기 & 타이틀
   const Slide = ({ imageSrc, text }) => (
-    <div className="relative mx-1 md:mb-1">
+    <div className="relative mx-1 mb-1">
       <Link to="/">
         <img
-          className="h-72 w-full object-cover"
+          className=" md:w-30 lg:h-72 w-full object-cover"
           src={imageSrc}
           alt="carousel"
         />
@@ -44,7 +44,7 @@ const Main = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 2000,
+    speed: 1000,
     slidesToShow: 3,
     slidesToScroll: 1,
     nextArrow: <NextArrow />,
@@ -62,7 +62,7 @@ const Main = () => {
 
   const slides1 = [
     { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg`, text: '최애의 아이' },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/2.jpeg`, text: '최애의 아이' },
+    { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg`, text: '최애의 아이' },
     { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg`, text: '최애의 아이' },
     { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg`, text: '최애의 아이' },
     { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg`, text: '최애의 아이' },

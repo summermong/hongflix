@@ -44,7 +44,7 @@ const Category = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 2000,
+    speed: 1000,
     slidesToShow: 3,
     slidesToScroll: 1,
     nextArrow: <NextArrow />,
@@ -62,7 +62,7 @@ const Category = () => {
 
   const slides1 = [
     { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg`, text: '최애의 아이' },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg`, text: '최애의 아이' },
+    { imageSrc: `${process.env.PUBLIC_URL}/img/2.jpeg`, text: '최애의 아이' },
     { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg`, text: '최애의 아이' },
     { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg`, text: '최애의 아이' },
     { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg`, text: '최애의 아이' },
