@@ -4,14 +4,26 @@ const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [hoveredMovie, setHoveredMovie] = useState(null);
 
   const movies = useMemo(
     () => [
-      { movieTitle: 'Movie 1' },
-      { movieTitle: 'Movie 2' },
-      { movieTitle: '주술회전' },
-      { movieTitle: '최애의 아이' },
-      { movieTitle: '카게구루이' },
+      {
+        movieTitle: '최애의 아이',
+        imageUrl: `${process.env.PUBLIC_URL}/img/1.jpeg`,
+      },
+      {
+        movieTitle: '주술회전2',
+        imageUrl: `${process.env.PUBLIC_URL}/img/2.jpeg`,
+      },
+      {
+        movieTitle: '도쿄 리벤저스',
+        imageUrl: `${process.env.PUBLIC_URL}/img/3.jpeg`,
+      },
+      {
+        movieTitle: '스킵과 로퍼',
+        imageUrl: `${process.env.PUBLIC_URL}/img/4.jpeg`,
+      },
     ],
     []
   );
@@ -51,11 +63,31 @@ const Search = () => {
       <hr />
       <div className="mt-5 font-semibold">검색 결과</div>
       {searchResults.length > 0 ? (
-        <ul>
+        <div className="mt-3">
           {searchResults.map((movie, index) => (
-            <li key={index}>{movie.movieTitle}</li>
+            <div
+              key={index}
+              className="flex flex-col items-center justify-center space-x-3 my-3 relative"
+            >
+              <div
+                className="relative md:w-4/5 lg:w-3/5 "
+                onMouseEnter={() => setHoveredMovie(movie)} // 마우스 올렸을 때 추가
+                onMouseLeave={() => setHoveredMovie(null)} // 마우스 나갔을 때 추가
+              >
+                <img
+                  src={movie.imageUrl}
+                  alt={movie.movieTitle}
+                  className="hover:brightness-50"
+                />
+                {hoveredMovie === movie && ( // 조건부 렌더링
+                  <div className="absolute top-2/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-xl font-semibold">
+                    {movie.movieTitle}
+                  </div>
+                )}
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       ) : (
         <p className="mt-3">검색 결과가 없습니다.</p>
       )}
