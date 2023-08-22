@@ -30,11 +30,23 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
     // Swagger Library
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
+
+    // S3 Library
+    implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.1.RELEASE'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+processResources.dependsOn('copySecret')
+
+tasks.register('copySecret', Copy) {
+    from './src/main/resources/hongflix_config'
+    include "application*.yml"  // 복사할 파일들
+    into 'src/main/resources'  // 복사 위치
 }
