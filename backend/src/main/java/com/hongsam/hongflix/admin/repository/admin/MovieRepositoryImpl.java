@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class MovieRepositoryIml implements MovieRepository{
+public class MovieRepositoryImpl implements MovieRepository{
 
     private final MovieMapper movieMapper;
 

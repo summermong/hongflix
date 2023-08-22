@@ -1,5 +1,6 @@
 package com.hongsam.hongflix.admin.web;
 
+import com.hongsam.hongflix.admin.domain.Content;
 import com.hongsam.hongflix.admin.domain.Movie;
 import com.hongsam.hongflix.admin.service.MovieService;
 
@@ -30,6 +31,12 @@ public class MovieController {
     public Movie addMovie(@RequestBody Movie movie){
         return movieService.save(movie);
     }
+
+    @PostMapping("/{movieId}")
+    public Content addContentToMovie(@PathVariable Long movieId, @RequestBody Content content) {
+        return movieService.addContentToMovie(movieId, content);
+    }
+
 
 
 

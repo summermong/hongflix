@@ -1,0 +1,43 @@
+package com.hongsam.hongflix.admin.repository.admin;
+
+import com.hongsam.hongflix.admin.domain.Content;
+import com.hongsam.hongflix.admin.domain.ContentCreateResDto;
+import com.hongsam.hongflix.admin.domain.ContentUpdateReqDto;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+
+@Repository
+@RequiredArgsConstructor
+public class ContentRepositoryImpl implements ContentRepository{
+    private final ContentMapper contentMapper;
+
+    @Override
+    public Content save(Content content) {
+        contentMapper.save(content);
+        return content;
+    }
+
+    @Override
+    public List<ContentCreateResDto> findAllByMovieId(Long movieId) {
+        return contentMapper.findAllByMovieId(movieId);
+    }
+
+
+//    @Override
+//    public void update(Long id, ContentUpdateReqDto contentUpdateReqDto) {
+//
+//    }
+
+//    @Override
+//    public Optional<Content> findById(Long id) {
+//        return Optional.empty();
+//    }
+//
+
+
+
+}

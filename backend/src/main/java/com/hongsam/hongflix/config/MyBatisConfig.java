@@ -1,8 +1,6 @@
 package com.hongsam.hongflix.config;
 
-import com.hongsam.hongflix.admin.repository.admin.MovieMapper;
-import com.hongsam.hongflix.admin.repository.admin.MovieRepository;
-import com.hongsam.hongflix.admin.repository.admin.MovieRepositoryIml;
+import com.hongsam.hongflix.admin.repository.admin.*;
 import com.hongsam.hongflix.admin.service.MovieService;
 import com.hongsam.hongflix.admin.service.MovieServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -14,14 +12,20 @@ import org.springframework.context.annotation.Configuration;
 public class MyBatisConfig {
 
     private final MovieMapper movieMapper;
+    private final ContentMapper contentMapper;
 
     @Bean
     public MovieService movieService() {
-        return new MovieServiceImpl(movieRepository());
+        return new MovieServiceImpl(movieRepository(), contentRepository());
     }
 
     @Bean
     public MovieRepository movieRepository() {
-        return new MovieRepositoryIml(movieMapper);
+        return new MovieRepositoryImpl(movieMapper);
+    }
+
+    @Bean
+    public ContentRepository contentRepository() {
+        return new ContentRepositoryImpl(contentMapper);
     }
 }

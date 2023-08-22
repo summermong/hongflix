@@ -16,7 +16,6 @@ public class Movie {
     public Movie() {
     }
 
-
     public Movie(String accessKey, String title, String subTitle, String content, String genre) {
         this.accessKey = accessKey;
         this.title = title;

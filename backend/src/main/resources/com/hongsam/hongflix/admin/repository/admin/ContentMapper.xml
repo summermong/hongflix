@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hongsam.hongflix.admin.repository.admin.ContentMapper">
+
+    <!-- Content 관련 SQL -->
+    <insert id="save" parameterType="Content" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO content (movieId, title, explanation)
+        VALUES (#{movieId}, #{title}, #{explanation})
+    </insert>
+
+    <select id="findAllByMovieId" resultType="ContentCreateResDto">
+        SELECT c.id, c.movieId, c.title, c.explanation, m.title AS movieName
+        FROM content c
+                 INNER JOIN movie m ON c.movieId = m.id
+        WHERE m.id = #{movieId}
+    </select>
+
+
+
+</mapper>
