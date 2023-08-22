@@ -1,8 +1,8 @@
-package com.hongsam.hongflix.service;
+package com.hongsam.hongflix.admin.service;
 
-import com.hongsam.hongflix.domain.Movie;
-import com.hongsam.hongflix.domain.MovieUpdateDto;
-import com.hongsam.hongflix.repository.admin.MovieRepository;
+import com.hongsam.hongflix.admin.domain.MovieUpdateDto;
+import com.hongsam.hongflix.admin.domain.Movie;
+import com.hongsam.hongflix.admin.repository.admin.MovieRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

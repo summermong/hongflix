@@ -1,7 +1,7 @@
-package com.hongsam.hongflix.web;
+package com.hongsam.hongflix.admin.web;
 
-import com.hongsam.hongflix.domain.Movie;
-import com.hongsam.hongflix.service.MovieService;
+import com.hongsam.hongflix.admin.domain.Movie;
+import com.hongsam.hongflix.admin.service.MovieService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

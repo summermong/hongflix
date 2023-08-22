@@ -1,7 +1,7 @@
-package com.hongsam.hongflix.service;
+package com.hongsam.hongflix.admin.service;
 
-import com.hongsam.hongflix.domain.Movie;
-import com.hongsam.hongflix.domain.MovieUpdateDto;
+import com.hongsam.hongflix.admin.domain.Movie;
+import com.hongsam.hongflix.admin.domain.MovieUpdateDto;
 
 import java.util.List;
 import java.util.Optional;

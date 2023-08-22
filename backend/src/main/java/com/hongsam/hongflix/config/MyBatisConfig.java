@@ -1,15 +1,13 @@
 package com.hongsam.hongflix.config;
 
-import com.hongsam.hongflix.repository.admin.MovieMapper;
-import com.hongsam.hongflix.repository.admin.MovieRepository;
-import com.hongsam.hongflix.repository.admin.MovieRepositoryIml;
-import com.hongsam.hongflix.service.MovieService;
-import com.hongsam.hongflix.service.MovieServiceImpl;
+import com.hongsam.hongflix.admin.repository.admin.MovieMapper;
+import com.hongsam.hongflix.admin.repository.admin.MovieRepository;
+import com.hongsam.hongflix.admin.repository.admin.MovieRepositoryIml;
+import com.hongsam.hongflix.admin.service.MovieService;
+import com.hongsam.hongflix.admin.service.MovieServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import javax.sql.DataSource;
 
 @Configuration
 @RequiredArgsConstructor
