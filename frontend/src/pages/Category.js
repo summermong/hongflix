@@ -1,21 +1,41 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import Modal from './Modal';
 
 const Category = () => {
+  const [modal, setModal] = useState(false);
+  const [modalImage, setModalImage] = useState('');
+  const [modalTitle, setModalTitle] = useState('');
+  const [modalGenre, setModalGenre] = useState('');
+  const [modalReleaseDate, setModalReleaseDate] = useState('');
+
+  // openModal 함수 정의
+  const openModal = (imageSrc, title, genre, releaseDate) => {
+    setModal(true);
+    setModalImage(imageSrc);
+    setModalTitle(title);
+    setModalGenre(genre);
+    setModalReleaseDate(releaseDate);
+  };
+
+  // closeModal 함수 정의
+  const closeModal = () => {
+    setModal(false);
+    setModalImage('');
+  };
+
   // 캐러셀 이미지 크기 & 타이틀
-  const Slide = ({ imageSrc, text }) => (
-    <div className="relative mx-1 md:mb-1">
-      <Link to="/">
-        <img
-          className="h-72 w-full object-cover"
-          src={imageSrc}
-          alt="carousel"
-        />
-        <div className="py-2 text-center">{text}</div>
-      </Link>
+  const Slide = ({ imageSrc, title, genre, releaseDate }) => (
+    <div className="relative mx-1 mb-1">
+      <img
+        className="object-cover"
+        src={imageSrc}
+        alt="carousel"
+        onClick={() => openModal(imageSrc, title, genre, releaseDate)}
+      />
+      <div className="py-2 text-center">{title}</div>
     </div>
   );
 
@@ -45,7 +65,7 @@ const Category = () => {
     dots: true,
     infinite: true,
     speed: 1000,
-    slidesToShow: 3,
+    slidesToShow: 5,
     slidesToScroll: 1,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
@@ -53,7 +73,7 @@ const Category = () => {
       {
         breakpoint: 768, // Breakpoint for screens less than 768px wide
         settings: {
-          slidesToShow: 1, // Display one slide at a time
+          slidesToShow: 3, // Display one slide at a time
           slidesToScroll: 1, // Scroll one slide at a time
         },
       },
@@ -61,27 +81,120 @@ const Category = () => {
   };
 
   const slides1 = [
-    { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg`, text: '최애의 아이' },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/2.jpeg`, text: '최애의 아이' },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg`, text: '최애의 아이' },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg`, text: '최애의 아이' },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg`, text: '최애의 아이' },
+    {
+      imageSrc: `${process.env.PUBLIC_URL}/img/1.jpg`,
+      title: '최애의 아이',
+      genre: '애니메이션',
+      releaseDate: '2023-08-23',
+    },
+    {
+      imageSrc: `${process.env.PUBLIC_URL}/img/2.jpg`,
+      title: '주술회전',
+      genre: '애니메이션',
+      releaseDate: '2023-08-23',
+    },
+    {
+      imageSrc: `${process.env.PUBLIC_URL}/img/3.jpg`,
+      title: '도쿄 리벤저스',
+      genre: '애니메이션',
+      releaseDate: '2023-08-23',
+    },
+    {
+      imageSrc: `${process.env.PUBLIC_URL}/img/4.jpg`,
+      title: '스킵과 로퍼',
+      genre: '애니메이션',
+      releaseDate: '2023-08-23',
+    },
+    {
+      imageSrc: `${process.env.PUBLIC_URL}/img/1.jpg`,
+      title: '최애의 아이',
+      genre: '애니메이션',
+      releaseDate: '2023-08-23',
+    },
+    {
+      imageSrc: `${process.env.PUBLIC_URL}/img/2.jpg`,
+      title: '주술회전',
+      genre: '애니메이션',
+      releaseDate: '2023-08-23',
+    },
   ];
 
   const slides2 = [
-    { imageSrc: `${process.env.PUBLIC_URL}/img/2.jpeg`, text: '주술회전' },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/2.jpeg`, text: '주술회전' },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/2.jpeg`, text: '주술회전' },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/2.jpeg`, text: '주술회전' },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/2.jpeg`, text: '주술회전' },
+    {
+      imageSrc: `${process.env.PUBLIC_URL}/img/1.jpg`,
+      title: '최애의 아이',
+      genre: '애니메이션',
+      releaseDate: '2023-08-23',
+    },
+    {
+      imageSrc: `${process.env.PUBLIC_URL}/img/2.jpg`,
+      title: '주술회전',
+      genre: '애니메이션',
+      releaseDate: '2023-08-23',
+    },
+    {
+      imageSrc: `${process.env.PUBLIC_URL}/img/3.jpg`,
+      title: '도쿄 리벤저스',
+      genre: '애니메이션',
+      releaseDate: '2023-08-23',
+    },
+    {
+      imageSrc: `${process.env.PUBLIC_URL}/img/4.jpg`,
+      title: '스킵과 로퍼',
+      genre: '애니메이션',
+      releaseDate: '2023-08-23',
+    },
+    {
+      imageSrc: `${process.env.PUBLIC_URL}/img/1.jpg`,
+      title: '최애의 아이',
+      genre: '애니메이션',
+      releaseDate: '2023-08-23',
+    },
+    {
+      imageSrc: `${process.env.PUBLIC_URL}/img/2.jpg`,
+      title: '주술회전',
+      genre: '애니메이션',
+      releaseDate: '2023-08-23',
+    },
   ];
 
   const slides3 = [
-    { imageSrc: `${process.env.PUBLIC_URL}/img/3.jpeg`, text: '도쿄 리벤저스' },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/3.jpeg`, text: '도쿄 리벤저스' },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/3.jpeg`, text: '도쿄 리벤저스' },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/3.jpeg`, text: '도쿄 리벤저스' },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/3.jpeg`, text: '도쿄 리벤저스' },
+    {
+      imageSrc: `${process.env.PUBLIC_URL}/img/1.jpg`,
+      title: '최애의 아이',
+      genre: '애니메이션',
+      releaseDate: '2023-08-23',
+    },
+    {
+      imageSrc: `${process.env.PUBLIC_URL}/img/2.jpg`,
+      title: '주술회전',
+      genre: '애니메이션',
+      releaseDate: '2023-08-23',
+    },
+    {
+      imageSrc: `${process.env.PUBLIC_URL}/img/3.jpg`,
+      title: '도쿄 리벤저스',
+      genre: '애니메이션',
+      releaseDate: '2023-08-23',
+    },
+    {
+      imageSrc: `${process.env.PUBLIC_URL}/img/4.jpg`,
+      title: '스킵과 로퍼',
+      genre: '애니메이션',
+      releaseDate: '2023-08-23',
+    },
+    {
+      imageSrc: `${process.env.PUBLIC_URL}/img/1.jpg`,
+      title: '최애의 아이',
+      genre: '애니메이션',
+      releaseDate: '2023-08-23',
+    },
+    {
+      imageSrc: `${process.env.PUBLIC_URL}/img/2.jpg`,
+      title: '주술회전',
+      genre: '애니메이션',
+      releaseDate: '2023-08-23',
+    },
   ];
 
   return (
@@ -95,7 +208,12 @@ const Category = () => {
           <Slider {...settings}>
             {slides1.map((slide, index) => (
               <div key={index}>
-                <Slide imageSrc={slide.imageSrc} text={slide.text} />
+                <Slide
+                  imageSrc={slide.imageSrc}
+                  title={slide.title}
+                  genre={slide.genre}
+                  releaseDate={slide.releaseDate}
+                />
               </div>
             ))}
           </Slider>
@@ -107,7 +225,12 @@ const Category = () => {
           <Slider {...settings}>
             {slides2.map((slide, index) => (
               <div key={index}>
-                <Slide imageSrc={slide.imageSrc} text={slide.text} />
+                <Slide
+                  imageSrc={slide.imageSrc}
+                  title={slide.title}
+                  genre={slide.genre}
+                  releaseDate={slide.releaseDate}
+                />
               </div>
             ))}
           </Slider>
@@ -119,12 +242,26 @@ const Category = () => {
           <Slider {...settings}>
             {slides3.map((slide, index) => (
               <div key={index}>
-                <Slide imageSrc={slide.imageSrc} text={slide.text} />
+                <Slide
+                  imageSrc={slide.imageSrc}
+                  title={slide.title}
+                  genre={slide.genre}
+                  releaseDate={slide.releaseDate}
+                />
               </div>
             ))}
           </Slider>
         </div>
       </div>
+      {modal && (
+        <Modal
+          modalImage={modalImage}
+          modalTitle={modalTitle}
+          modalGenre={modalGenre}
+          modalReleaseDate={modalReleaseDate}
+          closeModal={closeModal}
+        />
+      )}
     </div>
   );
 };
