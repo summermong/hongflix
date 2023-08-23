@@ -1,12 +1,18 @@
 package com.hongsam.hongflix.admin.web;
 
-import com.hongsam.hongflix.admin.domain.Content;
-import com.hongsam.hongflix.admin.domain.Movie;
-import com.hongsam.hongflix.admin.service.MovieService;
+import com.hongsam.hongflix.admin.domain.content.Content;
+
+import com.hongsam.hongflix.admin.domain.content.ContentCreateReqDto;
+import com.hongsam.hongflix.admin.domain.movie.Movie;
+import com.hongsam.hongflix.admin.domain.movie.MovieCreateReqDto;
+import com.hongsam.hongflix.admin.service.movie.MovieService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,14 +34,20 @@ public class MovieController {
     }
 
     @PostMapping
-    public Movie addMovie(@RequestBody Movie movie){
-        return movieService.save(movie);
+    public boolean addMovie(
+            @RequestPart MovieCreateReqDto movieCreateReqDto,
+            MultipartFile file) throws IOException {
+        return movieService.save(movieCreateReqDto, file);
     }
 
-    @PostMapping("/{movieId}")
-    public Content addContentToMovie(@PathVariable Long movieId, @RequestBody Content content) {
-        return movieService.addContentToMovie(movieId, content);
+    @PostMapping(path= "/{movieId}", consumes= {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+    public Content addContentToMovie(
+            @PathVariable Long movieId,
+            @RequestPart ContentCreateReqDto contentCreateReqDto,
+            MultipartFile file) throws IOException {
+        return movieService.addContentToMovie(movieId, contentCreateReqDto, file);
     }
+
 
 
 

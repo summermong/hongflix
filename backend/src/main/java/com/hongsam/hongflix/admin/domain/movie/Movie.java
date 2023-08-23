@@ -1,6 +1,10 @@
-package com.hongsam.hongflix.admin.domain;
+package com.hongsam.hongflix.admin.domain.movie;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.Builder;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 @Data
 public class Movie {
@@ -13,9 +17,13 @@ public class Movie {
     private String content;
     private String genre;
 
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    private LocalDateTime createdDate;
+
     public Movie() {
     }
 
+    @Builder
     public Movie(String accessKey, String title, String subTitle, String content, String genre) {
         this.accessKey = accessKey;
         this.title = title;

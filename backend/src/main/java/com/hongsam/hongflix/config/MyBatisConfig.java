@@ -1,8 +1,12 @@
 package com.hongsam.hongflix.config;
 
-import com.hongsam.hongflix.admin.repository.admin.*;
-import com.hongsam.hongflix.admin.service.MovieService;
-import com.hongsam.hongflix.admin.service.MovieServiceImpl;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.hongsam.hongflix.admin.repository.admin.movie.MovieMapper;
+import com.hongsam.hongflix.admin.repository.admin.movie.MovieRepository;
+import com.hongsam.hongflix.admin.repository.admin.movie.MovieRepositoryImpl;
+import com.hongsam.hongflix.admin.repository.admin.content.ContentMapper;
+import com.hongsam.hongflix.admin.repository.admin.content.ContentRepository;
+import com.hongsam.hongflix.admin.repository.admin.content.ContentRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,11 +17,8 @@ public class MyBatisConfig {
 
     private final MovieMapper movieMapper;
     private final ContentMapper contentMapper;
+    private final AmazonS3Client amazonS3Client;
 
-    @Bean
-    public MovieService movieService() {
-        return new MovieServiceImpl(movieRepository(), contentRepository());
-    }
 
     @Bean
     public MovieRepository movieRepository() {
@@ -28,4 +29,7 @@ public class MyBatisConfig {
     public ContentRepository contentRepository() {
         return new ContentRepositoryImpl(contentMapper);
     }
+
+
 }
+

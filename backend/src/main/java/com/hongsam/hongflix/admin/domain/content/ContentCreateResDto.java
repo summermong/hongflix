@@ -1,4 +1,4 @@
-package com.hongsam.hongflix.admin.domain;
+package com.hongsam.hongflix.admin.domain.content;
 
 import lombok.Data;
 

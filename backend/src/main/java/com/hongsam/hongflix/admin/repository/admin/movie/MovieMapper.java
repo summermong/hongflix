@@ -1,7 +1,7 @@
-package com.hongsam.hongflix.admin.repository.admin;
+package com.hongsam.hongflix.admin.repository.admin.movie;
 
-import com.hongsam.hongflix.admin.domain.MovieUpdateDto;
-import com.hongsam.hongflix.admin.domain.Movie;
+import com.hongsam.hongflix.admin.domain.movie.MovieUpdateDto;
+import com.hongsam.hongflix.admin.domain.movie.Movie;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

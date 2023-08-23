@@ -1,10 +1,10 @@
-package com.hongsam.hongflix.admin.service;
+package com.hongsam.hongflix.admin.service.content;
 
-import com.hongsam.hongflix.admin.domain.Content;
-import com.hongsam.hongflix.admin.domain.ContentCreateResDto;
-import com.hongsam.hongflix.admin.domain.Movie;
-import com.hongsam.hongflix.admin.domain.MovieUpdateDto;
-import com.hongsam.hongflix.admin.repository.admin.ContentMapper;
+import com.hongsam.hongflix.admin.domain.content.Content;
+import com.hongsam.hongflix.admin.domain.content.ContentCreateResDto;
+import com.hongsam.hongflix.admin.domain.movie.Movie;
+import com.hongsam.hongflix.admin.domain.movie.MovieUpdateDto;
+import com.hongsam.hongflix.admin.repository.admin.content.ContentMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
-package com.hongsam.hongflix.admin.repository.admin;
+package com.hongsam.hongflix.admin.repository.admin.content;
 
-import com.hongsam.hongflix.admin.domain.Content;
-import com.hongsam.hongflix.admin.domain.ContentCreateResDto;
+import com.hongsam.hongflix.admin.domain.content.Content;
+import com.hongsam.hongflix.admin.domain.content.ContentCreateResDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

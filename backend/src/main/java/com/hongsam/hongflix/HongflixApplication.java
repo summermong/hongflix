@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Import;
 @SpringBootApplication
 @Import({MyBatisConfig.class})
 public class HongflixApplication {
+    static {
+        System.setProperty("com.amazonaws.sdk.disableEc2Metadata", "true");
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(HongflixApplication.class, args);

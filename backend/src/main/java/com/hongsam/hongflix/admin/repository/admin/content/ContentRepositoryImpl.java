@@ -1,13 +1,11 @@
-package com.hongsam.hongflix.admin.repository.admin;
+package com.hongsam.hongflix.admin.repository.admin.content;
 
-import com.hongsam.hongflix.admin.domain.Content;
-import com.hongsam.hongflix.admin.domain.ContentCreateResDto;
-import com.hongsam.hongflix.admin.domain.ContentUpdateReqDto;
+import com.hongsam.hongflix.admin.domain.content.Content;
+import com.hongsam.hongflix.admin.domain.content.ContentCreateResDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @Repository

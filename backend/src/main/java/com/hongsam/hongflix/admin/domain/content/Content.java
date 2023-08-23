@@ -1,5 +1,6 @@
-package com.hongsam.hongflix.admin.domain;
+package com.hongsam.hongflix.admin.domain.content;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
@@ -10,13 +11,15 @@ public class Content {
 
     private String title;
     private String explanation;
+    private String accessUrl;
 
     public Content() {
     }
 
-    public Content(Long id, String title, String explanation) {
-        this.id = id;
+    @Builder
+    public Content(String title, String explanation, String accessUrl) {
         this.title = title;
         this.explanation = explanation;
+        this.accessUrl = accessUrl;
     }
 }
