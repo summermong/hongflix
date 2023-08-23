@@ -6,6 +6,6 @@ import lombok.Data;
 public class MovieCreateReqDto {
     private String title;
     private String subTitle;
-    private String content;
+    private String explanation;
     private String genre;
 }

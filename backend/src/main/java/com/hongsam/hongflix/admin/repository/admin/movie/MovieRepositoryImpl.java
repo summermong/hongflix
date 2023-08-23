@@ -1,6 +1,6 @@
 package com.hongsam.hongflix.admin.repository.admin.movie;
 
-import com.hongsam.hongflix.admin.domain.movie.MovieUpdateDto;
+import com.hongsam.hongflix.admin.domain.movie.MovieUpdateReqDto;
 import com.hongsam.hongflix.admin.domain.movie.Movie;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -21,8 +21,13 @@ public class MovieRepositoryImpl implements MovieRepository{
     }
 
     @Override
-    public void update(Long movieId, MovieUpdateDto movieUpdateDto) {
-        movieMapper.update(movieId, movieUpdateDto);
+    public Integer update(Long movieId, MovieUpdateReqDto movieUpdateReqDto) {
+        return movieMapper.update(movieId, movieUpdateReqDto);
+    }
+
+    @Override
+    public boolean delete(Long id) {
+        return movieMapper.delete(id);
     }
 
     @Override

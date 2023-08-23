@@ -4,7 +4,7 @@ import com.hongsam.hongflix.admin.domain.content.Content;
 import com.hongsam.hongflix.admin.domain.content.ContentCreateReqDto;
 import com.hongsam.hongflix.admin.domain.movie.Movie;
 import com.hongsam.hongflix.admin.domain.movie.MovieCreateReqDto;
-import com.hongsam.hongflix.admin.domain.movie.MovieUpdateDto;
+import com.hongsam.hongflix.admin.domain.movie.MovieUpdateReqDto;
 import com.hongsam.hongflix.admin.repository.admin.content.ContentRepository;
 import com.hongsam.hongflix.admin.repository.admin.movie.MovieRepository;
 import com.hongsam.hongflix.admin.service.s3.S3UploaderService;
@@ -36,7 +36,7 @@ public class MovieServiceImpl implements MovieService{
         Movie movie = new Movie(url,
                 movieCreateReqDto.getTitle(),
                 movieCreateReqDto.getSubTitle(),
-                movieCreateReqDto.getContent(),
+                movieCreateReqDto.getExplanation(),
                 movieCreateReqDto.getGenre()
         );
 
@@ -70,14 +70,29 @@ public class MovieServiceImpl implements MovieService{
 
 
     @Override
-    public void update(Long id, MovieUpdateDto movieUpdateDto) {
-        movieRepository.update(id, movieUpdateDto);
+    public boolean update(Long id, MovieUpdateReqDto movieUpdateReqDto, MultipartFile file) throws IOException {
+        Optional<Movie> byId = findById(id);
+        if(byId.isPresent()){
+            String url = s3UploaderService.upload(file, "static/content-video");
+            movieUpdateReqDto.setAccessKey(url);
+
+            movieRepository.update(id, movieUpdateReqDto);
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean delete(Long id) {
+        return movieRepository.delete(id);
     }
 
     @Override
     public Optional<Movie> findById(Long id) {
         return movieRepository.findById(id);
     }
+
 
     @Override
     public List<Movie> findMovies() {

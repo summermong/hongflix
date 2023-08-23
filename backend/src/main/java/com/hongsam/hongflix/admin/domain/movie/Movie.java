@@ -14,7 +14,7 @@ public class Movie {
     private String accessKey;
     private String title;
     private String subTitle;
-    private String content;
+    private String explanation;
     private String genre;
 
     @JsonSerialize(using = LocalDateTimeSerializer.class)
@@ -24,11 +24,11 @@ public class Movie {
     }
 
     @Builder
-    public Movie(String accessKey, String title, String subTitle, String content, String genre) {
+    public Movie(String accessKey, String title, String subTitle, String explanation, String genre) {
         this.accessKey = accessKey;
         this.title = title;
         this.subTitle = subTitle;
-        this.content = content;
+        this.explanation = explanation;
         this.genre = genre;
     }
 }

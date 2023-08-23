@@ -5,6 +5,7 @@ import com.hongsam.hongflix.admin.domain.content.Content;
 import com.hongsam.hongflix.admin.domain.content.ContentCreateReqDto;
 import com.hongsam.hongflix.admin.domain.movie.Movie;
 import com.hongsam.hongflix.admin.domain.movie.MovieCreateReqDto;
+import com.hongsam.hongflix.admin.domain.movie.MovieUpdateReqDto;
 import com.hongsam.hongflix.admin.service.movie.MovieService;
 
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,13 @@ public class MovieController {
 
     private final MovieService movieService;
 
+    @PostMapping
+    public boolean addMovie(
+            @RequestPart MovieCreateReqDto movieCreateReqDto,
+            MultipartFile file) throws IOException {
+        return movieService.save(movieCreateReqDto, file);
+    }
+
     @GetMapping
     public List<Movie> findMovies(){
         return movieService.findMovies();
@@ -33,12 +41,7 @@ public class MovieController {
         return movieService.findById(movieId);
     }
 
-    @PostMapping
-    public boolean addMovie(
-            @RequestPart MovieCreateReqDto movieCreateReqDto,
-            MultipartFile file) throws IOException {
-        return movieService.save(movieCreateReqDto, file);
-    }
+
 
     @PostMapping(path= "/{movieId}", consumes= {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
     public Content addContentToMovie(
@@ -46,6 +49,21 @@ public class MovieController {
             @RequestPart ContentCreateReqDto contentCreateReqDto,
             MultipartFile file) throws IOException {
         return movieService.addContentToMovie(movieId, contentCreateReqDto, file);
+    }
+
+    @PutMapping("/{movieId}")
+    public boolean updateMovie(
+            @PathVariable long movieId,
+            @RequestPart MovieUpdateReqDto movieUpdateReqDto,
+            MultipartFile file
+    ) throws IOException {
+        return movieService.update(movieId, movieUpdateReqDto, file);
+    }
+
+
+    @DeleteMapping("/{movieId}")
+    public boolean deleteMovie(@PathVariable long movieId){
+        return movieService.delete(movieId);
     }
 
 

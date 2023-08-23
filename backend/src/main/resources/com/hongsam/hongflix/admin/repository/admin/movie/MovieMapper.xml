@@ -4,12 +4,12 @@
 <mapper namespace="com.hongsam.hongflix.admin.repository.admin.movie.MovieMapper">
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
-        insert into movie (accessKey, title, subTitle, content, genre)
+        insert into movie (accessKey, title, subTitle, explanation, genre)
         values (
                     #{accessKey},
                     #{title},
                     #{subTitle},
-                    #{content},
+                    #{explanation},
                     #{genre}
                 )
     </insert>
@@ -18,27 +18,37 @@
         update movie
         set title=#{updateParam.title},
             subTitle=#{updateParam.subTitle},
-            content=#{updateParam.content},
-            genre=#{updateParam.genre}
+            explanation=#{updateParam.explanation},
+            genre=#{updateParam.genre},
+            accessKey=#{updateParam.accessKey}
         where id = #{id}
     </update>
+
+    <delete id="delete">
+        delete from movie
+        where id = #{id}
+    </delete>
+
 
     <select id="findById" resultType="Movie">
         select id,
                title,
                subTitle,
-               content,
+               explanation,
                genre
         from movie
         where id = #{id}
     </select>
+
+
 
     <select id="findAll" resultType="Movie">
         select
             id,
             title,
             subTitle,
-            content,
+            accessKey,
+            explanation,
             genre,
             createdDate
         from movie

@@ -4,7 +4,7 @@ import com.hongsam.hongflix.admin.domain.content.Content;
 import com.hongsam.hongflix.admin.domain.content.ContentCreateReqDto;
 import com.hongsam.hongflix.admin.domain.movie.Movie;
 import com.hongsam.hongflix.admin.domain.movie.MovieCreateReqDto;
-import com.hongsam.hongflix.admin.domain.movie.MovieUpdateDto;
+import com.hongsam.hongflix.admin.domain.movie.MovieUpdateReqDto;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -17,7 +17,9 @@ public interface MovieService {
 
     Content addContentToMovie(Long movieId, ContentCreateReqDto contentCreateReqDto, MultipartFile file) throws IOException;
 
-    void update(Long id, MovieUpdateDto movieUpdateDto);
+    boolean update(Long id, MovieUpdateReqDto movieUpdateReqDto, MultipartFile file) throws IOException;
+
+    boolean delete(Long id);
 
     Optional<Movie> findById(Long id);
 

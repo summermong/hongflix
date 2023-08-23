@@ -4,15 +4,15 @@ import lombok.Data;
 
 @Data
 public class ContentUpdateReqDto {
-    private String movieTitle;
-    private String contentTitle;
+    private String title;
     private String explanation;
     private String videoName;
+    private String accessUrl;
 
-    public ContentUpdateReqDto(String movieTitle, String contentTitle, String explanation, String videoName) {
-        this.movieTitle = movieTitle;
-        this.contentTitle = contentTitle;
+    public ContentUpdateReqDto(String title, String explanation, String videoName, String accessUrl) {
+        this.title = title;
         this.explanation = explanation;
         this.videoName = videoName;
+        this.accessUrl = accessUrl;
     }
 }

@@ -1,6 +1,6 @@
 package com.hongsam.hongflix.admin.repository.admin.movie;
 
-import com.hongsam.hongflix.admin.domain.movie.MovieUpdateDto;
+import com.hongsam.hongflix.admin.domain.movie.MovieUpdateReqDto;
 import com.hongsam.hongflix.admin.domain.movie.Movie;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -13,11 +13,12 @@ public interface MovieMapper {
 
     void save(Movie movie);
 
-    void update(@Param("id") Long id, @Param("updateParam") MovieUpdateDto movieUpdateDto);
+    Integer update(@Param("id") Long id, @Param("updateParam") MovieUpdateReqDto movieUpdateReqDto);
 
     Optional<Movie> findById(Long id);
 
     List<Movie> findAll();
 
+    boolean delete(Long id);
 
 }

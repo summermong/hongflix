@@ -10,12 +10,36 @@
     </insert>
 
     <select id="findAllByMovieId" resultType="ContentCreateResDto">
-        SELECT c.id, c.movieId, c.title, c.explanation, m.title AS movieName
+        SELECT c.id, c.movieId, c.title, c.explanation, c.accessUrl, m.title AS movieName
         FROM content c
                  INNER JOIN movie m ON c.movieId = m.id
         WHERE m.id = #{movieId}
     </select>
 
+
+    <delete id="delete">
+        delete from content
+        where id = #{id}
+    </delete>
+
+    <select id="findById" resultType="Content">
+        select id,
+               movieId,
+               title,
+               explanation,
+               accessUrl
+        from content
+        where id = #{id}
+    </select>
+
+    <update id="update">
+        update content
+        set title=#{updateParam.title},
+            explanation=#{updateParam.explanation},
+            explanation=#{updateParam.videoName},
+            accessUrl=#{updateParam.accessUrl}
+        where id = #{id}
+    </update>
 
 
 </mapper>
