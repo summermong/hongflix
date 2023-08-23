@@ -9,8 +9,12 @@ export default function AdminContentsTable({
   modalSwitch,
   updateModalView,
   setUpdateModalView,
+  deleteModalView,
+  setDeleteModalView,
+  seletId,
 }) {
-  console.log(movieId);
+  console.log(`movieId : ${movieId}`);
+  console.log(`seletId : ${seletId}`);
 
   return (
     <div>
@@ -49,7 +53,18 @@ export default function AdminContentsTable({
                   </button>
                 </td>
                 <td className="p-2 border w-14">
-                  <button>삭제</button>
+                  <button
+                    onClick={(e) => {
+                      modalSwitch(
+                        e,
+                        deleteModalView,
+                        setDeleteModalView,
+                        el["id"]
+                      );
+                    }}
+                  >
+                    삭제
+                  </button>
                 </td>
               </tr>
             );

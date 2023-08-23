@@ -6,29 +6,53 @@ export default function AdminMovieCreateModal({ setCreateModalView, apiUrl }) {
   const [title, setTitle] = useState("");
   const [subTitle, setSubTitle] = useState("");
   const [genre, setGenre] = useState("");
-  const [accessKey, setAccessKey] = useState("");
-  const [content, setContent] = useState("");
+  const [accessKey, setAccessKey] = useState(null);
+  const [explanation, setExplanation] = useState("");
   const inputHandler = (e, setValue) => {
     e.preventDefault();
     setValue(e.target.value);
+    console.log(e.target.value);
   };
-  console.log(apiUrl);
-  const createMovie = async () => {
-    await axios
-      .post(`${apiUrl}/movies`, {
-        title: title,
-        subTitle: subTitle,
-        genre: genre,
-        accessKey: accessKey,
-        content: content,
+  const fileHandler = (e) => {
+    console.log(e.target.files);
+    setAccessKey(e.target.files);
+  };
+
+  const createMovie = async (e) => {
+    e.preventDefault();
+
+    const movieCreateReqDto = {
+      title: title,
+      subTitle: subTitle,
+      explanation: explanation,
+      genre: genre,
+    };
+
+    const formData = new FormData();
+
+    formData.append(
+      "movieCreateReqDto",
+      new Blob([JSON.stringify(movieCreateReqDto)], {
+        type: "application/json",
       })
-      .then((res) => {
-        console.log(res.data);
+    );
+
+    formData.append("file", accessKey);
+
+    axios
+      .post(`${apiUrl}movies`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       })
-      .catch((err) => {
-        console.log(err);
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
       });
   };
+
   return (
     <div
       className={`${styles.modalContainer} flex flex-col items-center justify-center w-full h-1/3 fixed md:w-2/3 md:h-3/6 rounded-lg gap-3 border`}
@@ -37,7 +61,8 @@ export default function AdminMovieCreateModal({ setCreateModalView, apiUrl }) {
       <form className="flex w-4/5 flex-col justify-center gap-2" action="POST">
         <label htmlFor="title">영화 제목</label>
         <input
-          onClick={(e) => {
+          value={title}
+          onChange={(e) => {
             inputHandler(e, setTitle);
           }}
           className="p-3 border rounded-lg"
@@ -45,7 +70,8 @@ export default function AdminMovieCreateModal({ setCreateModalView, apiUrl }) {
         />
         <label htmlFor="content">영화 부제목</label>
         <input
-          onClick={(e) => {
+          value={subTitle}
+          onChange={(e) => {
             inputHandler(e, setSubTitle);
           }}
           className="p-3 border rounded-lg"
@@ -53,7 +79,8 @@ export default function AdminMovieCreateModal({ setCreateModalView, apiUrl }) {
         />
         <label htmlFor="title">장르</label>
         <input
-          onClick={(e) => {
+          value={genre}
+          onChange={(e) => {
             inputHandler(e, setGenre);
           }}
           className="p-3 border rounded-lg"
@@ -61,16 +88,17 @@ export default function AdminMovieCreateModal({ setCreateModalView, apiUrl }) {
         />
         <label htmlFor="title">영화 링크</label>
         <input
-          onClick={(e) => {
-            inputHandler(e, setAccessKey);
+          onChange={(e) => {
+            fileHandler(e);
           }}
           className="p-3 border rounded-lg"
           type="file"
         />
         <label htmlFor="title">내용</label>
         <textarea
-          onClick={(e) => {
-            inputHandler(e, setContent);
+          value={explanation}
+          onChange={(e) => {
+            inputHandler(e, setExplanation);
           }}
           className="p-3 border rounded-lg"
           type="text"
@@ -86,8 +114,8 @@ export default function AdminMovieCreateModal({ setCreateModalView, apiUrl }) {
           닫기
         </button>
         <button
-          onClick={() => {
-            createMovie();
+          onClick={(e) => {
+            createMovie(e);
           }}
           className={`${styles.contentModalCreateBtn}`}
         >

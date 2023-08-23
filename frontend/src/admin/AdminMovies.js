@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import AdminNavBar from "./AdminNavBar";
+import AdminNavBar from "./components/AdminNavBar";
 import styles from "./Admin.module.css";
 import axios from "axios";
 import AdminMoviesTable from "./components/AdminMoviesTable";
 import AdminMovieCreateModal from "./components/AdminMovieCreateModal";
 import { useNavigate } from "react-router-dom";
 import AdminMovieUpdateModal from "./components/AdminMovieUpdateModal";
+import AdminMovieDeleteModal from "./components/AdminMovieDeleteModal";
 
 export default function AdminMovies() {
   const [updateModalView, setUpdateModalView] = useState(false);
@@ -111,6 +112,8 @@ export default function AdminMovies() {
             modalSwitch={modalSwitch}
             updateModalView={updateModalView}
             setUpdateModalView={setUpdateModalView}
+            deleteModalView={deleteModalView}
+            setDeleteModalView={setDeleteModalView}
           ></AdminMoviesTable>
         </section>
         {createModalView ? (
@@ -125,6 +128,13 @@ export default function AdminMovies() {
             movie={movies[updateText()]}
             apiUrl={apiUrl}
           ></AdminMovieUpdateModal>
+        ) : null}
+        {deleteModalView ? (
+          <AdminMovieDeleteModal
+            setDeleteModalView={setDeleteModalView}
+            seleteId={seleteId}
+            apiUrl={apiUrl}
+          ></AdminMovieDeleteModal>
         ) : null}
       </div>
     </div>

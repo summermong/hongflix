@@ -1,5 +1,5 @@
 import React from "react";
-import AdminLeftBar from "./AdminNavBar";
+import AdminLeftBar from "./components/AdminNavBar";
 
 export default function AdminSetting() {
   return (

@@ -6,6 +6,8 @@ export default function AdminMoviesTable({
   navigator,
   updateModalView,
   setUpdateModalView,
+  deleteModalView,
+  setDeleteModalView,
   modalSwitch,
 }) {
   return (
@@ -51,7 +53,18 @@ export default function AdminMoviesTable({
                   </button>
                 </td>
                 <td className="p-2 border w-14">
-                  <button>삭제</button>
+                  <button
+                    onClick={(e) => {
+                      modalSwitch(
+                        e,
+                        deleteModalView,
+                        setDeleteModalView,
+                        +el["id"]
+                      );
+                    }}
+                  >
+                    삭제
+                  </button>
                 </td>
               </tr>
             );

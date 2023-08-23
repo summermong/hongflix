@@ -1,4 +1,4 @@
-import styles from "./Admin.module.css";
+import styles from "../Admin.module.css";
 
 import { Link, useLocation } from "react-router-dom";
 
@@ -74,7 +74,10 @@ export default function AdminLeftBar() {
             <Link
               to={"/admin/movies"}
               className={`${styles.navItem} ${
-                location.pathname === "/admin/movies" ? styles.navItemCur : ""
+                location.pathname === "/admin/movies" ||
+                location.pathname === "/admin/movies/contents/"
+                  ? styles.navItemCur
+                  : ""
               } flex flex-col md:flex-row items-center pt-3 pb-3 pl-1`}
             >
               <div className={`md:mr-5`}>

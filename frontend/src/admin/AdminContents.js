@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import AdminNavBar from "./AdminNavBar";
+import AdminNavBar from "./components/AdminNavBar";
 import styles from "./Admin.module.css";
 import axios from "axios";
 import { useLocation, useParams } from "react-router-dom";
 import AdminContentsTable from "./components/AdminContentsTable";
 import AdminContentCreateModal from "./components/AdminContentCreateModal";
 import AdminContentUpdateModal from "./components/AdminContentUpdateModal";
+import AdminContentDeleteModal from "./components/AdminContentDeleteModal";
 
 const apiUrl = "http://localhost:8080/";
 
@@ -17,6 +18,14 @@ export default function AdminContents() {
   const [deleteModalView, setDeleteModalView] = useState(false);
   const [seleteId, setSeletId] = useState(null);
   console.log(`movieId : ${movieId}`);
+
+  const updateText = () => {
+    const movieIndex = contents.findIndex((el) => {
+      return el["id"] == seleteId;
+    });
+    return movieIndex;
+  };
+
   const fetchMovies = async () => {
     await axios
       .get(`${apiUrl}/contents/${movieId}`)
@@ -32,9 +41,8 @@ export default function AdminContents() {
   useEffect(() => {
     fetchMovies();
   }, []);
+
   console.log(useParams());
-  console.log(movieId);
-  console.log(movieTitle);
 
   const modalSwitch = (e, value, setValue, id) => {
     e.preventDefault();
@@ -48,8 +56,6 @@ export default function AdminContents() {
   //   });
   //   return movieIndex;
   // };
-
-  const [viewContents, setViewContents] = useState([{}]);
 
   return (
     <div className={`w-screen h-screen flex flex-col md:flex-row`}>
@@ -95,7 +101,7 @@ export default function AdminContents() {
               </div>
               <button
                 onClick={(e) => {
-                  modalSwitch(e);
+                  modalSwitch(e, createModalView, setCreateModalView);
                 }}
                 className={`${styles.contentFormCreateBtn}`}
               >
@@ -112,6 +118,8 @@ export default function AdminContents() {
             modalSwitch={modalSwitch}
             updateModalView={updateModalView}
             setUpdateModalView={setUpdateModalView}
+            deleteModalView={deleteModalView}
+            setDeleteModalView={setDeleteModalView}
             setSeletId={seleteId}
           ></AdminContentsTable>
         </section>
@@ -124,8 +132,16 @@ export default function AdminContents() {
         {updateModalView ? (
           <AdminContentUpdateModal
             setUpdateModalView={setUpdateModalView}
+            content={contents[updateText()]}
             apiUrl={apiUrl}
           ></AdminContentUpdateModal>
+        ) : null}
+        {deleteModalView ? (
+          <AdminContentDeleteModal
+            setDeleteModalView={setDeleteModalView}
+            seleteId={seleteId}
+            apiUrl={apiUrl}
+          ></AdminContentDeleteModal>
         ) : null}
       </div>
     </div>

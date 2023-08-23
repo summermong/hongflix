@@ -1,5 +1,5 @@
 import React from "react";
-import AdminNavBar from "./AdminNavBar";
+import AdminNavBar from "./components/AdminNavBar";
 import AdminSetting from "./AdminSetting";
 import { Route, Routes } from "react-router-dom";
 import { Link } from "react-router-dom";
