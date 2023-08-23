@@ -17,6 +17,10 @@ spring:
         globally_quoted_identifiers: true
 
 mybatis:
-  type-aliases-package: com.hongsam.hongflix.domain,com.hongsam.hongflix.member.domain
+  type-aliases-package: com.hongsam.hongflix
   configuration:
     map-underscore-to-camel-case: true
+
+aws:
+  accessKey: "test"
+  secretKey: "test"

@@ -32,6 +32,7 @@ dependencies {
 
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
 
+    // aws sns
     implementation 'software.amazon.awssdk:sns'
     implementation 'software.amazon.awssdk:auth'
     implementation platform('software.amazon.awssdk:bom:2.15.0')

@@ -2,14 +2,18 @@ package com.hongsam.hongflix.member;
 
 import lombok.Getter;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.annotation.Value;
+
 
 @Getter
 @Configuration
 public class AWSConfig {
 
-    private String awsAccessKey = "AKIAZ75G5IVSM2HVOHMJ";
+    @Value("${aws.accessKey}")
+    private String awsAccessKey;
 
-    private String awsSecretKey = "h92op70H8gTIuTOrab2dhvehTEIGCPs+zkYF4gvb";
+    @Value("${aws.secretKey}")
+    private String awsSecretKey;
 
     private String awsRegion = "ap-northeast-1";
 }
