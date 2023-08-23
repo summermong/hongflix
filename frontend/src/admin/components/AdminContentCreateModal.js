@@ -62,14 +62,6 @@ export default function AdminContentCreateModal({
           className="p-3 border rounded-lg"
           type="text"
         />
-        <label htmlFor="title">영화명</label>
-        <input
-          onClick={(e) => {
-            inputHandler(e, setAccessKey);
-          }}
-          className="p-3 border rounded-lg"
-          type="text"
-        />
       </form>
       <div className="flex gap-5">
         <button

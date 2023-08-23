@@ -34,7 +34,7 @@ export default function AdminMoviesTable({
                   {el["title"]}
                 </td>
                 <td className="p-2 border">{el["subTitle"]}</td>
-                <td className="p-2 border">{el["content"]}</td>
+                <td className="p-2 border">{el["explanation"]}</td>
                 <td className="p-2 border">{el["genre"]}</td>
                 <td className="p-2 border w-14">
                   <button

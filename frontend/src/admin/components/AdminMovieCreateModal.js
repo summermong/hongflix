@@ -65,7 +65,7 @@ export default function AdminMovieCreateModal({ setCreateModalView, apiUrl }) {
             inputHandler(e, setAccessKey);
           }}
           className="p-3 border rounded-lg"
-          type="text"
+          type="file"
         />
         <label htmlFor="title">내용</label>
         <textarea

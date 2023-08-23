@@ -13,36 +13,7 @@ export default function AdminMovies() {
   const [createModalView, setCreateModalView] = useState(false);
   const [seleteId, setSeletId] = useState(null);
 
-  const [movies, setMovies] = useState([
-    {
-      id: 0,
-      title: "제목",
-      subTitle: "영화부제목",
-      content: "내용",
-      genre: "장르",
-    },
-    {
-      id: 1,
-      title: "제목2",
-      subTitle: "영화부제목",
-      content: "내용",
-      genre: "장르",
-    },
-    {
-      id: 3,
-      title: "제목3",
-      subTitle: "영화부제목",
-      content: "내용",
-      genre: "장르",
-    },
-    {
-      id: 11,
-      title: "제목11",
-      subTitle: "영화부제목",
-      content: "내용",
-      genre: "장르",
-    },
-  ]);
+  const [movies, setMovies] = useState([]);
 
   const modalSwitch = (e, value, setValue, id) => {
     e.preventDefault();
@@ -63,21 +34,21 @@ export default function AdminMovies() {
   const apiUrl = "http://localhost:8080/";
   const navigator = useNavigate();
 
-  // const fetchMovies = async () => {
-  //   await axios
-  //     .get(`${apiUrl}/movies`)
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       setMovies(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+  const fetchMovies = async () => {
+    await axios
+      .get(`${apiUrl}/movies`)
+      .then((res) => {
+        console.log(res.data);
+        setMovies(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-  // useEffect(() => {
-  //   fetchMovies();
-  // }, []);
+  useEffect(() => {
+    fetchMovies();
+  }, []);
 
   return (
     <div className={`w-screen h-screen flex flex-col md:flex-row`}>

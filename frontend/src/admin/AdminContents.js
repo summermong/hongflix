@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AdminNavBar from "./AdminNavBar";
 import styles from "./Admin.module.css";
 import axios from "axios";
@@ -11,101 +11,30 @@ const apiUrl = "http://localhost:8080/";
 
 export default function AdminContents() {
   const { movieTitle, movieId } = useParams();
+  const [contents, setContents] = useState([]);
   const [createModalView, setCreateModalView] = useState(false);
   const [updateModalView, setUpdateModalView] = useState(false);
   const [deleteModalView, setDeleteModalView] = useState(false);
   const [seleteId, setSeletId] = useState(null);
+  console.log(`movieId : ${movieId}`);
+  const fetchMovies = async () => {
+    await axios
+      .get(`${apiUrl}/contents/${movieId}`)
+      .then((res) => {
+        console.log(res.data);
+        setContents(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
+  useEffect(() => {
+    fetchMovies();
+  }, []);
   console.log(useParams());
   console.log(movieId);
   console.log(movieTitle);
-
-  const [contents, setContents] = useState([
-    {
-      id: 0,
-      movieId: 0,
-      title: "영화1",
-      explanation: "설명",
-      accessUrl: "URL",
-    },
-    {
-      id: 1,
-      movieId: 0,
-      title: "영화2",
-      explanation: "설명",
-      accessUrl: "URL",
-    },
-    {
-      id: 2,
-      movieId: 0,
-      title: "영화3",
-      explanation: "설명",
-      accessUrl: "URL",
-    },
-    {
-      id: 3,
-      movieId: 0,
-      title: "영화4",
-      explanation: "설명",
-      accessUrl: "URL",
-    },
-    {
-      id: 4,
-      movieId: 0,
-      title: "영화5",
-      explanation: "설명",
-      accessUrl: "URL",
-    },
-    {
-      id: 5,
-      movieId: 1,
-      title: "영화6",
-      explanation: "설명",
-      accessUrl: "URL",
-    },
-    {
-      id: 6,
-      movieId: 1,
-      title: "영화1",
-      explanation: "설명",
-      accessUrl: "URL",
-    },
-    {
-      id: 7,
-      movieId: 1,
-      title: "영화2",
-      explanation: "설명",
-      accessUrl: "URL",
-    },
-    {
-      id: 8,
-      movieId: 1,
-      title: "영화3",
-      explanation: "설명",
-      accessUrl: "URL",
-    },
-    {
-      id: 9,
-      movieId: 1,
-      title: "영화4",
-      explanation: "설명",
-      accessUrl: "URL",
-    },
-    {
-      id: 10,
-      movieId: 1,
-      title: "영화5",
-      explanation: "설명",
-      accessUrl: "URL",
-    },
-    {
-      id: 11,
-      movieId: 1,
-      title: "영화6",
-      explanation: "설명",
-      accessUrl: "URL",
-    },
-  ]);
 
   const modalSwitch = (e, value, setValue, id) => {
     e.preventDefault();
