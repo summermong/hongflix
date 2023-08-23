@@ -1,5 +1,4 @@
 src/main/resources/*.yml
-src/main/resources/hongflix_config
 
 HELP.md
 .gradle

@@ -14,6 +14,7 @@ public class ContentCreateResDto {
     private String accessUrl;
 
 
+
     public ContentCreateResDto(Long id, Long movieId, String title, String explanation, String movieName, String accessUrl) {
         this.id = id;
         this.movieId = movieId;
