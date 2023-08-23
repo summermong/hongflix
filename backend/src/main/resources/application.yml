@@ -19,7 +19,25 @@ spring:
       hibernate:
         globally_quoted_identifiers: true
 
+    servlet:
+      multipart:
+        max-file-size: 10GB
+        max-request-size: 10GB
+
 mybatis:
   type-aliases-package: com.hongsam.hongflix.domain
   configuration:
     map-underscore-to-camel-case: true
+
+cloud:
+  aws:
+    s3:
+      bucket: woodyvideo
+    credentials:
+      access-key: AKIAZY5VWBZ6JG62JQNJ
+      secret-key: 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
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
