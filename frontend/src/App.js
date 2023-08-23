@@ -1,24 +1,57 @@
-import logo from './logo.svg';
+import { Route, Router, Routes } from 'react-router-dom';
 import './App.css';
+import AdminHome from './admin/AdminHome';
+import AdminMembers from './admin/AdminMembers';
+import AdminMovies from './admin/AdminMovies';
+import AdminSetting from './admin/AdminSetting';
+import AdminContents from './admin/AdminContents';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload;;
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route
+          path="/admin"
+          element={
+            <>
+              <AdminHome></AdminHome>
+            </>
+          }
+        ></Route>
+        <Route
+          path="/admin/movies"
+          element={
+            <>
+              <AdminMovies></AdminMovies>
+            </>
+          }
+        ></Route>
+        <Route
+          path="/admin/members"
+          element={
+            <>
+              <AdminMembers></AdminMembers>
+            </>
+          }
+        ></Route>
+        <Route
+          path="/admin/setting"
+          element={
+            <>
+              <AdminSetting></AdminSetting>
+            </>
+          }
+        ></Route>
+        <Route
+          path="/admin/movies/contents/:movieTitle/:movieId"
+          element={
+            <>
+              <AdminContents></AdminContents>
+            </>
+          }
+        ></Route>
+      </Routes>
+    </>
   );
 }
 
