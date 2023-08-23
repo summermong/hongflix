@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Value;
 @Configuration
 public class AWSConfig {
 
-    @Value("${aws.accessKey}")
+    @Value("${aws.sns.accessKey}")
     private String awsAccessKey;
 
-    @Value("${aws.secretKey}")
+    @Value("${aws.sns.secretKey}")
     private String awsSecretKey;
 
     private String awsRegion = "ap-northeast-1";
