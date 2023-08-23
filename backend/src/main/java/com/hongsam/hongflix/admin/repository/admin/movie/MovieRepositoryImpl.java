@@ -31,6 +31,11 @@ public class MovieRepositoryImpl implements MovieRepository{
     }
 
     @Override
+    public List<Movie> searchByTitle(String title) {
+        return movieMapper.findByTitle(title);
+    }
+
+    @Override
     public Optional<Movie> findById(Long movieId) {
         return movieMapper.findById(movieId);
     }
@@ -39,4 +44,5 @@ public class MovieRepositoryImpl implements MovieRepository{
     public List<Movie> findAll() {
         return movieMapper.findAll();
     }
+
 }

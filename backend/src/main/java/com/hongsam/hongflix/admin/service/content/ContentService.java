@@ -17,6 +17,8 @@ public interface ContentService {
 
     List<ContentCreateResDto> findAllByMovieId(Long movieId);
 
+    List<Content> searchByTitle(String title);
+
     boolean delete(Long id);
 
     boolean update(Long id, ContentUpdateReqDto contentUpdateReqDto, MultipartFile file) throws IOException;

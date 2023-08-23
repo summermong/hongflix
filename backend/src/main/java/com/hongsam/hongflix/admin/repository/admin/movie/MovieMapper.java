@@ -21,4 +21,6 @@ public interface MovieMapper {
 
     boolean delete(Long id);
 
+    List<Movie> findByTitle(String title);
+
 }

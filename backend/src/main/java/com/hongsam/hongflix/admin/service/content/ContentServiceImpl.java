@@ -34,6 +34,11 @@ public class ContentServiceImpl implements ContentService{
     }
 
     @Override
+    public List<Content> searchByTitle(String title) {
+        return contentMapper.findByTitle(title);
+    }
+
+    @Override
     public boolean delete(Long id) {
         return contentMapper.delete(id);
     }

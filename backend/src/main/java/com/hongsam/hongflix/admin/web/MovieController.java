@@ -51,6 +51,11 @@ public class MovieController {
         return movieService.addContentToMovie(movieId, contentCreateReqDto, file);
     }
 
+    @GetMapping("/search")
+    public List<Movie> searchMovies(@RequestParam String title) {
+        return movieService.searchByTitle(title);
+    }
+
     @PutMapping("/{movieId}")
     public boolean updateMovie(
             @PathVariable long movieId,

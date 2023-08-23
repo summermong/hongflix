@@ -16,6 +16,12 @@
         WHERE m.id = #{movieId}
     </select>
 
+    <select id="findByTitle" resultType="Content">
+        SELECT * FROM content
+        WHERE title LIKE CONCAT('%', #{title}, '%')
+    </select>
+
+
 
     <delete id="delete">
         delete from content

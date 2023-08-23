@@ -25,6 +25,6 @@ public interface ContentMapper {
 
     boolean update(@Param("id") Long id, @Param("updateParam") ContentUpdateReqDto contentUpdateReqDto);
 
-
+    List<Content> findByTitle(String title);
 
 }

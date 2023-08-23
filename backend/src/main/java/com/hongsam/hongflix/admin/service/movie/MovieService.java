@@ -21,6 +21,8 @@ public interface MovieService {
 
     boolean delete(Long id);
 
+    List<Movie> searchByTitle(String title);
+
     Optional<Movie> findById(Long id);
 
     List<Movie> findMovies();

@@ -10,6 +10,8 @@ public interface ContentRepository {
 
     List<ContentCreateResDto> findAllByMovieId(Long movieId);
 
+    List<Content> searchByTitle(String title);
+
 //    void update(Long id, ContentUpdateReqDto contentUpdateReqDto);
 //
 //    Optional<Content> findById(Long id);
