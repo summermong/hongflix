@@ -21,3 +21,5 @@ spring:
 
 mybatis:
   type-aliases-package: com.hongsam.hongflix.domain
+  configuration:
+    map-underscore-to-camel-case: true
