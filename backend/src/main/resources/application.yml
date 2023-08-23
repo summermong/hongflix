@@ -34,8 +34,8 @@ cloud:
     s3:
       bucket: woodyvideo
     credentials:
-      access-key: AKIAZY5VWBZ6JG62JQNJ
-      secret-key: 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
+      access-key:
+      secret-key:
     region:
       static: ap-northeast-2
       auto: false
