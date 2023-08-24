@@ -1,10 +1,10 @@
-import { Route, Router, Routes } from "react-router-dom";
-import "./App.css";
-import AdminHome from "./admin/AdminHome";
-import AdminMembers from "./admin/AdminMembers";
-import AdminMovies from "./admin/AdminMovies";
-import AdminSetting from "./admin/AdminSetting";
-import AdminContents from "./admin/AdminContents";
+import { Route, Router, Routes } from 'react-router-dom';
+import './App.css';
+import AdminHome from './admin/AdminHome';
+import AdminMembers from './admin/AdminMembers';
+import AdminMovies from './admin/AdminMovies';
+import AdminSetting from './admin/AdminSetting';
+import AdminContents from './admin/AdminContents';
 
 function App() {
   return (
