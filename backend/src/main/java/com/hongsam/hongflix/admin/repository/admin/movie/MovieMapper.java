@@ -1,5 +1,6 @@
 package com.hongsam.hongflix.admin.repository.admin.movie;
 
+import com.hongsam.hongflix.admin.domain.movie.MovieTwoGenreReqDto;
 import com.hongsam.hongflix.admin.domain.movie.MovieUpdateReqDto;
 import com.hongsam.hongflix.admin.domain.movie.Movie;
 import org.apache.ibatis.annotations.Mapper;
@@ -22,5 +23,7 @@ public interface MovieMapper {
     boolean delete(Long id);
 
     List<Movie> findByTitle(String title);
+
+    List<Movie> findByTwoGenres(MovieTwoGenreReqDto movieGenreReqDto);
 
 }

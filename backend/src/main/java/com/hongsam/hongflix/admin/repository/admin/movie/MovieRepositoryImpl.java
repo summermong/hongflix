@@ -1,5 +1,6 @@
 package com.hongsam.hongflix.admin.repository.admin.movie;
 
+import com.hongsam.hongflix.admin.domain.movie.MovieTwoGenreReqDto;
 import com.hongsam.hongflix.admin.domain.movie.MovieUpdateReqDto;
 import com.hongsam.hongflix.admin.domain.movie.Movie;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +44,14 @@ public class MovieRepositoryImpl implements MovieRepository{
     @Override
     public List<Movie> findAll() {
         return movieMapper.findAll();
+    }
+
+    @Override
+    public List<Movie> getMoviesByTwoGenres(String genre1, String genre2) {
+        MovieTwoGenreReqDto dto = new MovieTwoGenreReqDto();
+        dto.setGenre_first_name(genre1);
+        dto.setGenre_second_name(genre2);
+        return movieMapper.findByTwoGenres(dto);
     }
 
 }

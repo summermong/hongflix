@@ -26,4 +26,6 @@ public interface MovieService {
     Optional<Movie> findById(Long id);
 
     List<Movie> findMovies();
+
+    List<Movie> getMoviesByTwoGenres(String genre1, String genre2);
 }

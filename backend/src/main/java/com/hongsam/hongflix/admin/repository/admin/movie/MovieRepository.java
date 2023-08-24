@@ -19,5 +19,5 @@ public interface MovieRepository {
 
     List<Movie> searchByTitle(String title);
 
-
+    List<Movie> getMoviesByTwoGenres(String genre1, String genre2);
 }

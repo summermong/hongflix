@@ -77,4 +77,9 @@ public class MovieServiceImpl implements MovieService{
     public List<Movie> findMovies() {
         return movieRepository.findAll();
     }
+
+    @Override
+    public List<Movie> getMoviesByTwoGenres(String genre1, String genre2) {
+        return movieRepository.getMoviesByTwoGenres(genre1, genre2);
+    }
 }
