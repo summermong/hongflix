@@ -1,5 +1,6 @@
 package com.hongsam.hongflix.admin.repository.admin.movie;
 
+import com.hongsam.hongflix.admin.domain.movie.MovieFiveGenreReqDto;
 import com.hongsam.hongflix.admin.domain.movie.MovieTwoGenreReqDto;
 import com.hongsam.hongflix.admin.domain.movie.MovieUpdateReqDto;
 import com.hongsam.hongflix.admin.domain.movie.Movie;
@@ -26,4 +27,5 @@ public interface MovieMapper {
 
     List<Movie> findByTwoGenres(MovieTwoGenreReqDto movieGenreReqDto);
 
+    List<Movie> findByFiveGenres(MovieFiveGenreReqDto movieFiveGenreReqDto);
 }

@@ -3,9 +3,7 @@ package com.hongsam.hongflix.admin.web;
 import com.hongsam.hongflix.admin.domain.content.Content;
 
 import com.hongsam.hongflix.admin.domain.content.ContentCreateReqDto;
-import com.hongsam.hongflix.admin.domain.movie.Movie;
-import com.hongsam.hongflix.admin.domain.movie.MovieCreateReqDto;
-import com.hongsam.hongflix.admin.domain.movie.MovieUpdateReqDto;
+import com.hongsam.hongflix.admin.domain.movie.*;
 import com.hongsam.hongflix.admin.service.movie.MovieService;
 
 import com.hongsam.hongflix.admin.service.s3.S3UploaderService;
@@ -127,6 +125,16 @@ public class MovieController {
     @DeleteMapping("/{movieId}")
     public boolean deleteMovie(@PathVariable long movieId){
         return movieService.delete(movieId);
+    }
+
+    @GetMapping("/twoGenre")
+    public List<Movie> getMoviesByTwoGenres(@RequestParam MovieTwoGenreReqDto movieTwoGenreReqDto){
+        return movieService.getMoviesByTwoGenres(movieTwoGenreReqDto);
+    }
+
+    @GetMapping("/fiveGenr")
+    public List<Movie> getMoviesByFiveGenres(@RequestParam MovieFiveGenreReqDto movieFiveGenreReqDto){
+        return movieService.findByFiveGenres(movieFiveGenreReqDto);
     }
 
 

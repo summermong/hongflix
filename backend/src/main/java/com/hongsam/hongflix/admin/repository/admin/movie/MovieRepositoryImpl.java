@@ -1,5 +1,6 @@
 package com.hongsam.hongflix.admin.repository.admin.movie;
 
+import com.hongsam.hongflix.admin.domain.movie.MovieFiveGenreReqDto;
 import com.hongsam.hongflix.admin.domain.movie.MovieTwoGenreReqDto;
 import com.hongsam.hongflix.admin.domain.movie.MovieUpdateReqDto;
 import com.hongsam.hongflix.admin.domain.movie.Movie;
@@ -47,11 +48,14 @@ public class MovieRepositoryImpl implements MovieRepository{
     }
 
     @Override
-    public List<Movie> getMoviesByTwoGenres(String genre1, String genre2) {
-        MovieTwoGenreReqDto dto = new MovieTwoGenreReqDto();
-        dto.setGenre_first_name(genre1);
-        dto.setGenre_second_name(genre2);
-        return movieMapper.findByTwoGenres(dto);
+    public List<Movie> getMoviesByTwoGenres(MovieTwoGenreReqDto movieTwoGenreReqDto) {
+        return movieMapper.findByTwoGenres(movieTwoGenreReqDto);
     }
+
+    @Override
+    public List<Movie> findByFiveGenres(MovieFiveGenreReqDto movieFiveGenreReqDto) {
+        return movieMapper.findByFiveGenres(movieFiveGenreReqDto);
+    }
+
 
 }

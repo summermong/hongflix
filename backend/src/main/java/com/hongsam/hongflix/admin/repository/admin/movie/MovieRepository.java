@@ -1,6 +1,8 @@
 package com.hongsam.hongflix.admin.repository.admin.movie;
 
 import com.hongsam.hongflix.admin.domain.movie.Movie;
+import com.hongsam.hongflix.admin.domain.movie.MovieFiveGenreReqDto;
+import com.hongsam.hongflix.admin.domain.movie.MovieTwoGenreReqDto;
 import com.hongsam.hongflix.admin.domain.movie.MovieUpdateReqDto;
 
 import java.util.List;
@@ -19,5 +21,7 @@ public interface MovieRepository {
 
     List<Movie> searchByTitle(String title);
 
-    List<Movie> getMoviesByTwoGenres(String genre1, String genre2);
+    List<Movie> getMoviesByTwoGenres(MovieTwoGenreReqDto movieTwoGenreReqDto);
+
+    List<Movie> findByFiveGenres(MovieFiveGenreReqDto movieFiveGenreReqDto);
 }
