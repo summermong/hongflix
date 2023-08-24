@@ -65,6 +65,12 @@
 
 
 
+    <select id="findByTwoGenres" resultType="Movie">
+        SELECT *
+        FROM movie
+        WHERE genre = #{genre_first_name} OR genre = #{genre_second_name}
+    </select>
+
 
 
 
