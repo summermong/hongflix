@@ -24,6 +24,11 @@ public class ContentRepositoryImpl implements ContentRepository{
         return contentMapper.findAllByMovieId(movieId);
     }
 
+    @Override
+    public List<Content> searchByTitle(String title) {
+        return contentMapper.findByTitle(title);
+    }
+
 
 //    @Override
 //    public void update(Long id, ContentUpdateReqDto contentUpdateReqDto) {

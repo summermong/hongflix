@@ -6,13 +6,9 @@ import lombok.Data;
 public class ContentUpdateReqDto {
     private String title;
     private String explanation;
-    private String videoName;
-    private String accessUrl;
 
-    public ContentUpdateReqDto(String title, String explanation, String videoName, String accessUrl) {
+    public ContentUpdateReqDto(String title, String explanation) {
         this.title = title;
         this.explanation = explanation;
-        this.videoName = videoName;
-        this.accessUrl = accessUrl;
     }
 }

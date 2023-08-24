@@ -5,10 +5,14 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.web.servlet.MultipartProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.unit.DataSize;
 
 @Configuration
+@EnableConfigurationProperties(MultipartProperties.class)
 public class S3Config {
     @Value("${cloud.aws.credentials.access-key}")
     private String iamAccessKey;
@@ -23,5 +27,13 @@ public class S3Config {
                 .withRegion(region).enablePathStyleAccess()
                 .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
                 .build();
+    }
+
+    @Bean
+    public MultipartProperties multipartProperties() {
+        MultipartProperties properties = new MultipartProperties();
+        properties.setMaxFileSize(DataSize.parse("10GB"));
+        properties.setMaxRequestSize(DataSize.parse("10GB"));
+        return properties;
     }
 }
