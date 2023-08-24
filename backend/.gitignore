@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 src/main/resources/*.yml
 
 HELP.md
@@ -41,3 +40,4 @@ out/
 
 src/main/resources/*.yml
 src/main/resources/hongflix_config
+
