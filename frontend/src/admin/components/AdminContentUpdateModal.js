@@ -1,6 +1,7 @@
 import axios from "axios";
 import styles from "../Admin.module.css";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function AdminContentUpdateModal({
   setUpdateModalView,
@@ -20,7 +21,8 @@ export default function AdminContentUpdateModal({
     console.log(e.target.files);
     setValue(e.target.files[0]);
   };
-  const updateContent = async () => {
+  const updateContent = async (e) => {
+    e.preventDefault();
     const formData = new FormData();
     const contentUpdateReqDto = {
       title: title,
@@ -33,7 +35,7 @@ export default function AdminContentUpdateModal({
     formData.append("file", accessUrl);
     formData.append("contentUpdateReqDto", blob, "contentUpdateReqDto.json");
     await axios
-      .post(`${apiUrl}contents/${content["id"]}`, formData, {
+      .put(`${apiUrl}contents/${content["id"]}`, formData, {
         header: { "Content-Type": "multipart/form-data" },
       })
       .then((res) => {
@@ -48,7 +50,7 @@ export default function AdminContentUpdateModal({
 
   return (
     <div
-      className={`${styles.modalContainer} flex flex-col items-center justify-center w-full h-1/3 fixed md:w-2/3 md:h-3/6 rounded-lg gap-3 border`}
+      className={`${styles.modalContainer} flex flex-col items-center justify-center w-full fixed md:w-2/3 rounded-lg gap-3 border pt-5 pb-5`}
     >
       <h1 className="text-3xl">콘텐츠 등록</h1>
       <form className="flex w-4/5 flex-col justify-center gap-2" action="POST">
@@ -70,8 +72,12 @@ export default function AdminContentUpdateModal({
           className="p-3 border rounded-lg"
           type="text"
         />
-        <label htmlFor="title">영상</label>
+        <label htmlFor="">기존 콘텐츠</label>
+        <div className="p-3 border rounded-lg">
+          <Link to={accessUrl}>Link</Link>
+        </div>
 
+        <label htmlFor="title">변경할 콘텐츠</label>
         <input
           onChange={(e) => {
             fileHandler(e, setAccessUrl);
@@ -89,7 +95,14 @@ export default function AdminContentUpdateModal({
         >
           닫기
         </button>
-        <button className={`${styles.contentModalCreateBtn}`}>등록</button>
+        <button
+          onClick={(e) => {
+            updateContent(e);
+          }}
+          className={`${styles.contentModalCreateBtn}`}
+        >
+          등록
+        </button>
       </div>
     </div>
   );

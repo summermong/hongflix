@@ -1,12 +1,14 @@
 import axios from "axios";
 import styles from "../Admin.module.css";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function AdminMovieUpdateModal({
   setUpdateModalView,
   apiUrl,
   movie,
   movieIndex,
+  fetchMovies,
 }) {
   const [title, setTitle] = useState(movie["title"]);
   const [subTitle, setSubTitle] = useState(movie["subTitle"]);
@@ -50,17 +52,21 @@ export default function AdminMovieUpdateModal({
       })
       .then((res) => {
         console.log(res.data);
+        fetchMovies();
+        setUpdateModalView(false);
       })
       .catch((err) => {
         console.log(`ERROR!! ${err}`);
+        alert(err);
+        setUpdateModalView(false);
       });
   };
 
   return (
     <div
-      className={`${styles.modalContainer} flex flex-col items-center justify-center w-full h-1/3 fixed md:w-2/3 md:h-3/6 rounded-lg gap-3 border`}
+      className={`${styles.modalContainer} flex flex-col items-center justify-center w-full fixed md:w-2/3 rounded-lg gap-3 border pt-5 pb-5`}
     >
-      <h1 className="text-3xl">영화 등록</h1>
+      <h1 className="text-3xl">영화 수정</h1>
       <form className="flex w-4/5 flex-col justify-center gap-2" action="POST">
         <label htmlFor="title">영화 제목</label>
         <input
@@ -89,17 +95,16 @@ export default function AdminMovieUpdateModal({
           className="p-3 border rounded-lg"
           type="text"
         />
-        <label htmlFor="title">영화 링크</label>
-        <input
-          value={accessKey}
-          className="p-3 border rounded-lg"
-          type="text"
-        />
+        <label htmlFor="title">기존 영화</label>
+        <div className="p-3 border rounded-lg">
+          <Link to={accessKey}>Link</Link>
+        </div>
+        <label htmlFor="">수정할 영화</label>
         <input
           onChange={(e) => {
             fileHandler(e);
           }}
-          className="p-3 rounded-lg"
+          className="p-3 border rounded-lg"
           type="file"
         />
         <label htmlFor="title">내용</label>

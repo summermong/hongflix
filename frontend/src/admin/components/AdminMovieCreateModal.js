@@ -57,7 +57,7 @@ export default function AdminMovieCreateModal({
 
   return (
     <div
-      className={`${styles.modalContainer} flex flex-col items-center justify-center w-full h-1/3 fixed md:w-2/3 md:h-3/6 rounded-lg gap-3 border`}
+      className={`${styles.modalContainer} flex flex-col items-center justify-center w-full fixed md:w-2/3 rounded-lg gap-3 border pt-5 pb-5`}
     >
       <h1 className="text-3xl">영화 등록</h1>
       <form className="flex w-4/5 flex-col justify-center gap-2" action="POST">
