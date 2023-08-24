@@ -50,15 +50,20 @@ public class S3UploaderService {
     }
 
     public String upload(MultipartFile multipartFile, String dirName) throws IOException {
-        File uploadFile = convert(multipartFile)  // 파일 변환할 수 없으면 에러
-                .orElseThrow(() -> new IllegalArgumentException("error: MultipartFile -> File convert fail"));
+        String originalFilename = multipartFile.getOriginalFilename();
 
-        return upload(uploadFile, dirName);
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentLength(multipartFile.getSize());
+        metadata.setContentType(multipartFile.getContentType());
+
+        amazonS3Client.putObject(bucketName, "input/" + originalFilename, multipartFile.getInputStream(), metadata);
+        return amazonS3Client.getUrl(bucketName, originalFilename).toString();
     }
 
     // S3로 파일 업로드하기
     private String upload(File uploadFile, String dirName) {
         String fileName = dirName + "/" + UUID.randomUUID() + uploadFile.getName();   // S3에 저장된 파일 이름
+
         String uploadImageUrl = putS3(uploadFile, fileName); // s3로 업로드
         removeNewFile(uploadFile);
         return uploadImageUrl;
@@ -67,7 +72,7 @@ public class S3UploaderService {
     // S3로 업로드
     private String putS3(File uploadFile, String fileName) {
         // 파일 저장 위치 input 폴더 하위
-        amazonS3Client.putObject(new PutObjectRequest(bucketName, "input/" + fileName, uploadFile).withCannedAcl(CannedAccessControlList.PublicRead));
+        amazonS3Client.putObject(new PutObjectRequest(bucketName, fileName, uploadFile).withCannedAcl(CannedAccessControlList.PublicRead));
         return amazonS3Client.getUrl(bucketName, fileName).toString();
     }
 
@@ -96,10 +101,9 @@ public class S3UploaderService {
         metadata.setContentLength(multipartFile.getSize());
         metadata.setContentType(multipartFile.getContentType());
 
-        String storeFileName = createStoreFileName(originalFilename);
 
         //파일 업로드
-        File file = new File(fileDir+storeFileName);
+        File file = new File(fileDir+originalFilename);
         multipartFile.transferTo(file);
 
         return Optional.of(file);

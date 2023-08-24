@@ -2,6 +2,7 @@ package com.hongsam.hongflix.admin.service.content;
 
 import com.hongsam.hongflix.admin.domain.content.Content;
 import com.hongsam.hongflix.admin.domain.content.ContentCreateResDto;
+import com.hongsam.hongflix.admin.domain.content.ContentUpdateMapperReqDto;
 import com.hongsam.hongflix.admin.domain.content.ContentUpdateReqDto;
 import com.hongsam.hongflix.admin.domain.movie.Movie;
 import com.hongsam.hongflix.admin.domain.movie.MovieUpdateReqDto;
@@ -21,13 +22,6 @@ public class ContentServiceImpl implements ContentService{
 
     private final ContentMapper contentMapper;
 
-    private final S3UploaderService s3UploaderService;
-
-    @Override
-    public void update(Long id, MovieUpdateReqDto movieUpdateReqDto) {
-
-    }
-
     @Override
     public List<ContentCreateResDto> findAllByMovieId(Long movieId) {
         return contentMapper.findAllByMovieId(movieId);
@@ -44,16 +38,9 @@ public class ContentServiceImpl implements ContentService{
     }
 
     @Override
-    public boolean update(Long id, ContentUpdateReqDto contentUpdateReqDto, MultipartFile file) throws IOException {
-        Optional<Content> byId = findById(id);
-
-        if(byId.isPresent()){
-            contentMapper.update(id, contentUpdateReqDto);
-            return true;
-        }
-
-        return false;
-
+    public boolean update(Long id, ContentUpdateMapperReqDto updateMapperReqDto) throws IOException {
+        contentMapper.update(id, updateMapperReqDto);
+        return true;
     }
 
     @Override

@@ -5,16 +5,17 @@
 
     <!-- Content 관련 SQL -->
     <insert id="save" parameterType="Content" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO content (movieId, title, explanation, accessUrl)
-        VALUES (#{movieId}, #{title}, #{explanation}, #{accessUrl})
+        INSERT INTO content (movieId, title, explanation, accessUrl, accessStreamingUrl)
+        VALUES (#{movieId}, #{title}, #{explanation}, #{accessUrl}, #{accessStreamingUrl})
     </insert>
 
     <select id="findAllByMovieId" resultType="ContentCreateResDto">
-        SELECT c.id, c.movieId, c.title, c.explanation, c.accessUrl, m.title AS movieName
+        SELECT c.id, c.movieId, c.title, c.explanation, c.accessUrl, c.accessStreamingUrl, m.title AS movieName
         FROM content c
                  INNER JOIN movie m ON c.movieId = m.id
         WHERE m.id = #{movieId}
     </select>
+
 
     <select id="findByTitle" resultType="Content">
         SELECT * FROM content
@@ -33,7 +34,8 @@
                movieId,
                title,
                explanation,
-               accessUrl
+               accessUrl,
+               accessStreamingUrl
         from content
         where id = #{id}
     </select>
@@ -42,8 +44,8 @@
         update content
         set title=#{updateParam.title},
             explanation=#{updateParam.explanation},
-            explanation=#{updateParam.videoName},
-            accessUrl=#{updateParam.accessUrl}
+            accessUrl=#{updateParam.accessUrl},
+            accessStreamingUrl=#{updateParam.accessStreamingUrl}
         where id = #{id}
     </update>
 

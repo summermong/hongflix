@@ -27,20 +27,10 @@ public class MovieServiceImpl implements MovieService{
 
     private final ContentRepository contentRepository;
 
-    private final S3UploaderService s3UploaderService;
+
 
     @Override
-    public boolean save(MovieCreateReqDto movieCreateReqDto, MultipartFile file) throws IOException {
-        String url = "";
-        url = s3UploaderService.upload(file, "static/content-video");
-        Movie movie = new Movie(url,
-                movieCreateReqDto.getTitle(),
-                movieCreateReqDto.getSubTitle(),
-                movieCreateReqDto.getExplanation(),
-                movieCreateReqDto.getGenre()
-        );
-
-        movie.setAccessKey(url);
+    public boolean save(Movie movie) throws IOException {
         Movie savedMovie = movieRepository.save(movie);
         if(savedMovie.getId() != null){
             return true;
@@ -51,20 +41,7 @@ public class MovieServiceImpl implements MovieService{
 
     @Override
     @Transactional
-    public Content addContentToMovie(Long movieId, ContentCreateReqDto contentCreateReqDto, MultipartFile file) throws IOException {
-        String url = "";
-        if(file != null) {
-            url = s3UploaderService.upload(file, "static/content-video");
-        }
-
-        Content content = Content.builder()
-                .title(contentCreateReqDto.getTitle())
-                .accessUrl(url)
-                .explanation(contentCreateReqDto.getExplanation())
-                .build();
-        content.setMovieId(movieId);
-        content.setAccessUrl(url);
-
+    public Content addContentToMovie(Long movieId, Content content) throws IOException {
         return contentRepository.save(content);
     }
 
@@ -73,9 +50,6 @@ public class MovieServiceImpl implements MovieService{
     public boolean update(Long id, MovieUpdateReqDto movieUpdateReqDto, MultipartFile file) throws IOException {
         Optional<Movie> byId = findById(id);
         if(byId.isPresent()){
-            String url = s3UploaderService.upload(file, "static/content-video");
-            movieUpdateReqDto.setAccessKey(url);
-
             movieRepository.update(id, movieUpdateReqDto);
             return true;
         }

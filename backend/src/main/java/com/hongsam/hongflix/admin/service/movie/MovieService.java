@@ -13,9 +13,9 @@ import java.util.Optional;
 
 public interface MovieService {
 
-    boolean save(MovieCreateReqDto movieCreateReqDto, MultipartFile file) throws IOException;
+    boolean save(Movie movie) throws IOException;
 
-    Content addContentToMovie(Long movieId, ContentCreateReqDto contentCreateReqDto, MultipartFile file) throws IOException;
+    Content addContentToMovie(Long movieId, Content content) throws IOException;
 
     boolean update(Long id, MovieUpdateReqDto movieUpdateReqDto, MultipartFile file) throws IOException;
 

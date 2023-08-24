@@ -8,7 +8,9 @@ import com.hongsam.hongflix.admin.domain.movie.MovieCreateReqDto;
 import com.hongsam.hongflix.admin.domain.movie.MovieUpdateReqDto;
 import com.hongsam.hongflix.admin.service.movie.MovieService;
 
+import com.hongsam.hongflix.admin.service.s3.S3UploaderService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,18 +22,33 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/movies")
 @RequiredArgsConstructor
+@Slf4j
 public class MovieController {
 
     private final MovieService movieService;
+
+    private final S3UploaderService s3UploaderService;
 
     @PostMapping
     public boolean addMovie(
             @RequestPart MovieCreateReqDto movieCreateReqDto,
             MultipartFile file) throws IOException {
-        return movieService.save(movieCreateReqDto, file);
+
+        String url = s3UploaderService.upload(file, "img");
+
+        Movie movie = new Movie(url,
+                movieCreateReqDto.getTitle(),
+                movieCreateReqDto.getSubTitle(),
+                movieCreateReqDto.getExplanation(),
+                movieCreateReqDto.getGenre()
+        );
+
+        movie.setAccessKey(url);
+        log.info("생성된 url = {}", url);
+
+        return movieService.save(movie);
     }
 
-    @GetMapping
     public List<Movie> findMovies(){
         return movieService.findMovies();
     }
@@ -48,7 +65,31 @@ public class MovieController {
             @PathVariable Long movieId,
             @RequestPart ContentCreateReqDto contentCreateReqDto,
             MultipartFile file) throws IOException {
-        return movieService.addContentToMovie(movieId, contentCreateReqDto, file);
+
+        s3UploaderService.upload(file, "input");
+
+        // 이미지, 스트리밍 파일의 URL 파싱하는 과정
+        String fileName = file.getOriginalFilename();
+        int lastDotIndex = fileName.lastIndexOf(".");
+        String realFileName = fileName.substring(0, lastDotIndex);
+
+        String videoURL = "https://d2hpuoq6hnp8cm.cloudfront.net/output/" + realFileName
+                + "/Default/HLS/" + realFileName + ".m3u8";
+        log.info("videoUrl = {}", videoURL);
+
+        String imgURL = "https://d2hpuoq6hnp8cm.cloudfront.net/output/" + realFileName
+                + "/Default/Thumbnails/" + realFileName + ".00000000.jpg";
+        log.info("imgUrl = {}", imgURL);
+
+        Content content = Content.builder()
+                .title(contentCreateReqDto.getTitle())
+                .accessUrl(imgURL)
+                .accessStreamingUrl(videoURL)
+                .explanation(contentCreateReqDto.getExplanation())
+                .build();
+        content.setMovieId(movieId);
+
+        return movieService.addContentToMovie(movieId, content);
     }
 
     @GetMapping("/search")
@@ -62,6 +103,9 @@ public class MovieController {
             @RequestPart MovieUpdateReqDto movieUpdateReqDto,
             MultipartFile file
     ) throws IOException {
+        String url = s3UploaderService.upload(file, "img");
+        movieUpdateReqDto.setAccessKey(url);
+
         return movieService.update(movieId, movieUpdateReqDto, file);
     }
 
