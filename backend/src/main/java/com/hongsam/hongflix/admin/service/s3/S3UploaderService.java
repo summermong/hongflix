@@ -2,6 +2,7 @@ package com.hongsam.hongflix.admin.service.s3;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -65,7 +66,8 @@ public class S3UploaderService {
 
     // S3로 업로드
     private String putS3(File uploadFile, String fileName) {
-        amazonS3Client.putObject(new PutObjectRequest(bucketName, fileName, uploadFile).withCannedAcl(CannedAccessControlList.PublicRead));
+        // 파일 저장 위치 input 폴더 하위
+        amazonS3Client.putObject(new PutObjectRequest(bucketName, "input/" + fileName, uploadFile).withCannedAcl(CannedAccessControlList.PublicRead));
         return amazonS3Client.getUrl(bucketName, fileName).toString();
     }
 
@@ -88,6 +90,12 @@ public class S3UploaderService {
         }
 
         String originalFilename = multipartFile.getOriginalFilename();
+
+        // 파일 저장 추가 로직
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentLength(multipartFile.getSize());
+        metadata.setContentType(multipartFile.getContentType());
+
         String storeFileName = createStoreFileName(originalFilename);
 
         //파일 업로드

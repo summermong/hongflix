@@ -48,9 +48,6 @@ public class ContentServiceImpl implements ContentService{
         Optional<Content> byId = findById(id);
 
         if(byId.isPresent()){
-            String url = s3UploaderService.upload(file, "static/content-video");
-            contentUpdateReqDto.setAccessUrl(url);
-
             contentMapper.update(id, contentUpdateReqDto);
             return true;
         }
