@@ -2,12 +2,9 @@ import React, { useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Modal from '../pages/Modal';
-import axios from 'axios';
+import Modal from './Modal';
 
-const Main = () => {
-  // 구독 여부 상태
-  const [isSubscribed, setIsSubscribed] = useState(true);
+const Category = () => {
   const [modal, setModal] = useState(false);
   const [modalImage, setModalImage] = useState('');
   const [modalTitle, setModalTitle] = useState('');
@@ -200,84 +197,31 @@ const Main = () => {
     },
   ];
 
-  const slides4 = [
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/1.jpg`,
-      title: '최애의 아이',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/2.jpg`,
-      title: '주술회전',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/3.jpg`,
-      title: '도쿄 리벤저스',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/4.jpg`,
-      title: '스킵과 로퍼',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/1.jpg`,
-      title: '최애의 아이',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/2.jpg`,
-      title: '주술회전',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-  ];
-
-  axios
-    .get('https://a409-218-154-176-12.ngrok-free.app/movies')
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-
   return (
-    <div className="p-5 lg:p-8 mt-5 px-3 font-['Pretendard-Bold']">
-      <div className="flex flex-col gap-1 mb-8">
-        {isSubscribed === true ? (
-          <>
-            <div className="font-bold text-base mt-3 md:text-lg lg:text-xl">
-              최근 시청한 콘텐츠
-            </div>
-            <div>
-              <Slider {...settings}>
-                {slides1.map((slide, index) => (
-                  <div key={index}>
-                    <Slide
-                      imageSrc={slide.imageSrc}
-                      title={slide.title}
-                      genre={slide.genre}
-                      releaseDate={slide.releaseDate}
-                    />
-                  </div>
-                ))}
-              </Slider>
-            </div>
-          </>
-        ) : null}
-      </div>
-      <div className="flex flex-col gap-1 mb-8">
-        <div className="font-bold text-base mt-3 md:text-lg lg:text-xl">
-          따끈따끈한 신작
+    <div className="p-5 lg:p-8 font-['Pretendard-Bold']">
+      <div className="font-black text-xl lg:text-2xl">테마 추천</div>
+      <div className="mt-5 mb-10">
+        <div className="font-semibold text-lg lg:text-xl mb-2">
+          달달한 로맨스
         </div>
-        <div>
+        <div className="w-auto">
+          <Slider {...settings}>
+            {slides1.map((slide, index) => (
+              <div key={index}>
+                <Slide
+                  imageSrc={slide.imageSrc}
+                  title={slide.title}
+                  genre={slide.genre}
+                  releaseDate={slide.releaseDate}
+                />
+              </div>
+            ))}
+          </Slider>
+        </div>
+      </div>
+      <div className="my-5">
+        <div className="font-semibold text-lg lg:text-xl mb-2">호러/스릴러</div>
+        <div className="w-auto">
           <Slider {...settings}>
             {slides2.map((slide, index) => (
               <div key={index}>
@@ -292,32 +236,11 @@ const Main = () => {
           </Slider>
         </div>
       </div>
-      <div className="flex flex-col gap-1 mb-8">
-        <div className="font-bold text-base mt-3 md:text-lg lg:text-xl">
-          주간 인기작
-        </div>
-        <div>
+      <div className="my-5">
+        <div className="font-semibold text-lg lg:text-xl mb-2">다큐멘터리</div>
+        <div className="w-auto">
           <Slider {...settings}>
             {slides3.map((slide, index) => (
-              <div key={index}>
-                <Slide
-                  imageSrc={slide.imageSrc}
-                  title={slide.title}
-                  genre={slide.genre}
-                  releaseDate={slide.releaseDate}
-                />
-              </div>
-            ))}
-          </Slider>
-        </div>
-      </div>
-      <div className="flex flex-col gap-1 mb-8">
-        <div className="font-bold text-base mt-3 md:text-lg lg:text-xl">
-          오타쿠가 세상을 구한다
-        </div>
-        <div>
-          <Slider {...settings}>
-            {slides4.map((slide, index) => (
               <div key={index}>
                 <Slide
                   imageSrc={slide.imageSrc}
@@ -343,4 +266,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Category;

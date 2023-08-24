@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
   // 로그인 여부 상태
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // 스크롤 시 헤더 배경색 변경
   const [isScrolled, setIsScrolled] = useState(false);
