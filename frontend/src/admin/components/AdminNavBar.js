@@ -15,8 +15,18 @@ export default function AdminLeftBar() {
         <div
           className={`${styles.navBarProfileContainer} flex justify-center md:justify-start w-2/6 h-full md:w-5/6 gap-3`}
         >
-          <div className={`${styles.navProfileImg} `}>
-            <img className={`bg-black w-16 h-16 rounded-xl`} src="" alt="" />
+          <div
+            className={`${styles.navProfileImg} bg-black w-16 h-16 rounded-xl flex items-center`}
+          >
+            <svg
+              className="w-full h-4/6 text-gray-800 dark:text-white"
+              ariaHidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 14 18"
+            >
+              <path d="M7 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm2 1H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
+            </svg>
           </div>
           <div className={`${styles.navProfileText} mt-5 hidden md:block`}>
             <p className={`${styles.navProfileItem} md:pt-1`}>Administrator</p>

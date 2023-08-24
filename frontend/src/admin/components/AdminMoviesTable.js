@@ -10,6 +10,7 @@ export default function AdminMoviesTable({
   setDeleteModalView,
   modalSwitch,
 }) {
+  console.log(movies);
   return (
     <div>
       <table className="border w-full text-center rounded-lg">

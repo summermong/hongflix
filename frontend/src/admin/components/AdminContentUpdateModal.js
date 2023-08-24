@@ -5,8 +5,10 @@ import React, { useState } from "react";
 export default function AdminContentUpdateModal({
   setUpdateModalView,
   content,
+  fetchContents,
   apiUrl,
 }) {
+  console.log(`contentId : ${content["id"]}`);
   const [title, setTitle] = useState(content["title"]);
   const [accessUrl, setAccessUrl] = useState(content["accessUrl"]);
   const [explanation, setExplanation] = useState(content["explanation"]);
@@ -18,7 +20,31 @@ export default function AdminContentUpdateModal({
     console.log(e.target.files);
     setValue(e.target.files[0]);
   };
-  console.log(accessUrl);
+  const updateContent = async () => {
+    const formData = new FormData();
+    const contentUpdateReqDto = {
+      title: title,
+      explanation: explanation,
+    };
+    console.log(title, explanation);
+    const blob = new Blob([JSON.stringify(contentUpdateReqDto)], {
+      type: "application/json",
+    });
+    formData.append("file", accessUrl);
+    formData.append("contentUpdateReqDto", blob, "contentUpdateReqDto.json");
+    await axios
+      .post(`${apiUrl}contents/${content["id"]}`, formData, {
+        header: { "Content-Type": "multipart/form-data" },
+      })
+      .then((res) => {
+        console.log(res.data);
+        fetchContents();
+        setUpdateModalView(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div
@@ -45,6 +71,7 @@ export default function AdminContentUpdateModal({
           type="text"
         />
         <label htmlFor="title">영상</label>
+
         <input
           onChange={(e) => {
             fileHandler(e, setAccessUrl);

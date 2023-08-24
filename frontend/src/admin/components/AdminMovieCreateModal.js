@@ -1,21 +1,25 @@
 import axios from "axios";
 import styles from "../Admin.module.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-export default function AdminMovieCreateModal({ setCreateModalView, apiUrl }) {
+export default function AdminMovieCreateModal({
+  setCreateModalView,
+  apiUrl,
+  fetchMovies,
+}) {
   const [title, setTitle] = useState("");
   const [subTitle, setSubTitle] = useState("");
   const [genre, setGenre] = useState("");
   const [accessKey, setAccessKey] = useState(null);
   const [explanation, setExplanation] = useState("");
+
   const inputHandler = (e, setValue) => {
     e.preventDefault();
     setValue(e.target.value);
     console.log(e.target.value);
   };
   const fileHandler = (e) => {
-    console.log(e.target.files);
-    setAccessKey(e.target.files);
+    setAccessKey(e.target.files[0]);
   };
 
   const createMovie = async (e) => {
@@ -27,26 +31,24 @@ export default function AdminMovieCreateModal({ setCreateModalView, apiUrl }) {
       explanation: explanation,
       genre: genre,
     };
-
     const formData = new FormData();
-
-    formData.append(
-      "movieCreateReqDto",
-      new Blob([JSON.stringify(movieCreateReqDto)], {
-        type: "application/json",
-      })
-    );
+    const blob = new Blob([JSON.stringify(movieCreateReqDto)], {
+      type: "application/json",
+    });
 
     formData.append("file", accessKey);
+    formData.append("movieCreateReqDto", blob, "movieCreateReqDto.json");
 
-    axios
+    await axios
       .post(`${apiUrl}movies`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       })
-      .then((response) => {
-        console.log(response);
+      .then((res) => {
+        console.log(res.data);
+        fetchMovies();
+        setCreateModalView(false);
       })
       .catch((error) => {
         console.error(error);

@@ -6,22 +6,54 @@ export default function AdminMovieUpdateModal({
   setUpdateModalView,
   apiUrl,
   movie,
+  movieIndex,
 }) {
   const [title, setTitle] = useState(movie["title"]);
   const [subTitle, setSubTitle] = useState(movie["subTitle"]);
   const [genre, setGenre] = useState(movie["genre"]);
   const [accessKey, setAccessKey] = useState(movie["accessKey"]);
-  const [content, setContent] = useState(movie["content"]);
-  console.log(movie);
+  const [explanation, setExplanation] = useState(movie["explanation"]);
+  console.log(`movieIndex : ${movieIndex}`);
+  console.log(`movidId : ${movie["id"]}`);
 
   const inputHandler = (e, setValue) => {
     e.preventDefault();
     setValue(e.target.value);
   };
+  const fileHandler = (e) => {
+    console.log(e.target.files);
+    setAccessKey(e.target.files[0]);
+  };
 
-  const updateMovie = (e) => {
+  const updateMovie = async (e) => {
     e.preventDefault();
-    console.log(title);
+    const movieUpdateReqDto = {
+      title: title,
+      subTitle: subTitle,
+      explanation: explanation,
+      genre: genre,
+      accessKey: accessKey,
+    };
+    const blob = new Blob([JSON.stringify(movieUpdateReqDto)], {
+      type: "application/json",
+    });
+    const formData = new FormData();
+    console.log(movieUpdateReqDto);
+    formData.append("file", accessKey);
+    formData.append("movieUpdateReqDto", blob, "movieUpdateReqDto.json");
+
+    await axios
+      .put(`${apiUrl}movies/${movie["id"]}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(`ERROR!! ${err}`);
+      });
   };
 
   return (
@@ -41,7 +73,7 @@ export default function AdminMovieUpdateModal({
         />
         <label htmlFor="content">영화 부제목</label>
         <input
-          value={content}
+          value={subTitle}
           onChange={(e) => {
             inputHandler(e, setSubTitle);
           }}
@@ -60,17 +92,21 @@ export default function AdminMovieUpdateModal({
         <label htmlFor="title">영화 링크</label>
         <input
           value={accessKey}
-          onChange={(e) => {
-            inputHandler(e, setAccessKey);
-          }}
           className="p-3 border rounded-lg"
           type="text"
         />
+        <input
+          onChange={(e) => {
+            fileHandler(e);
+          }}
+          className="p-3 rounded-lg"
+          type="file"
+        />
         <label htmlFor="title">내용</label>
         <textarea
-          value={content}
+          value={explanation}
           onChange={(e) => {
-            inputHandler(e, setContent);
+            inputHandler(e, setExplanation);
           }}
           className="p-3 border rounded-lg"
           type="text"

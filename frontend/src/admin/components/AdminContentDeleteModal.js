@@ -9,7 +9,17 @@ export default function AdminContentDeleteModal({
 }) {
   console.log(`seleteId : ${seleteId}`);
   const deleteMovie = async () => {
-    await axios.delete(`${apiUrl}movies/${seleteId}`);
+    await axios
+      .delete(`${apiUrl}contents/${seleteId}`)
+      .then((res) => {
+        setDeleteModalView(false);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        alert(err);
+        setDeleteModalView(false);
+        console.log(`ERROR!! ${err}`);
+      });
   };
   return (
     <div

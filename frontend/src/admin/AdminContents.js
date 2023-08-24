@@ -20,15 +20,15 @@ export default function AdminContents() {
   console.log(`movieId : ${movieId}`);
 
   const updateText = () => {
-    const movieIndex = contents.findIndex((el) => {
+    const contentIndex = contents.findIndex((el) => {
       return el["id"] == seleteId;
     });
-    return movieIndex;
+    return contentIndex;
   };
 
-  const fetchMovies = async () => {
+  const fetchContents = async () => {
     await axios
-      .get(`${apiUrl}/contents/${movieId}`)
+      .get(`${apiUrl}contents/${movieId}`)
       .then((res) => {
         console.log(res.data);
         setContents(res.data);
@@ -39,23 +39,14 @@ export default function AdminContents() {
   };
 
   useEffect(() => {
-    fetchMovies();
+    fetchContents();
   }, []);
-
-  console.log(useParams());
 
   const modalSwitch = (e, value, setValue, id) => {
     e.preventDefault();
     !value ? setValue(true) : setValue(false);
     setSeletId(id);
   };
-
-  // const updateText = () => {
-  //   const movieIndex = movies.findIndex((el) => {
-  //     return el["id"] == seleteId;
-  //   });
-  //   return movieIndex;
-  // };
 
   return (
     <div className={`w-screen h-screen flex flex-col md:flex-row`}>
@@ -126,6 +117,8 @@ export default function AdminContents() {
         {createModalView ? (
           <AdminContentCreateModal
             setCreateModalView={setCreateModalView}
+            movieId={movieId}
+            fetchContents={fetchContents}
             apiUrl={apiUrl}
           ></AdminContentCreateModal>
         ) : null}
@@ -133,6 +126,7 @@ export default function AdminContents() {
           <AdminContentUpdateModal
             setUpdateModalView={setUpdateModalView}
             content={contents[updateText()]}
+            fetchContents={fetchContents}
             apiUrl={apiUrl}
           ></AdminContentUpdateModal>
         ) : null}
@@ -140,6 +134,7 @@ export default function AdminContents() {
           <AdminContentDeleteModal
             setDeleteModalView={setDeleteModalView}
             seleteId={seleteId}
+            fetchContents={fetchContents}
             apiUrl={apiUrl}
           ></AdminContentDeleteModal>
         ) : null}

@@ -12,8 +12,7 @@ export default function AdminMovies() {
   const [updateModalView, setUpdateModalView] = useState(false);
   const [deleteModalView, setDeleteModalView] = useState(false);
   const [createModalView, setCreateModalView] = useState(false);
-  const [seleteId, setSeletId] = useState(null);
-
+  const [seleteId, setSeletId] = useState(0);
   const [movies, setMovies] = useState([]);
 
   const modalSwitch = (e, value, setValue, id) => {
@@ -30,7 +29,6 @@ export default function AdminMovies() {
     });
     return movieIndex;
   };
-  console.log(updateText());
 
   const apiUrl = "http://localhost:8080/";
   const navigator = useNavigate();
@@ -119,6 +117,8 @@ export default function AdminMovies() {
         {createModalView ? (
           <AdminMovieCreateModal
             setCreateModalView={setCreateModalView}
+            fetchMovies={fetchMovies}
+            movies={movies}
             apiUrl={apiUrl}
           ></AdminMovieCreateModal>
         ) : null}
@@ -126,6 +126,8 @@ export default function AdminMovies() {
           <AdminMovieUpdateModal
             setUpdateModalView={setUpdateModalView}
             movie={movies[updateText()]}
+            movieIndex={updateText()}
+            fetchMovies={fetchMovies}
             apiUrl={apiUrl}
           ></AdminMovieUpdateModal>
         ) : null}
@@ -133,6 +135,7 @@ export default function AdminMovies() {
           <AdminMovieDeleteModal
             setDeleteModalView={setDeleteModalView}
             seleteId={seleteId}
+            fetchMovies={fetchMovies}
             apiUrl={apiUrl}
           ></AdminMovieDeleteModal>
         ) : null}

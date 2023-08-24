@@ -9,7 +9,12 @@ export default function AdminMovieDeleteModal({
 }) {
   console.log(`seleteId : ${seleteId}`);
   const deleteMovie = async () => {
-    await axios.delete(`${apiUrl}movies/${seleteId}`);
+    await axios
+      .delete(`${apiUrl}movies/${seleteId}`)
+      .then((res) => console.log(res.data))
+      .catch((err) => {
+        console.log(`ERROR!!${err}`);
+      });
   };
   return (
     <div

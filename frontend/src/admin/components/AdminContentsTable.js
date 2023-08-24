@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "../Admin.module.css";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function AdminContentsTable({
   contents,
@@ -35,7 +35,9 @@ export default function AdminContentsTable({
               <tr key={i}>
                 <td className="p-2 border">{el["title"]}</td>
                 <td className="p-2 border">{el["explanation"]}</td>
-                <td className="p-2 border">{el["accessUrl"]}</td>
+                <td className="p-2 border">
+                  {<Link to={el["accessUrl"]}>Link</Link>}
+                </td>
                 <td className="p-2 border">{movieTitle}</td>
 
                 <td className="p-2 border w-14">
