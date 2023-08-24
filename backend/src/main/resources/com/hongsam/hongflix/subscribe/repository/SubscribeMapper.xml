@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.hongsam.hongflix.repository.SubscribeMapper">
+<mapper namespace="com.hongsam.hongflix.subscribe.repository.SubscribeMapper">
 
     <insert id="save">
         insert into subscribe (id, available, period)

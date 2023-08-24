@@ -1,4 +1,4 @@
-package com.hongsam.hongflix.domain;
+package com.hongsam.hongflix.subscribe.domain;
 
 import lombok.Getter;
 import lombok.Setter;

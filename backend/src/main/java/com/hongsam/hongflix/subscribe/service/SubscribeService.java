@@ -1,12 +1,10 @@
-package com.hongsam.hongflix.service;
+package com.hongsam.hongflix.subscribe.service;
 
-import com.hongsam.hongflix.domain.SubscribeDto;
-import com.hongsam.hongflix.domain.SubscribeUpdateDto;
-import com.hongsam.hongflix.repository.SubscribeRepository;
+import com.hongsam.hongflix.subscribe.domain.SubscribeDto;
+import com.hongsam.hongflix.subscribe.domain.SubscribeUpdateDto;
+import com.hongsam.hongflix.subscribe.repository.SubscribeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

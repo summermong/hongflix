@@ -1,4 +1,4 @@
-package com.hongsam.hongflix.domain;
+package com.hongsam.hongflix.subscribe.domain;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,8 +11,10 @@ public class SubscribeDto {
 
     private long id;
 
-    private boolean available;
+    private int available;
 
     private int period;
 
+    public SubscribeDto() {
+    }
 }

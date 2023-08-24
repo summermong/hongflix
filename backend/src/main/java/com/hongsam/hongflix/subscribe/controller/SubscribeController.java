@@ -1,9 +1,9 @@
-package com.hongsam.hongflix.controller;
+package com.hongsam.hongflix.subscribe.controller;
 
 
-import com.hongsam.hongflix.domain.SubscribeDto;
-import com.hongsam.hongflix.domain.SubscribeUpdateDto;
-import com.hongsam.hongflix.service.SubscribeService;
+import com.hongsam.hongflix.subscribe.domain.SubscribeDto;
+import com.hongsam.hongflix.subscribe.domain.SubscribeUpdateDto;
+import com.hongsam.hongflix.subscribe.service.SubscribeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +18,7 @@ public class SubscribeController {
     public String save(@PathVariable Long memberId) {
         SubscribeDto saveDto = new SubscribeDto();
         saveDto.setId(memberId);
-        saveDto.setAvailable(false);
+        saveDto.setAvailable(0);
         saveDto.setPeriod(0);
         // 서비스단 호출
         subscribeService.save(saveDto);

@@ -1,7 +1,7 @@
-package com.hongsam.hongflix.repository;
+package com.hongsam.hongflix.subscribe.repository;
 
-import com.hongsam.hongflix.domain.SubscribeDto;
-import com.hongsam.hongflix.domain.SubscribeUpdateDto;
+import com.hongsam.hongflix.subscribe.domain.SubscribeDto;
+import com.hongsam.hongflix.subscribe.domain.SubscribeUpdateDto;
 
 import java.util.Optional;
 

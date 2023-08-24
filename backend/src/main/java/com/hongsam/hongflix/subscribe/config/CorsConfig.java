@@ -1,4 +1,4 @@
-package com.hongsam.hongflix.config;
+package com.hongsam.hongflix.subscribe.config;
 
 
 import org.springframework.context.annotation.Configuration;
