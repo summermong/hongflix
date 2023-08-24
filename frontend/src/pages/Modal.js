@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Modal = ({
   modalImage,
@@ -7,13 +8,34 @@ const Modal = ({
   modalReleaseDate,
   closeModal,
 }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubscribe = () => {
+    // 로그인도 하고 구독도 한 경우
+    if (isLoggedIn && isSubscribed) {
+      navigate('/search');
+    }
+    // 로그인 안 한 경우
+    else if (!isLoggedIn) {
+      alert('로그인을 해주세요.');
+      navigate('/login');
+    }
+    // 로그인은 했는데 구독은 안 한 경우
+    else if (isLoggedIn && !isSubscribed) {
+      alert('구독 결제를 해주세요.');
+      navigate('/mypage');
+    }
+  };
+
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
       <div
-        className="flex w-3/4 h-4/5 bg-indigo-950 rounded-md shadow-2xl lg:w-1/3 lg:h-2/3"
+        className="relative flex flex-col justify-center w-3/4 h-4/5 bg-indigo-950 rounded-md shadow-2xl lg:w-1/3 lg:h-3/4"
         onClick={closeModal}
       >
-        <div className="flex relative flex-col">
+        <div>
           <button
             className="absolute top-2 right-2 text-white text-lg"
             onClick={closeModal}
@@ -25,22 +47,22 @@ const Modal = ({
             alt="modal"
             className="w-2/3 mx-auto my-5 sm:w-2/5 md:w-1/3 lg:w-1/3"
           />
-          <div className="flex flex-col  text-white text-xs sm:text-sm mx-3 justify-center">
-            <div className="flex flex-col items-center">
-              <div className="font-semibold text-base ">{modalTitle}</div>
-              <div className="">장르: {modalGenre}</div>
-              <div className="">공개일: {modalReleaseDate}</div>
-              <div className="py-4">
-                "이 연예계에서 거짓말은 무기다" 지방 도시에서 일하는 산부인과
-                의사 고로. 어느 날, '최애' 아이돌 'B코마치'의 멤버 아이가 그의
-                앞에 나타난다. 그녀는 어떤 금단의 비밀을 품고 있었는데... 그런
-                두 사람의 '최악'의 만남에서부터 운명이 움직이기 시작한다.
-              </div>
-              <button className="bg-white text-indigo-950 rounded-sm p-1 w-full font-bold">
-                지금 바로 보러 가기
-              </button>
-            </div>
+        </div>
+        <div className="text-white p-3 text-xs justify-center sm:text-sm md:text-base lg:text-lg text-center">
+          <div className="font-semibold">{modalTitle}</div>
+          <div className="">장르: {modalGenre}</div>
+          <div className="">공개일: {modalReleaseDate}</div>
+          <div className="py-4 w-full break-words">
+            dfafasfafffdsfadskfjdskfjadsfkldsjfklasfjakldsfjasdklfjdasklfkfjdlkfjaslfkfjdlkfjasfkljdklflfkfjdlkfjasfkljdklffkljdklfjakfjasdklfjdasklfkfjdlkfjaslfkfjdlfjasdklfjdasklfkfjdlkfjaslfkfjdlfjasdklfjdasklfkfjdlkfjaslfkfjdlfjaㅇㄴㄹㄴㅇㄹㅇㄴㅁㄹ
           </div>
+        </div>
+        <div className="p-3">
+          <button
+            className="bg-white text-indigo-950 rounded-sm mb-3 w-full font-bold py-1 text-sm md:text-base lg:text-xl"
+            onClick={handleSubscribe}
+          >
+            지금 바로 보러 가기
+          </button>
         </div>
       </div>
     </div>

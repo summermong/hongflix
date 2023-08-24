@@ -3,8 +3,11 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Modal from '../pages/Modal';
+import axios from 'axios';
 
 const Main = () => {
+  // 구독 여부 상태
+  const [isSubscribed, setIsSubscribed] = useState(true);
   const [modal, setModal] = useState(false);
   const [modalImage, setModalImage] = useState('');
   const [modalTitle, setModalTitle] = useState('');
@@ -236,26 +239,39 @@ const Main = () => {
     },
   ];
 
+  axios
+    .get('https://a409-218-154-176-12.ngrok-free.app/movies')
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+
   return (
     <div className="p-5 lg:p-8 mt-5 px-3 font-['Pretendard-Bold']">
       <div className="flex flex-col gap-1 mb-8">
-        <div className="font-bold text-base mt-3 md:text-lg lg:text-xl">
-          최근 시청한 콘텐츠
-        </div>
-        <div>
-          <Slider {...settings}>
-            {slides1.map((slide, index) => (
-              <div key={index}>
-                <Slide
-                  imageSrc={slide.imageSrc}
-                  title={slide.title}
-                  genre={slide.genre}
-                  releaseDate={slide.releaseDate}
-                />
-              </div>
-            ))}
-          </Slider>
-        </div>
+        {isSubscribed === true ? (
+          <>
+            <div className="font-bold text-base mt-3 md:text-lg lg:text-xl">
+              최근 시청한 콘텐츠
+            </div>
+            <div>
+              <Slider {...settings}>
+                {slides1.map((slide, index) => (
+                  <div key={index}>
+                    <Slide
+                      imageSrc={slide.imageSrc}
+                      title={slide.title}
+                      genre={slide.genre}
+                      releaseDate={slide.releaseDate}
+                    />
+                  </div>
+                ))}
+              </Slider>
+            </div>
+          </>
+        ) : null}
       </div>
       <div className="flex flex-col gap-1 mb-8">
         <div className="font-bold text-base mt-3 md:text-lg lg:text-xl">

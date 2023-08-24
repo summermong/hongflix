@@ -7,7 +7,7 @@ const Main = () => {
   // 캐러셀 이미지 크기 & 타이틀
   const Slide = ({ imageSrc, text }) => (
     <div className="relative">
-      <img className="w-screen h-fit" src={imageSrc} alt="carousel" />
+      <img className="w-full" src={imageSrc} alt="carousel" />
       <div className="absolute -translate-x-2/4 px-5 py-1.5 rounded-3xl bottom-5 left-2/4 text-xs md:text-base lg:text-sm text-center text-white  bg-indigo-950">
         {text}
       </div>
@@ -47,8 +47,8 @@ const Main = () => {
   };
 
   const slides = [
-    { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg`, text: '최애의 아이' },
-    { imageSrc: `${process.env.PUBLIC_URL}/img/1.jpeg`, text: '주술회전' },
+    { imageSrc: `${process.env.PUBLIC_URL}/img/b1.jpg`, text: '최애의 아이' },
+    { imageSrc: `${process.env.PUBLIC_URL}/img/b2.jpg`, text: '주술회전' },
     // Add more slide objects as needed
   ];
 
