@@ -2,6 +2,11 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+<<<<<<< Updated upstream
+=======
+  const isLoggedIn = true; // 로그인 여부 상태
+
+>>>>>>> Stashed changes
   return (
     <div className="App">
       <header className="App-header">
