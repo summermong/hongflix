@@ -34,7 +34,7 @@ public class MovieController {
             @RequestPart MovieCreateReqDto movieCreateReqDto,
             MultipartFile file) throws IOException {
 
-        String url = s3UploaderService.upload(file, "img");
+        String url = s3UploaderService.upload(file, "img/");
 
         Movie movie = new Movie(url,
                 movieCreateReqDto.getTitle(),
@@ -43,8 +43,16 @@ public class MovieController {
                 movieCreateReqDto.getGenre()
         );
 
-        movie.setAccessKey(url);
-        log.info("생성된 url = {}", url);
+        // 이미지, 스트리밍 파일의 URL 파싱하는 과정
+        String fileName = file.getOriginalFilename();
+        int lastDotIndex = fileName.lastIndexOf(".");
+        String realFileName = fileName.substring(0, lastDotIndex);
+
+        String imgURL = "https://d2hpuoq6hnp8cm.cloudfront.net/output/" + realFileName
+                + "img" + realFileName + ".00000000.jpg";
+        log.info("imgUrl = {}", imgURL);
+
+        movie.setAccessKey(imgURL);
 
         return movieService.save(movie);
     }
@@ -66,7 +74,7 @@ public class MovieController {
             @RequestPart ContentCreateReqDto contentCreateReqDto,
             MultipartFile file) throws IOException {
 
-        s3UploaderService.upload(file, "input");
+        s3UploaderService.upload(file, "input/");
 
         // 이미지, 스트리밍 파일의 URL 파싱하는 과정
         String fileName = file.getOriginalFilename();
@@ -103,7 +111,7 @@ public class MovieController {
             @RequestPart MovieUpdateReqDto movieUpdateReqDto,
             MultipartFile file
     ) throws IOException {
-        String url = s3UploaderService.upload(file, "img");
+        String url = s3UploaderService.upload(file, "img/");
         movieUpdateReqDto.setAccessKey(url);
 
         return movieService.update(movieId, movieUpdateReqDto, file);

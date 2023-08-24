@@ -56,7 +56,7 @@ public class S3UploaderService {
         metadata.setContentLength(multipartFile.getSize());
         metadata.setContentType(multipartFile.getContentType());
 
-        amazonS3Client.putObject(bucketName, "input/" + originalFilename, multipartFile.getInputStream(), metadata);
+        amazonS3Client.putObject(bucketName, dirName + originalFilename, multipartFile.getInputStream(), metadata);
         return amazonS3Client.getUrl(bucketName, originalFilename).toString();
     }
 
