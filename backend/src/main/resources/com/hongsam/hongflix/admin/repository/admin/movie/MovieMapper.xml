@@ -30,12 +30,19 @@
     </delete>
 
 
+    <select id="findByTitle" resultType="Movie">
+        SELECT * FROM movie
+        WHERE title LIKE CONCAT('%', #{title}, '%')
+    </select>
+
     <select id="findById" resultType="Movie">
         select id,
                title,
                subTitle,
+               accessKey,
                explanation,
-               genre
+               genre,
+               createdDate
         from movie
         where id = #{id}
     </select>
@@ -53,8 +60,10 @@
             createdDate
         from movie
         order by createdDate DESC
-        LIMIT 6
+        LIMIT 8
     </select>
+
+
 
 
 

@@ -4,23 +4,18 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class Content {
-
-    private Long id;
-    private Long movieId;
-
+public class ContentUpdateMapperReqDto {
     private String title;
     private String explanation;
+    private String videoName;
     private String accessUrl;
     private String accessStreamingUrl;
 
-    public Content() {
-    }
-
     @Builder
-    public Content(String title, String explanation, String accessUrl, String accessStreamingUrl) {
+    public ContentUpdateMapperReqDto(String title, String explanation, String videoName, String accessUrl, String accessStreamingUrl) {
         this.title = title;
         this.explanation = explanation;
+        this.videoName = videoName;
         this.accessUrl = accessUrl;
         this.accessStreamingUrl = accessStreamingUrl;
     }

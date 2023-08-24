@@ -2,6 +2,7 @@ package com.hongsam.hongflix.admin.repository.admin.content;
 
 import com.hongsam.hongflix.admin.domain.content.Content;
 import com.hongsam.hongflix.admin.domain.content.ContentCreateResDto;
+import com.hongsam.hongflix.admin.domain.content.ContentUpdateMapperReqDto;
 import com.hongsam.hongflix.admin.domain.content.ContentUpdateReqDto;
 import com.hongsam.hongflix.admin.domain.movie.Movie;
 import com.hongsam.hongflix.admin.domain.movie.MovieUpdateReqDto;
@@ -23,8 +24,8 @@ public interface ContentMapper {
 
     Optional<Content> findById(Long id);
 
-    boolean update(@Param("id") Long id, @Param("updateParam") ContentUpdateReqDto contentUpdateReqDto);
+    boolean update(@Param("id") Long id, @Param("updateParam") ContentUpdateMapperReqDto updateMapperReqDto);
 
-
+    List<Content> findByTitle(String title);
 
 }

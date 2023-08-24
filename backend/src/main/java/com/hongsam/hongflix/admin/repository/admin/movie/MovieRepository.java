@@ -17,5 +17,7 @@ public interface MovieRepository {
 
     List<Movie> findAll();
 
+    List<Movie> searchByTitle(String title);
+
 
 }
