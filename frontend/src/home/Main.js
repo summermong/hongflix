@@ -240,7 +240,7 @@ const Main = () => {
   ];
 
   axios
-    .get('https://a409-218-154-176-12.ngrok-free.app/movies')
+    .get('https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies')
     .then((response) => {
       console.log(response);
     })
