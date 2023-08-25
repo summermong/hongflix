@@ -36,7 +36,6 @@ const Search = () => {
 
   const openModal = (movie) => {
     setModalMovie(movie);
-    console.log(movie);
     setModalVisible(true);
   };
 
@@ -70,10 +69,10 @@ const Search = () => {
                 <img
                   src={movie.accessKey}
                   alt={movie.title}
-                  className="hover:brightness-50 lg:w-full"
+                  className="hover:brightness-50"
                 />
                 {hoveredMovie === movie && (
-                  <div className="absolute top-2/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-lg font-semibold">
+                  <div className="absolute text-white top-2/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-semibold text-lg">
                     {movie.title}
                   </div>
                 )}

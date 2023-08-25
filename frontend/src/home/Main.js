@@ -95,7 +95,9 @@ const Main = () => {
   // 최근 시청한 콘텐츠 (슬라이드 1)
   useEffect(() => {
     axios
-      .get('https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies')
+      .get(
+        'https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies/all'
+      )
       .then((response) => {
         const slideData = response.data.map((item) => ({
           imageSrc: item.accessKey,
@@ -107,8 +109,8 @@ const Main = () => {
               ? item.explanation.slice(0, 238) + '...'
               : item.explanation,
         }));
-        setSlide1(slideData);
-        console.log(response.data);
+        const CutData = slideData.slice(8, 15);
+        setSlide1(CutData);
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -118,7 +120,9 @@ const Main = () => {
   // 따끈따끈한 신작 (슬라이드 2)
   useEffect(() => {
     axios
-      .get('https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies')
+      .get(
+        'https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies/all'
+      )
       .then((response) => {
         const slideData = response.data.map((item) => ({
           imageSrc: item.accessKey,
@@ -146,7 +150,9 @@ const Main = () => {
   // 주간 인기작 (슬라이드 3)
   useEffect(() => {
     axios
-      .get('https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies')
+      .get(
+        'https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies/all'
+      )
       .then((response) => {
         const slideData = response.data.map((item) => ({
           imageSrc: item.accessKey,
@@ -173,7 +179,9 @@ const Main = () => {
 
   useEffect(() => {
     axios
-      .get('https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies')
+      .get(
+        'https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies/all'
+      )
       .then((response) => {
         const slideData = response.data.map((item) => ({
           imageSrc: item.accessKey,

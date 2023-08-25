@@ -93,7 +93,9 @@ const Category = () => {
   // 슬라이드1
   useEffect(() => {
     axios
-      .get('https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies')
+      .get(
+        'https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies/all'
+      )
       .then((response) => {
         const slideData = response.data.map((item) => ({
           imageSrc: item.accessKey,
@@ -118,7 +120,9 @@ const Category = () => {
 
   useEffect(() => {
     axios
-      .get('https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies')
+      .get(
+        'https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies/all'
+      )
       .then((response) => {
         const slideData = response.data.map((item) => ({
           imageSrc: item.accessKey,
@@ -144,7 +148,9 @@ const Category = () => {
 
   useEffect(() => {
     axios
-      .get('https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies')
+      .get(
+        'https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies/all'
+      )
       .then((response) => {
         const slideData = response.data.map((item) => ({
           imageSrc: item.accessKey,
