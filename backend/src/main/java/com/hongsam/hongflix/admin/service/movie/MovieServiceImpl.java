@@ -86,5 +86,10 @@ public class MovieServiceImpl implements MovieService{
         return movieRepository.findByFiveGenres(movieFiveGenreReqDto);
     }
 
+    @Override
+    public List<Movie> findAllMovies() {
+        return movieRepository.findAllMovies();
+    }
+
 
 }

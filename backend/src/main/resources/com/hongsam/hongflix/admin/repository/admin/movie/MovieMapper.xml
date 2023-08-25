@@ -122,6 +122,18 @@
 
 
 
+    <select id="findAllMovies" resultType="Movie">
+        select
+            id,
+            title,
+            subTitle,
+            accessKey,
+            explanation,
+            genre,
+            createdDate
+        from movie
+        order by createdDate DESC
+    </select>
 
 
 

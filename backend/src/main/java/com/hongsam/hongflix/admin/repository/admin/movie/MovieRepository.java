@@ -24,4 +24,6 @@ public interface MovieRepository {
     List<Movie> getMoviesByTwoGenres(MovieTwoGenreReqDto movieTwoGenreReqDto);
 
     List<Movie> findByFiveGenres(MovieFiveGenreReqDto movieFiveGenreReqDto);
+
+    List<Movie> findAllMovies();
 }
