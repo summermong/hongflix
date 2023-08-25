@@ -5,7 +5,8 @@ const Modal = ({
   modalImage,
   modalTitle,
   modalGenre,
-  modalReleaseDate,
+  modalCreatedDate,
+  modalExplanation,
   closeModal,
 }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -32,7 +33,7 @@ const Modal = ({
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
       <div
-        className="relative flex flex-col justify-center w-3/4 h-4/5 bg-indigo-950 rounded-md shadow-2xl lg:w-1/3 lg:h-3/4"
+        className="relative flex flex-col justify-evenly w-3/4 h-4/5 bg-indigo-950 rounded-md shadow-2xl lg:w-1/3 lg:h-3/4"
         onClick={closeModal}
       >
         <div>
@@ -45,16 +46,14 @@ const Modal = ({
           <img
             src={modalImage}
             alt="modal"
-            className="w-2/3 mx-auto my-5 sm:w-2/5 md:w-1/3 lg:w-1/3"
+            className="w-2/3 mx-auto my-5 sm:w-2/5 md:w-1/3 lg:w-2/3"
           />
         </div>
-        <div className="text-white p-3 text-xs justify-center sm:text-sm md:text-base lg:text-lg text-center">
+        <div className="text-white p-3 text-xs justify-center sm:text-sm md:text-base lg:text-base text-center">
           <div className="font-semibold">{modalTitle}</div>
           <div className="">장르: {modalGenre}</div>
-          <div className="">공개일: {modalReleaseDate}</div>
-          <div className="py-4 w-full break-words">
-            dfafasfafffdsfadskfjdskfjadsfkldsjfklasfjakldsfjasdklfjdasklfkfjdlkfjaslfkfjdlkfjasfkljdklflfkfjdlkfjasfkljdklffkljdklfjakfjasdklfjdasklfkfjdlkfjaslfkfjdlfjasdklfjdasklfkfjdlkfjaslfkfjdlfjasdklfjdasklfkfjdlkfjaslfkfjdlfjaㅇㄴㄹㄴㅇㄹㅇㄴㅁㄹ
-          </div>
+          <div className="">공개일: {modalCreatedDate}</div>
+          <div className="py-4 w-full break-words">{modalExplanation}</div>
         </div>
         <div className="p-3">
           <button

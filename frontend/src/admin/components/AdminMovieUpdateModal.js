@@ -1,7 +1,7 @@
-import axios from "axios";
-import styles from "../Admin.module.css";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import axios from 'axios';
+import styles from '../Admin.module.css';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function AdminMovieUpdateModal({
   setUpdateModalView,
@@ -10,13 +10,13 @@ export default function AdminMovieUpdateModal({
   movieIndex,
   fetchMovies,
 }) {
-  const [title, setTitle] = useState(movie["title"]);
-  const [subTitle, setSubTitle] = useState(movie["subTitle"]);
-  const [genre, setGenre] = useState(movie["genre"]);
-  const [accessKey, setAccessKey] = useState(movie["accessKey"]);
-  const [explanation, setExplanation] = useState(movie["explanation"]);
+  const [title, setTitle] = useState(movie['title']);
+  const [subTitle, setSubTitle] = useState(movie['subTitle']);
+  const [genre, setGenre] = useState(movie['genre']);
+  const [accessKey, setAccessKey] = useState(movie['accessKey']);
+  const [explanation, setExplanation] = useState(movie['explanation']);
   console.log(`movieIndex : ${movieIndex}`);
-  console.log(`movidId : ${movie["id"]}`);
+  console.log(`movidId : ${movie['id']}`);
 
   const inputHandler = (e, setValue) => {
     e.preventDefault();
@@ -37,17 +37,17 @@ export default function AdminMovieUpdateModal({
       accessKey: accessKey,
     };
     const blob = new Blob([JSON.stringify(movieUpdateReqDto)], {
-      type: "application/json",
+      type: 'application/json',
     });
     const formData = new FormData();
     console.log(movieUpdateReqDto);
-    formData.append("file", accessKey);
-    formData.append("movieUpdateReqDto", blob, "movieUpdateReqDto.json");
+    formData.append('file', accessKey);
+    formData.append('movieUpdateReqDto', blob, 'movieUpdateReqDto.json');
 
     await axios
-      .put(`${apiUrl}movies/${movie["id"]}`, formData, {
+      .put(`${apiUrl}movies/${movie['id']}`, formData, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          'Content-Type': 'multipart/form-data',
         },
       })
       .then((res) => {

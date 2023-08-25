@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -12,15 +12,17 @@ const Main = () => {
   const [modalImage, setModalImage] = useState('');
   const [modalTitle, setModalTitle] = useState('');
   const [modalGenre, setModalGenre] = useState('');
-  const [modalReleaseDate, setModalReleaseDate] = useState('');
+  const [modalCreatedDate, setModalCreatedDate] = useState('');
+  const [modalExplanation, setModalExplanation] = useState('');
 
   // openModal 함수 정의
-  const openModal = (imageSrc, title, genre, releaseDate) => {
+  const openModal = (imageSrc, title, genre, createdDate, explanation) => {
     setModal(true);
     setModalImage(imageSrc);
     setModalTitle(title);
     setModalGenre(genre);
-    setModalReleaseDate(releaseDate);
+    setModalCreatedDate(createdDate);
+    setModalExplanation(explanation);
   };
 
   // closeModal 함수 정의
@@ -30,13 +32,15 @@ const Main = () => {
   };
 
   // 캐러셀 이미지 크기 & 타이틀
-  const Slide = ({ imageSrc, title, genre, releaseDate }) => (
+  const Slide = ({ imageSrc, title, genre, createdDate, explanation }) => (
     <div className="relative mx-1 mb-1">
       <img
         className="object-cover"
         src={imageSrc}
         alt="carousel"
-        onClick={() => openModal(imageSrc, title, genre, releaseDate)}
+        onClick={() =>
+          openModal(imageSrc, title, genre, createdDate, explanation)
+        }
       />
       <div className="py-2 text-center">{title}</div>
     </div>
@@ -74,218 +78,143 @@ const Main = () => {
     prevArrow: <PrevArrow />,
     responsive: [
       {
-        breakpoint: 768, // Breakpoint for screens less than 768px wide
+        breakpoint: 376, // Breakpoint for screens less than 768px wide
         settings: {
-          slidesToShow: 3, // Display one slide at a time
+          slidesToShow: 1, // Display one slide at a time
           slidesToScroll: 1, // Scroll one slide at a time
         },
       },
     ],
   };
 
-  const slides1 = [
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/1.jpg`,
-      title: '최애의 아이',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/2.jpg`,
-      title: '주술회전',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/3.jpg`,
-      title: '도쿄 리벤저스',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/4.jpg`,
-      title: '스킵과 로퍼',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/1.jpg`,
-      title: '최애의 아이',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/2.jpg`,
-      title: '주술회전',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-  ];
+  const [slide1, setSlide1] = useState([]);
+  const [slide2, setSlide2] = useState([]);
+  const [slide3, setSlide3] = useState([]);
+  const [slide4, setSlide4] = useState([]);
 
-  const slides2 = [
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/1.jpg`,
-      title: '최애의 아이',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/2.jpg`,
-      title: '주술회전',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/3.jpg`,
-      title: '도쿄 리벤저스',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/4.jpg`,
-      title: '스킵과 로퍼',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/1.jpg`,
-      title: '최애의 아이',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/2.jpg`,
-      title: '주술회전',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-  ];
+  useEffect(() => {
+    axios
+      .get('https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies')
+      .then((response) => {
+        const slideData = response.data.map((item) => ({
+          imageSrc: item.accessKey,
+          title: item.title,
+          genre: item.genre,
+          createdDate: item.createdDate,
+          explanation: item.explanation,
+        }));
+        setSlide1(slideData);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }, []);
 
-  const slides3 = [
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/1.jpg`,
-      title: '최애의 아이',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/2.jpg`,
-      title: '주술회전',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/3.jpg`,
-      title: '도쿄 리벤저스',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/4.jpg`,
-      title: '스킵과 로퍼',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/1.jpg`,
-      title: '최애의 아이',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/2.jpg`,
-      title: '주술회전',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-  ];
+  useEffect(() => {
+    axios
+      .get('https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies')
+      .then((response) => {
+        const slideData = response.data.map((item) => ({
+          imageSrc: item.accessKey,
+          title: item.title,
+          genre: item.genre,
+          createdDate: item.createdDate,
+          explanation: item.explanation,
+        }));
 
-  const slides4 = [
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/1.jpg`,
-      title: '최애의 아이',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/2.jpg`,
-      title: '주술회전',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/3.jpg`,
-      title: '도쿄 리벤저스',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/4.jpg`,
-      title: '스킵과 로퍼',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/1.jpg`,
-      title: '최애의 아이',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-    {
-      imageSrc: `${process.env.PUBLIC_URL}/img/2.jpg`,
-      title: '주술회전',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
-    },
-  ];
+        slideData.sort(
+          (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
+        );
+        const top8 = slideData.slice(0, 8);
 
-  axios
-    .get('https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies')
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
+        setSlide2(top8);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get('https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies')
+      .then((response) => {
+        const slideData = response.data.map((item) => ({
+          imageSrc: item.accessKey,
+          title: item.title,
+          genre: item.genre,
+          createdDate: item.createdDate,
+          explanation: item.explanation,
+        }));
+
+        // "스릴러" 장르인 영화만 필터링하여 slide2에 설정
+        const thrillerMovies = slideData.filter(
+          (movie) => movie.genre === '스릴러'
+        );
+        setSlide3(thrillerMovies);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get('https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies')
+      .then((response) => {
+        const slideData = response.data.map((item) => ({
+          imageSrc: item.accessKey,
+          title: item.title,
+          genre: item.genre,
+          createdDate: item.createdDate,
+          explanation: item.explanation,
+        }));
+
+        // "스릴러" 장르인 영화만 필터링하여 slide2에 설정
+        const thrillerMovies = slideData.filter(
+          (movie) => movie.genre === '스릴러'
+        );
+        setSlide4(thrillerMovies);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }, []);
 
   return (
     <div className="p-5 lg:p-8 mt-5 px-3 font-['Pretendard-Bold']">
       <div className="flex flex-col gap-1 mb-8">
-        {isSubscribed === true ? (
-          <>
-            <div className="font-bold text-base mt-3 md:text-lg lg:text-xl">
-              최근 시청한 콘텐츠
+        <div className="font-bold text-base mt-3 md:text-lg lg:text-xl">
+          최근 시청한 콘텐츠(수정 필요)
+        </div>
+        <Slider {...settings}>
+          {slide1.map((slide, index) => (
+            <div key={index}>
+              <Slide
+                imageSrc={slide.imageSrc}
+                title={slide.title}
+                genre={slide.genre}
+                createdDate={slide.createdDate}
+                explanation={slide.explanation}
+              />
             </div>
-            <div>
-              <Slider {...settings}>
-                {slides1.map((slide, index) => (
-                  <div key={index}>
-                    <Slide
-                      imageSrc={slide.imageSrc}
-                      title={slide.title}
-                      genre={slide.genre}
-                      releaseDate={slide.releaseDate}
-                    />
-                  </div>
-                ))}
-              </Slider>
-            </div>
-          </>
-        ) : null}
+          ))}
+        </Slider>
       </div>
       <div className="flex flex-col gap-1 mb-8">
         <div className="font-bold text-base mt-3 md:text-lg lg:text-xl">
-          따끈따끈한 신작
+          따끈따끈한 신작(releaseDate순)
         </div>
         <div>
           <Slider {...settings}>
-            {slides2.map((slide, index) => (
+            {slide2.map((slide, index) => (
               <div key={index}>
                 <Slide
                   imageSrc={slide.imageSrc}
                   title={slide.title}
                   genre={slide.genre}
-                  releaseDate={slide.releaseDate}
+                  createdDate={slide.createdDate}
+                  explanation={slide.explanation}
                 />
               </div>
             ))}
@@ -294,17 +223,18 @@ const Main = () => {
       </div>
       <div className="flex flex-col gap-1 mb-8">
         <div className="font-bold text-base mt-3 md:text-lg lg:text-xl">
-          주간 인기작
+          주간 인기작(수정 필요)
         </div>
         <div>
           <Slider {...settings}>
-            {slides3.map((slide, index) => (
+            {slide3.map((slide, index) => (
               <div key={index}>
                 <Slide
                   imageSrc={slide.imageSrc}
                   title={slide.title}
                   genre={slide.genre}
-                  releaseDate={slide.releaseDate}
+                  createdDate={slide.createdDate}
+                  explanation={slide.explanation}
                 />
               </div>
             ))}
@@ -313,17 +243,18 @@ const Main = () => {
       </div>
       <div className="flex flex-col gap-1 mb-8">
         <div className="font-bold text-base mt-3 md:text-lg lg:text-xl">
-          오타쿠가 세상을 구한다
+          스릴러/미스터리
         </div>
         <div>
           <Slider {...settings}>
-            {slides4.map((slide, index) => (
+            {slide4.map((slide, index) => (
               <div key={index}>
                 <Slide
                   imageSrc={slide.imageSrc}
                   title={slide.title}
                   genre={slide.genre}
-                  releaseDate={slide.releaseDate}
+                  createdDate={slide.createdDate}
+                  explanation={slide.explanation}
                 />
               </div>
             ))}
@@ -335,7 +266,8 @@ const Main = () => {
           modalImage={modalImage}
           modalTitle={modalTitle}
           modalGenre={modalGenre}
-          modalReleaseDate={modalReleaseDate}
+          modalCreatedDate={modalCreatedDate}
+          modalExplanation={modalExplanation}
           closeModal={closeModal}
         />
       )}

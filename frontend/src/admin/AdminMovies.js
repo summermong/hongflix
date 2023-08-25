@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import AdminNavBar from "./components/AdminNavBar";
-import styles from "./Admin.module.css";
-import axios from "axios";
-import AdminMoviesTable from "./components/AdminMoviesTable";
-import AdminMovieCreateModal from "./components/AdminMovieCreateModal";
-import { useNavigate } from "react-router-dom";
-import AdminMovieUpdateModal from "./components/AdminMovieUpdateModal";
-import AdminMovieDeleteModal from "./components/AdminMovieDeleteModal";
+import React, { useEffect, useState } from 'react';
+import AdminNavBar from './components/AdminNavBar';
+import styles from './Admin.module.css';
+import axios from 'axios';
+import AdminMoviesTable from './components/AdminMoviesTable';
+import AdminMovieCreateModal from './components/AdminMovieCreateModal';
+import { useNavigate } from 'react-router-dom';
+import AdminMovieUpdateModal from './components/AdminMovieUpdateModal';
+import AdminMovieDeleteModal from './components/AdminMovieDeleteModal';
 
 export default function AdminMovies() {
   const [updateModalView, setUpdateModalView] = useState(false);
@@ -25,12 +25,12 @@ export default function AdminMovies() {
 
   const updateText = () => {
     const movieIndex = movies.findIndex((el) => {
-      return el["id"] == seleteId;
+      return el['id'] == seleteId;
     });
     return movieIndex;
   };
 
-  const apiUrl = "http://localhost:8080/";
+  const apiUrl = 'https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/';
   const navigator = useNavigate();
 
   const fetchMovies = async () => {

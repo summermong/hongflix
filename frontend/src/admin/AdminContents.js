@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import AdminNavBar from "./components/AdminNavBar";
-import styles from "./Admin.module.css";
-import axios from "axios";
-import { useLocation, useParams } from "react-router-dom";
-import AdminContentsTable from "./components/AdminContentsTable";
-import AdminContentCreateModal from "./components/AdminContentCreateModal";
-import AdminContentUpdateModal from "./components/AdminContentUpdateModal";
-import AdminContentDeleteModal from "./components/AdminContentDeleteModal";
+import React, { useEffect, useState } from 'react';
+import AdminNavBar from './components/AdminNavBar';
+import styles from './Admin.module.css';
+import axios from 'axios';
+import { useLocation, useParams } from 'react-router-dom';
+import AdminContentsTable from './components/AdminContentsTable';
+import AdminContentCreateModal from './components/AdminContentCreateModal';
+import AdminContentUpdateModal from './components/AdminContentUpdateModal';
+import AdminContentDeleteModal from './components/AdminContentDeleteModal';
 
-const apiUrl = "http://localhost:8080/";
+const apiUrl = 'https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/';
 
 export default function AdminContents() {
   const { movieTitle, movieId } = useParams();
@@ -21,7 +21,7 @@ export default function AdminContents() {
 
   const updateText = () => {
     const contentIndex = contents.findIndex((el) => {
-      return el["id"] == seleteId;
+      return el['id'] == seleteId;
     });
     return contentIndex;
   };
