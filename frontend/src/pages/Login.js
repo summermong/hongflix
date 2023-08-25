@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import styles from './Auth.module.css';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import styles from "./Auth.module.css";
+import { Link } from "react-router-dom";
 
 export default function Login({
   inputValue,
@@ -9,9 +9,9 @@ export default function Login({
   isLogin,
   url,
 }) {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [isEmailFocused, setIsEmailFocused] = useState(false);
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
   const [isPassWordFocused, setIsPassWordFocused] = useState(false);
   const [isButtonActive, setIsButtonActive] = useState(false);
 
@@ -21,9 +21,9 @@ export default function Login({
       email: email,
       password: password,
     };
-    isLogin(loginInfo, `${url}/members/login`);
+    isLogin(loginInfo, `${url}/members/login`, "/");
 
-    console.log(`Email : ${email}\npassword : ${password}`);
+    console.log(`email : ${email}\npassword : ${password}`);
   };
 
   useEffect(() => {
@@ -31,8 +31,80 @@ export default function Login({
   });
   return (
     <>
+      <div className="sc-hYbzA-d iHTwyS w-full fixed flex flex-col gap-5">
+        <div
+          className={`${styles.backgroundImage}`}
+          style={{
+            backgroundImage:
+              'url("https://web-prod.laftel.net/3.4.7/assets/BG_0.6c211609.png")',
+          }}
+        ></div>
+        <div
+          className={`${styles.backgroundImage}`}
+          style={{
+            backgroundImage:
+              'url("https://web-prod.laftel.net/3.4.7/assets/BG_1.a4453576.png")',
+          }}
+        ></div>
+        <div
+          className={`${styles.backgroundImage}`}
+          style={{
+            backgroundImage:
+              'url("https://web-prod.laftel.net/3.4.7/assets/BG_2.0b4bed7c.png")',
+          }}
+        ></div>
+        <div
+          className={`${styles.backgroundImage}`}
+          style={{
+            backgroundImage:
+              'url("https://web-prod.laftel.net/3.4.7/assets/BG_3.3d72e3ed.png")',
+          }}
+        ></div>
+        <div
+          className={`${styles.backgroundImage}`}
+          style={{
+            backgroundImage:
+              'url("https://web-prod.laftel.net/3.4.7/assets/BG_4.6242ed78.png")',
+          }}
+        ></div>
+        <div
+          className={`${styles.backgroundImage}`}
+          style={{
+            backgroundImage:
+              'url("https://web-prod.laftel.net/3.4.7/assets/BG_0.6c211609.png")',
+          }}
+        ></div>
+        <div
+          className={`${styles.backgroundImage}`}
+          style={{
+            backgroundImage:
+              'url("https://web-prod.laftel.net/3.4.7/assets/BG_1.a4453576.png")',
+          }}
+        ></div>
+        <div
+          className={`${styles.backgroundImage}`}
+          style={{
+            backgroundImage:
+              'url("https://web-prod.laftel.net/3.4.7/assets/BG_2.0b4bed7c.png")',
+          }}
+        ></div>
+        <div
+          className={`${styles.backgroundImage}`}
+          style={{
+            backgroundImage:
+              'url("https://web-prod.laftel.net/3.4.7/assets/BG_3.3d72e3ed.png")',
+          }}
+        ></div>
+        <div
+          className={`${styles.backgroundImage}`}
+          style={{
+            backgroundImage:
+              'url("https://web-prod.laftel.net/3.4.7/assets/BG_4.6242ed78.png")',
+          }}
+        ></div>
+      </div>
       <div
-        className={`${styles.BackGround} flex flex-col justify-center items-center w-screen h-screen`}
+        className={`${styles.BackGround} flex flex-col justify-center items-center w-screen h-4/5 font-['Pretendard-Bold']`}
       >
         <div
           className={`${styles.Container} flex flex-col justify-center items-center rounded-lg`}
@@ -40,14 +112,14 @@ export default function Login({
           <div
             className={`${styles.FormHeader} mt-10 text-center font-black flex flex-col gap-3 mb-3`}
           >
-            <h1 className="text-2xl">HONG CHA</h1>
+            <h1 className="text-2xl">Hongflix</h1>
             <p>동시방영 신작부터 역대 인기작까지</p>
             <p>한 곳에서 편안-하게!</p>
           </div>
           <form className={`${styles.Form}`} action="" method="POST">
             <div
               className={`${styles.FormItem} ${
-                isEmailFocused ? styles.FormItemFocus : ''
+                isEmailFocused ? styles.FormItemFocus : ""
               } flex flex-col w-80`}
             >
               <label className={`${styles.FormLabel}`} htmlFor="">
@@ -58,7 +130,7 @@ export default function Login({
                   className={`${styles.FormInput}`}
                   placeholder="이메일 입력해주세요"
                   type="Email"
-                  value={email || ''}
+                  value={email || ""}
                   onChange={(e) => {
                     inputValue(e, setEmail);
                   }}
@@ -71,7 +143,7 @@ export default function Login({
                 />
                 {isEmailFocused ? (
                   <button
-                    className={`${styles.InputButton} flex items-center rounded-full font-black absolute top-0 right-0`}
+                    className={`${styles.InputButton} flex items-center rounded-full font-black absolute top-0 right-0 `}
                     onMouseDown={(e) => {
                       inputClear(e, setEmail);
                     }}
@@ -86,7 +158,7 @@ export default function Login({
             </div>
             <div
               className={`${styles.FormItem} ${
-                isPassWordFocused ? styles.FormItemFocus : ''
+                isPassWordFocused ? styles.FormItemFocus : ""
               } relative`}
             >
               <label className={`${styles.FormLabel}`} htmlFor="">
@@ -97,7 +169,7 @@ export default function Login({
                   className={`${styles.FormInput}`}
                   placeholder="비밀번호를 입력해주세요"
                   type="password"
-                  value={password || ''}
+                  value={password || ""}
                   onChange={(e) => {
                     inputValue(e, setPassword);
                   }}
@@ -124,12 +196,12 @@ export default function Login({
               </div>
             </div>
             <p className={`${styles.FormText} mt-2`}>
-              계정이 없으시다면 .. <Link to={'/signup'}> 가입하기</Link>
+              계정이 없으시다면 .. <Link to={"/signup"}> 가입하기</Link>
             </p>
             <div className="mb-10">
               <button
                 className={`${styles.FormBtn} ${
-                  isButtonActive ? styles.FormBtnCompletion : ''
+                  isButtonActive ? styles.FormBtnCompletion : ""
                 } flex items-center justify-cente w-full`}
                 disabled={!isButtonActive}
                 onClick={(e) => {

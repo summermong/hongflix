@@ -9,11 +9,16 @@ export default function SignUp({
   isSignUp,
   url,
 }) {
+  const [seconds, setSeconds] = useState(180);
+
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+
   const [email, setEmail] = useState("");
   const [emailCheck, setEmailCheck] = useState(false);
   const [isEmailWarringTextView, setIsEmailWarringTextView] = useState(false);
   const [isEmailFocused, setIsEmailFocused] = useState(false);
-  const [isEmailSameCheck, setIsEmailSameCheck] = useState(true);
+  const [isEmailSameCheck, setIsEmailSameCheck] = useState(false);
 
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState(false);
@@ -62,11 +67,15 @@ export default function SignUp({
   const phoneNumberReq = async (e) => {
     e.preventDefault();
     setIsSmsCodeCheck(true);
-    console.log(`phoneNumber : +82${phoneNumber}`);
+    console.log(`+82${phoneNumber.replaceAll("-", "")}`);
     await axios
-      .post(`${url}members/signup/message`, {
-        phoneNumber: `+82${phoneNumber}`,
-      })
+      .post(
+        `${url}members/signup/message`,
+        {
+          phoneNumber: `+82${phoneNumber.replaceAll("-", "")}`,
+        },
+        { withCredentials: true }
+      )
       .then((res) => {
         setResSmsCode(res.data.data);
         console.log(res.data.data);
@@ -81,10 +90,17 @@ export default function SignUp({
     e.preventDefault();
     console.log(`email : ${email}`);
     await axios
-      .post(`${url}members/signup/email-check`, { email: email })
+      .post(
+        `${url}members/signup/email-check`,
+        { email: email },
+        { withCredentials: true }
+      )
       .then((res) => {
-        console.log(res.data);
-        setIsEmailSameCheck(res.data);
+        console.log(res.data.data);
+        alert(res.data.data);
+        if (res.data.status === 200) {
+          setIsEmailSameCheck(true);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -93,12 +109,12 @@ export default function SignUp({
   };
   //email 최종 체크 함수
   const isValidEmail = () => {
+    //setEmailCheck가 false일 시 밑에 경고 메시지
+    setIsEmailWarringTextView(!emailCheck);
     //정규식 및 중복체크 모두 true일 시 최종 이메일 체크를 true로 변경
     valueRegCheck(emailReg, email) && isEmailSameCheck
       ? setEmailCheck(true)
       : setEmailCheck(false);
-    //setEmailCheck가 false일 시 밑에 경고 메시지
-    setIsEmailWarringTextView(!emailCheck);
   };
   //password 최종 체크 함수
   const isValidPassword = () => {
@@ -116,9 +132,14 @@ export default function SignUp({
     e.preventDefault();
     console.log(smsCode);
 
-    smsCode === resSmsCode
-      ? setPhoneNumberCheck(true)
-      : setPhoneNumberCheck(false);
+    if (smsCode === resSmsCode) {
+      setPhoneNumberCheck(true);
+      alert("인증 완료");
+    } else {
+      setPhoneNumberCheck(false);
+      alert("인증번호를 확인해주세요");
+    }
+
     console.log("전화번호 최종 체크 : ", phoneNumberCheck);
   };
   //회원가입 완료 함수
@@ -130,15 +151,21 @@ export default function SignUp({
       nickName: nickName,
       phoneNumber: phoneNumber,
     };
-    isSignUp(userInfo, `${url}members/signup`);
+    isSignUp(userInfo, `${url}members/signup`, `/login`);
   };
 
   useEffect(() => {
-    isValidPassword();
-  }, [password, confirmPassword, isPassWordFocused, isConfirmPassWordFocused]);
-  useEffect(() => {
     isValidEmail();
-  }, [email, isEmailFocused]);
+    isValidPassword();
+  }, [
+    isEmailFocused,
+    isEmailSameCheck,
+    isPassWordFocused,
+    confirmPassword,
+    isPassWordFocused,
+    isConfirmPassWordFocused,
+    isNickNameFocused,
+  ]);
 
   useEffect(() => {
     if (!password && !confirmPassword) {
@@ -160,12 +187,32 @@ export default function SignUp({
       setIsPhoneNumberReg(false);
       setIsSmsCodeCheck(false);
     }
-
     console.log("phoneReg : ", isPhoneNumberReg);
   }, [phoneNumber]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (seconds > 0 && !phoneNumberCheck && resSmsCode !== "") {
+        setSeconds(seconds - 1);
+      }
+    }, 1000);
+    if (seconds === 0) {
+      setIsPhoneNumberReg(false);
+      setResSmsCode("");
+      setPhoneNumber("");
+      alert("인증 버튼을 다시 눌러주세요");
+      setSeconds(180);
+    }
+    return () => {
+      if (phoneNumber) {
+        clearInterval(timer);
+      }
+    };
+  }, [seconds, resSmsCode]);
+
   return (
     <div
-      className={`${styles.BackGround} flex flex-col justify-center items-center w-screen h-screen`}
+      className={`${styles.BackGround} flex flex-col justify-center items-center w-screen h-4/5 font-['Pretendard-Bold']`}
     >
       <div
         className={`${styles.Container} flex flex-col justify-center items-center rounded-lg`}
@@ -173,7 +220,7 @@ export default function SignUp({
         <div
           className={`${styles.FormHeader} mt-10 text-center font-black flex flex-col gap-3 mb-3`}
         >
-          <h1>HONG CHA</h1>
+          <h1>Hongflix</h1>
           <p>회원가입</p>
         </div>
         <form className={`${styles.Form}`} action="" method="POST">
@@ -190,6 +237,7 @@ export default function SignUp({
                 className={`${styles.FormInput} `}
                 placeholder="이메일 입력해주세요"
                 type="email"
+                disabled={emailCheck}
                 value={email || ""}
                 onChange={(e) => {
                   inputValue(e, setEmail);
@@ -453,6 +501,7 @@ export default function SignUp({
                     X
                   </button>
                 ) : null}
+
                 <button
                   className={`${styles.phoneNumberSmsBtn} rounded-md`}
                   onClick={(e) => {
@@ -464,6 +513,13 @@ export default function SignUp({
                 </button>
               </div>
             </div>
+          ) : null}
+          {isSmsCodeCheck && isPhoneNumberReg && !phoneNumberCheck ? (
+            <p className="mb-2">
+              남은 시간: {minutes < 10 ? "0" : ""}
+              {minutes}:{remainingSeconds < 10 ? "0" : ""}
+              {remainingSeconds}
+            </p>
           ) : null}
 
           <div className="mb-10">

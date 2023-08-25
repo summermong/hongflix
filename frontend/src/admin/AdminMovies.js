@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import AdminNavBar from './components/AdminNavBar';
-import styles from './Admin.module.css';
-import axios from 'axios';
-import AdminMoviesTable from './components/AdminMoviesTable';
-import AdminMovieCreateModal from './components/AdminMovieCreateModal';
-import { useNavigate } from 'react-router-dom';
-import AdminMovieUpdateModal from './components/AdminMovieUpdateModal';
-import AdminMovieDeleteModal from './components/AdminMovieDeleteModal';
+import React, { useEffect, useState } from "react";
+import AdminNavBar from "./components/AdminNavBar";
+import styles from "./Admin.module.css";
+import axios from "axios";
+import AdminMoviesTable from "./components/AdminMoviesTable";
+import AdminMovieCreateModal from "./components/AdminMovieCreateModal";
+import { useNavigate } from "react-router-dom";
+import AdminMovieUpdateModal from "./components/AdminMovieUpdateModal";
+import AdminMovieDeleteModal from "./components/AdminMovieDeleteModal";
 
 export default function AdminMovies() {
   const [updateModalView, setUpdateModalView] = useState(false);
@@ -25,12 +25,12 @@ export default function AdminMovies() {
 
   const updateText = () => {
     const movieIndex = movies.findIndex((el) => {
-      return el['id'] == seleteId;
+      return el["id"] == seleteId;
     });
     return movieIndex;
   };
 
-  const apiUrl = 'https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/';
+  const apiUrl = "https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/";
   const navigator = useNavigate();
 
   const fetchMovies = async () => {
@@ -50,7 +50,9 @@ export default function AdminMovies() {
   }, []);
 
   return (
-    <div className={`w-screen h-screen flex flex-col md:flex-row`}>
+    <div
+      className={`w-screen h-full flex flex-col md:flex-row font-['Pretendard-Bold'] overscroll-y-auto  mb-10`}
+    >
       <AdminNavBar></AdminNavBar>
       <div className="flex flex-col items-center w-full h-5/6 md:h-full md:w-3/4">
         <header className={`w-4/5 h-28 bg-white flex items-center`}>

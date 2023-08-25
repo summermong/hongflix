@@ -2,13 +2,14 @@ input:focus {
   outline: none;
 }
 .BackGround {
-  background-color: rgb(0, 0, 0);
+  background-color: white;
   color: white;
 }
 .Container {
   background-color: rgb(18, 18, 18);
   width: 488px;
   border: 2px solid rgb(50, 50, 50);
+  z-index: 1;
 }
 .FormItem,
 .FormBtn,
@@ -89,4 +90,15 @@ input:focus {
   display: flex;
   flex-direction: row;
   font-size: 14px;
+}
+.backgroundImage {
+  height: 256px;
+  animation: movingBackground linear 20s infinite;
+  transform: rotate(-5deg);
+  background-repeat: no-repeat 0 0;
+}
+@keyframes movingBackground {
+  to {
+    background-position: 100% 0;
+  }
 }

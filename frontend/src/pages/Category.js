@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import Modal from './Modal';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Modal from "./Modal";
+import axios from "axios";
 
 const Category = () => {
   const [modal, setModal] = useState(false);
-  const [modalImage, setModalImage] = useState('');
-  const [modalTitle, setModalTitle] = useState('');
-  const [modalGenre, setModalGenre] = useState('');
-  const [modalReleaseDate, setModalReleaseDate] = useState('');
-  const [modalCreatedDate, setModalCreatedDate] = useState('');
-  const [modalExplanation, setModalExplanation] = useState('');
+  const [modalImage, setModalImage] = useState("");
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalGenre, setModalGenre] = useState("");
+  const [modalReleaseDate, setModalReleaseDate] = useState("");
+  const [modalCreatedDate, setModalCreatedDate] = useState("");
+  const [modalExplanation, setModalExplanation] = useState("");
 
   // openModal 함수 정의
   const openModal = (imageSrc, title, genre, createdDate, explanation) => {
@@ -27,7 +27,7 @@ const Category = () => {
   // closeModal 함수 정의
   const closeModal = () => {
     setModal(false);
-    setModalImage('');
+    setModalImage("");
   };
 
   // 캐러셀 이미지 크기 & 타이틀
@@ -52,7 +52,7 @@ const Category = () => {
       onClick={onClick}
       type="button"
     >
-      {'>'}
+      {">"}
     </button>
   );
 
@@ -63,7 +63,7 @@ const Category = () => {
       onClick={onClick}
       type="button"
     >
-      {'<'}
+      {"<"}
     </button>
   );
 
@@ -94,7 +94,7 @@ const Category = () => {
   useEffect(() => {
     axios
       .get(
-        'https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies/all'
+        "https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies/all"
       )
       .then((response) => {
         const slideData = response.data.map((item) => ({
@@ -104,24 +104,24 @@ const Category = () => {
           createdDate: item.createdDate,
           explanation:
             item.explanation.length > 238
-              ? item.explanation.slice(0, 238) + '...'
+              ? item.explanation.slice(0, 238) + "..."
               : item.explanation,
         }));
         // "로맨스" 장르인 영화만 필터링하여 slide1에 설정
         const RomanceMovies = slideData.filter(
-          (movie) => movie.genre === '로맨스'
+          (movie) => movie.genre === "로맨스"
         );
         setSlide1(RomanceMovies);
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   }, []);
 
   useEffect(() => {
     axios
       .get(
-        'https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies/all'
+        "https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies/all"
       )
       .then((response) => {
         const slideData = response.data.map((item) => ({
@@ -131,25 +131,25 @@ const Category = () => {
           createdDate: item.createdDate,
           explanation:
             item.explanation.length > 238
-              ? item.explanation.slice(0, 238) + '...'
+              ? item.explanation.slice(0, 238) + "..."
               : item.explanation,
         }));
 
         // "판타지" 장르인 영화만 필터링하여 slide1에 설정
         const FantasyMovies = slideData.filter(
-          (movie) => movie.genre === '판타지'
+          (movie) => movie.genre === "판타지"
         );
         setSlide2(FantasyMovies);
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   }, []);
 
   useEffect(() => {
     axios
       .get(
-        'https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies/all'
+        "https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies/all"
       )
       .then((response) => {
         const slideData = response.data.map((item) => ({
@@ -159,16 +159,16 @@ const Category = () => {
           createdDate: item.createdDate,
           explanation:
             item.explanation.length > 238
-              ? item.explanation.slice(0, 238) + '...'
+              ? item.explanation.slice(0, 238) + "..."
               : item.explanation,
         }));
 
         // "일상" 장르인 영화만 필터링
-        const LifeMovies = slideData.filter((movie) => movie.genre === '일상');
+        const LifeMovies = slideData.filter((movie) => movie.genre === "일상");
         setSlide3(LifeMovies);
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   }, []);
 

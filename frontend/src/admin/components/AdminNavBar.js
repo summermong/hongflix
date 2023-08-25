@@ -7,7 +7,7 @@ export default function AdminLeftBar() {
 
   return (
     <div
-      className={`${styles.navBarBackground} md:w-1/4 md:h-full w-screen h-auto pb-5 flex justify-center md:block`}
+      className={`${styles.navBarBackground} md:w-1/4 md:h-full w-screen h-auto pb-5 flex justify-center md:block font-['Pretendard-Bold']`}
     >
       <nav
         className={`${styles.navBarContainer} flex md:flex-col w-full items-center justify-center gap-3 ml-3 md:ml-0`}

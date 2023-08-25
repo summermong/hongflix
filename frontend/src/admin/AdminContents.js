@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import AdminNavBar from './components/AdminNavBar';
-import styles from './Admin.module.css';
-import axios from 'axios';
-import { useLocation, useParams } from 'react-router-dom';
-import AdminContentsTable from './components/AdminContentsTable';
-import AdminContentCreateModal from './components/AdminContentCreateModal';
-import AdminContentUpdateModal from './components/AdminContentUpdateModal';
-import AdminContentDeleteModal from './components/AdminContentDeleteModal';
+import React, { useEffect, useState } from "react";
+import AdminNavBar from "./components/AdminNavBar";
+import styles from "./Admin.module.css";
+import axios from "axios";
+import { useLocation, useParams } from "react-router-dom";
+import AdminContentsTable from "./components/AdminContentsTable";
+import AdminContentCreateModal from "./components/AdminContentCreateModal";
+import AdminContentUpdateModal from "./components/AdminContentUpdateModal";
+import AdminContentDeleteModal from "./components/AdminContentDeleteModal";
 
-const apiUrl = 'https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/';
+const apiUrl = "https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/";
 
 export default function AdminContents() {
   const { movieTitle, movieId } = useParams();
@@ -21,7 +21,7 @@ export default function AdminContents() {
 
   const updateText = () => {
     const contentIndex = contents.findIndex((el) => {
-      return el['id'] == seleteId;
+      return el["id"] == seleteId;
     });
     return contentIndex;
   };
@@ -49,7 +49,9 @@ export default function AdminContents() {
   };
 
   return (
-    <div className={`w-screen h-screen flex flex-col md:flex-row`}>
+    <div
+      className={`w-screen h-full flex flex-col md:flex-row font-['Pretendard-Bold'] overscroll-y-auto  mb-10`}
+    >
       <AdminNavBar></AdminNavBar>
       <div className="flex flex-col items-center w-full h-5/6 md:h-full md:w-3/4">
         <header className={`w-4/5 h-28 bg-white flex items-center`}>

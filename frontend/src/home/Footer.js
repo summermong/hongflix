@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
 const Footer = () => {
   return (
-    <div className="w-full bg-indigo-950 text-white font-['Pretendard-Bold'] text-xs md:text-sm lg:text-sm">
+    <div className="w-full bg-indigo-950 text-white font-['Pretendard-Bold'] text-xs md:text-sm lg:text-sm z-10">
       <div className="text-center pt-5 text-xl font-black md:text-lg lg:text-base">
         Hongflix
       </div>

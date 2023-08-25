@@ -21,9 +21,9 @@ export default function LoginForAdmin({
       email: email,
       password: password,
     };
-    isLogin(loginInfo, `${url}member/admin/login`);
+    isLogin(loginInfo, `${url}members/admin/login`, "/admin");
 
-    console.log(`Email : ${email}\npassword : ${password}`);
+    console.log(`email : ${email}\npassword : ${password}`);
   };
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function LoginForAdmin({
   return (
     <>
       <div
-        className={`${styles.BackGround} flex flex-col justify-center items-center w-screen h-screen`}
+        className={`${styles.BackGround} flex flex-col justify-center items-center w-screen h-4/5 font-['Pretendard-Bold']`}
       >
         <div
           className={`${styles.Container} flex flex-col justify-center items-center rounded-lg`}
@@ -40,7 +40,8 @@ export default function LoginForAdmin({
           <div
             className={`${styles.FormHeader} mt-10 text-center font-black flex flex-col gap-3 mb-5`}
           >
-            <h1 className="mb-1">HONG CHA</h1>
+            <h1 className="mb-1">Hongflix</h1>
+            <p>관리자 로그인</p>
           </div>
           <form className={`${styles.Form}`} action="" method="POST">
             <div
@@ -55,7 +56,7 @@ export default function LoginForAdmin({
                 <input
                   className={`${styles.FormInput}`}
                   placeholder="이메일 입력해주세요"
-                  type="Email"
+                  type="email"
                   value={email || ""}
                   onChange={(e) => {
                     inputValue(e, setEmail);
