@@ -100,7 +100,10 @@ const Category = () => {
           title: item.title,
           genre: item.genre,
           createdDate: item.createdDate,
-          explanation: item.explanation,
+          explanation:
+            item.explanation.length > 238
+              ? item.explanation.slice(0, 238) + '...'
+              : item.explanation,
         }));
         // "로맨스" 장르인 영화만 필터링하여 slide1에 설정
         const RomanceMovies = slideData.filter(
@@ -122,7 +125,10 @@ const Category = () => {
           title: item.title,
           genre: item.genre,
           createdDate: item.createdDate,
-          explanation: item.explanation,
+          explanation:
+            item.explanation.length > 238
+              ? item.explanation.slice(0, 238) + '...'
+              : item.explanation,
         }));
 
         // "판타지" 장르인 영화만 필터링하여 slide1에 설정
@@ -145,7 +151,10 @@ const Category = () => {
           title: item.title,
           genre: item.genre,
           createdDate: item.createdDate,
-          explanation: item.explanation,
+          explanation:
+            item.explanation.length > 238
+              ? item.explanation.slice(0, 238) + '...'
+              : item.explanation,
         }));
 
         // "일상" 장르인 영화만 필터링

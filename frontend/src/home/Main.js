@@ -101,7 +101,10 @@ const Main = () => {
           title: item.title,
           genre: item.genre,
           createdDate: item.createdDate,
-          explanation: item.explanation,
+          explanation:
+            item.explanation.length > 238
+              ? item.explanation.slice(0, 238) + '...'
+              : item.explanation,
         }));
         setSlide1(slideData);
         console.log(response.data);
@@ -120,7 +123,10 @@ const Main = () => {
           title: item.title,
           genre: item.genre,
           createdDate: item.createdDate,
-          explanation: item.explanation,
+          explanation:
+            item.explanation.length > 238
+              ? item.explanation.slice(0, 238) + '...'
+              : item.explanation,
         }));
 
         slideData.sort(
@@ -144,7 +150,10 @@ const Main = () => {
           title: item.title,
           genre: item.genre,
           createdDate: item.createdDate,
-          explanation: item.explanation,
+          explanation:
+            item.explanation.length > 238
+              ? item.explanation.slice(0, 238) + '...'
+              : item.explanation,
         }));
 
         // "스릴러" 장르인 영화만 필터링하여 slide2에 설정
@@ -167,7 +176,10 @@ const Main = () => {
           title: item.title,
           genre: item.genre,
           createdDate: item.createdDate,
-          explanation: item.explanation,
+          explanation:
+            item.explanation.length > 238
+              ? item.explanation.slice(0, 238) + '...'
+              : item.explanation,
         }));
 
         // "스릴러" 장르인 영화만 필터링하여 slide2에 설정
