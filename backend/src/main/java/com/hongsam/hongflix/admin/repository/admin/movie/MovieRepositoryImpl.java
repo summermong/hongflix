@@ -57,5 +57,10 @@ public class MovieRepositoryImpl implements MovieRepository{
         return movieMapper.findByFiveGenres(movieFiveGenreReqDto);
     }
 
+    @Override
+    public List<Movie> findAllMovies() {
+        return movieMapper.findAllMovies();
+    }
+
 
 }

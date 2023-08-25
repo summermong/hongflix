@@ -137,5 +137,10 @@ public class MovieController {
         return movieService.findByFiveGenres(movieFiveGenreReqDto);
     }
 
+    @GetMapping("/all")
+    List<Movie> findAllMovies(){
+        return movieService.findAllMovies();
+    }
+
 
 }

@@ -28,4 +28,6 @@ public interface MovieMapper {
     List<Movie> findByTwoGenres(MovieTwoGenreReqDto movieGenreReqDto);
 
     List<Movie> findByFiveGenres(MovieFiveGenreReqDto movieFiveGenreReqDto);
+
+    List<Movie> findAllMovies();
 }
