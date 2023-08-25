@@ -44,6 +44,8 @@ export default function AdminContentCreateModal({
       })
       .catch((err) => {
         console.log(err);
+        alert(err);
+        setCreateModalView(false);
       });
   };
   return (
