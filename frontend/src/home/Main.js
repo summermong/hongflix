@@ -92,6 +92,7 @@ const Main = () => {
   const [slide3, setSlide3] = useState([]);
   const [slide4, setSlide4] = useState([]);
 
+  // 최근 시청한 콘텐츠 (슬라이드 1)
   useEffect(() => {
     axios
       .get('https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies')
@@ -114,6 +115,7 @@ const Main = () => {
       });
   }, []);
 
+  // 따끈따끈한 신작 (슬라이드 2)
   useEffect(() => {
     axios
       .get('https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies')
@@ -141,6 +143,7 @@ const Main = () => {
       });
   }, []);
 
+  // 주간 인기작 (슬라이드 3)
   useEffect(() => {
     axios
       .get('https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies')
@@ -160,6 +163,7 @@ const Main = () => {
         const thrillerMovies = slideData.filter(
           (movie) => movie.genre === '스릴러'
         );
+        console.log(thrillerMovies);
         setSlide3(thrillerMovies);
       })
       .catch((error) => {
