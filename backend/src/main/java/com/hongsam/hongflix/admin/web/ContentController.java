@@ -33,14 +33,15 @@ public class ContentController {
     public List<ContentCreateResDto> findAllByMovieId(@PathVariable Long movieId, @SessionAttribute(required = false) LoginUserResponse loginUserResponse) throws Exception {
 //        return contentService.findAllByMovieId(movieId);
 
-        if (loginUserResponse == null) {
-            throw new Exception("로그인 안 한 사용자입니다.");
-        } else if (loginUserResponse.getAvailable() == 0) {
-            throw new Exception("구독 안 한 사용자입니다.");
-        } else {
-            memberMovieService.userMovieWatch(loginUserResponse.getMemberId(), movieId);
-            return contentService.findAllByMovieId(movieId);
-        }
+//        if (loginUserResponse == null) {
+//            throw new Exception("로그인 안 한 사용자입니다.");
+//        } else if (loginUserResponse.getAvailable() == 0) {
+//            throw new Exception("구독 안 한 사용자입니다.");
+//        } else {
+//            memberMovieService.userMovieWatch(loginUserResponse.getMemberId(), movieId);
+//            return contentService.findAllByMovieId(movieId);
+//        }
+        return contentService.findAllByMovieId(movieId);
     }
 
     @PutMapping("/{contentId}")
