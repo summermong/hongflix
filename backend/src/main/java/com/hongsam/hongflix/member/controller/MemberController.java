@@ -4,10 +4,7 @@ import com.hongsam.hongflix.member.domain.*;
 import com.hongsam.hongflix.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -90,4 +87,10 @@ public class MemberController {
         session.invalidate();
         return new MemberResponse(200,"로그아웃 성공");
     }
+
+    // 마이 페이지
+//    @GetMapping("/my")
+//    public LoginUserResponse myPage(@SessionAttribute(required = false) LoginUserResponse loginUserResponse) {
+//        return loginUserResponse;
+//    }
 }

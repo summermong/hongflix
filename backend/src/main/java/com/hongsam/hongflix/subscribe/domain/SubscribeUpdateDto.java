@@ -9,7 +9,7 @@ import lombok.ToString;
 @ToString
 public class SubscribeUpdateDto {
 
-    private boolean available;
+    private int available;
 
     private int period;
 
