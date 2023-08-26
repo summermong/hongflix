@@ -65,7 +65,75 @@
 
 
 
+    <select id="findByTwoGenres" resultType="Movie">
+        (
+            SELECT *
+            FROM movie
+            WHERE genre = #{genre_first_name}
+                LIMIT 8
+        )
+        UNION ALL
+        (
+            SELECT *
+            FROM movie
+            WHERE genre = #{genre_second_name}
+                LIMIT 8
+        )
+        LIMIT 16
+    </select>
 
+    <select id="findByFiveGenres" resultType="Movie">
+        (
+            SELECT *
+            FROM movie
+            WHERE genre = #{genre_first_name}
+                LIMIT 8
+        )
+        UNION ALL
+        (
+            SELECT *
+            FROM movie
+            WHERE genre = #{genre_second_name}
+                LIMIT 8
+        )
+        UNION ALL
+        (
+            SELECT *
+            FROM movie
+            WHERE genre = #{genre_third_name}
+                LIMIT 8
+        )
+        UNION ALL
+        (
+            SELECT *
+            FROM movie
+            WHERE genre = #{genre_four_name}
+                LIMIT 8
+        )
+        UNION ALL
+        (
+            SELECT *
+            FROM movie
+            WHERE genre = #{genre_five_name}
+                LIMIT 8
+        )
+        LIMIT 40
+    </select>
+
+
+
+    <select id="findAllMovies" resultType="Movie">
+        select
+            id,
+            title,
+            subTitle,
+            accessKey,
+            explanation,
+            genre,
+            createdDate
+        from movie
+        order by createdDate DESC
+    </select>
 
 
 

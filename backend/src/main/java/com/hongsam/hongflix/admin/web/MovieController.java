@@ -3,9 +3,7 @@ package com.hongsam.hongflix.admin.web;
 import com.hongsam.hongflix.admin.domain.content.Content;
 
 import com.hongsam.hongflix.admin.domain.content.ContentCreateReqDto;
-import com.hongsam.hongflix.admin.domain.movie.Movie;
-import com.hongsam.hongflix.admin.domain.movie.MovieCreateReqDto;
-import com.hongsam.hongflix.admin.domain.movie.MovieUpdateReqDto;
+import com.hongsam.hongflix.admin.domain.movie.*;
 import com.hongsam.hongflix.admin.service.movie.MovieService;
 
 import com.hongsam.hongflix.admin.service.s3.S3UploaderService;
@@ -18,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/movies")
@@ -45,11 +44,8 @@ public class MovieController {
 
         // 이미지, 스트리밍 파일의 URL 파싱하는 과정
         String fileName = file.getOriginalFilename();
-        int lastDotIndex = fileName.lastIndexOf(".");
-        String realFileName = fileName.substring(0, lastDotIndex);
 
-        String imgURL = "https://d2hpuoq6hnp8cm.cloudfront.net/output/" + realFileName
-                + "img" + realFileName + ".00000000.jpg";
+        String imgURL = "https://d2hpuoq6hnp8cm.cloudfront.net/img/" + fileName;
         log.info("imgUrl = {}", imgURL);
 
         movie.setAccessKey(imgURL);
@@ -57,6 +53,7 @@ public class MovieController {
         return movieService.save(movie);
     }
 
+    @GetMapping
     public List<Movie> findMovies(){
         return movieService.findMovies();
     }
@@ -86,7 +83,7 @@ public class MovieController {
         log.info("videoUrl = {}", videoURL);
 
         String imgURL = "https://d2hpuoq6hnp8cm.cloudfront.net/output/" + realFileName
-                + "/Default/Thumbnails/" + realFileName + ".00000000.jpg";
+                + "/Default/Thumbnails/" + realFileName + ".0000000.jpg";
         log.info("imgUrl = {}", imgURL);
 
         Content content = Content.builder()
@@ -111,8 +108,15 @@ public class MovieController {
             @RequestPart MovieUpdateReqDto movieUpdateReqDto,
             MultipartFile file
     ) throws IOException {
-        String url = s3UploaderService.upload(file, "img/");
-        movieUpdateReqDto.setAccessKey(url);
+        s3UploaderService.upload(file, "img/");
+
+        // 이미지, 스트리밍 파일의 URL 파싱하는 과정
+        String fileName = file.getOriginalFilename();
+
+        String imgURL = "https://d2hpuoq6hnp8cm.cloudfront.net/img/" + fileName;
+        log.info("imgUrl = {}", imgURL);
+
+        movieUpdateReqDto.setAccessKey(imgURL);
 
         return movieService.update(movieId, movieUpdateReqDto, file);
     }
@@ -123,9 +127,20 @@ public class MovieController {
         return movieService.delete(movieId);
     }
 
+    @GetMapping("/twoGenre")
+    public List<Movie> getMoviesByTwoGenres(@RequestParam MovieTwoGenreReqDto movieTwoGenreReqDto){
+        return movieService.getMoviesByTwoGenres(movieTwoGenreReqDto);
+    }
 
+    @GetMapping("/fiveGenr")
+    public List<Movie> getMoviesByFiveGenres(@RequestParam MovieFiveGenreReqDto movieFiveGenreReqDto){
+        return movieService.findByFiveGenres(movieFiveGenreReqDto);
+    }
 
-
+    @GetMapping("/all")
+    List<Movie> findAllMovies(){
+        return movieService.findAllMovies();
+    }
 
 
 }

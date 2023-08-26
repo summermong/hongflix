@@ -2,9 +2,7 @@ package com.hongsam.hongflix.admin.service.movie;
 
 import com.hongsam.hongflix.admin.domain.content.Content;
 import com.hongsam.hongflix.admin.domain.content.ContentCreateReqDto;
-import com.hongsam.hongflix.admin.domain.movie.Movie;
-import com.hongsam.hongflix.admin.domain.movie.MovieCreateReqDto;
-import com.hongsam.hongflix.admin.domain.movie.MovieUpdateReqDto;
+import com.hongsam.hongflix.admin.domain.movie.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -26,4 +24,10 @@ public interface MovieService {
     Optional<Movie> findById(Long id);
 
     List<Movie> findMovies();
+
+    List<Movie> getMoviesByTwoGenres(MovieTwoGenreReqDto movieTwoGenreReqDto);
+
+    List<Movie> findByFiveGenres(MovieFiveGenreReqDto movieFiveGenreReqDto);
+
+    List<Movie> findAllMovies();
 }

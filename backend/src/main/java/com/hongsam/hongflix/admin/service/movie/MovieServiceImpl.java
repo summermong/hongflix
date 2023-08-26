@@ -2,9 +2,7 @@ package com.hongsam.hongflix.admin.service.movie;
 
 import com.hongsam.hongflix.admin.domain.content.Content;
 import com.hongsam.hongflix.admin.domain.content.ContentCreateReqDto;
-import com.hongsam.hongflix.admin.domain.movie.Movie;
-import com.hongsam.hongflix.admin.domain.movie.MovieCreateReqDto;
-import com.hongsam.hongflix.admin.domain.movie.MovieUpdateReqDto;
+import com.hongsam.hongflix.admin.domain.movie.*;
 import com.hongsam.hongflix.admin.repository.admin.content.ContentRepository;
 import com.hongsam.hongflix.admin.repository.admin.movie.MovieRepository;
 import com.hongsam.hongflix.admin.service.s3.S3UploaderService;
@@ -77,4 +75,21 @@ public class MovieServiceImpl implements MovieService{
     public List<Movie> findMovies() {
         return movieRepository.findAll();
     }
+
+    @Override
+    public List<Movie> getMoviesByTwoGenres(MovieTwoGenreReqDto movieTwoGenreReqDto) {
+        return movieRepository.getMoviesByTwoGenres(movieTwoGenreReqDto);
+    }
+
+    @Override
+    public List<Movie> findByFiveGenres(MovieFiveGenreReqDto movieFiveGenreReqDto) {
+        return movieRepository.findByFiveGenres(movieFiveGenreReqDto);
+    }
+
+    @Override
+    public List<Movie> findAllMovies() {
+        return movieRepository.findAllMovies();
+    }
+
+
 }
