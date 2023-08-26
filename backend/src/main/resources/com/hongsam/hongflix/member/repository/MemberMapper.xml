@@ -35,5 +35,17 @@
         where email = #{email};
     </select>
 
+    <insert id="userMovieWatch">
+        insert into memberWatch (userId,movieId) values (#{memberId}, #{movieId});
+    </insert>
+
+    <select id="findLatestWatchMovies" resultType="Movie">
+        select m.id, title, subTitle, accessKey, explanation, genre, m.createdDate
+        from movie m
+        inner join memberWatch w
+        on m.id = w.movieId
+        where w.userId = #{memberId}
+        order by w.createdDate DESC;
+    </select>
 
 </mapper>
