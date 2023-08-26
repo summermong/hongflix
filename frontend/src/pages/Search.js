@@ -42,12 +42,6 @@ const Search = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMovie, setModalMovie] = useState(null);
 
-  axios
-    .get(
-      `https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/contents/18`
-    )
-    .then((response) => console.log(response));
-
   return (
     <div className="p-5 lg:p-8 font-['Pretendard-Bold']">
       <div className="font-black text-xl lg:text-2xl">검색</div>

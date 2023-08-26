@@ -10,13 +10,13 @@ const Modal = ({
   closeModal,
 }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(true);
   const navigate = useNavigate();
 
   const handleSubscribe = () => {
     // 로그인도 하고 구독도 한 경우
     if (isLoggedIn && isSubscribed) {
-      navigate('/search');
+      navigate('/list');
     }
     // 로그인 안 한 경우
     else if (!isLoggedIn) {

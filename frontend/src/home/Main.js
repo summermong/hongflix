@@ -169,7 +169,6 @@ const Main = () => {
         const thrillerMovies = slideData.filter(
           (movie) => movie.genre === '스릴러'
         );
-        console.log(thrillerMovies);
         setSlide3(thrillerMovies);
       })
       .catch((error) => {
