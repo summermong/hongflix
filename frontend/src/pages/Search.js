@@ -61,7 +61,7 @@ const Search = () => {
           {searchResults.map((movie) => (
             <div key={movie.id} className="flex space-x-3 my-3 relative">
               <div
-                className="relative sm:w-full md:w-1/5 lg:w-2/6 cursor-pointer"
+                className="relative sm:w-full md:w-1/5 cursor-pointer"
                 onClick={() => openModal(movie)}
                 onMouseEnter={() => setHoveredMovie(movie)}
                 onMouseLeave={() => setHoveredMovie(null)}
@@ -69,7 +69,7 @@ const Search = () => {
                 <img
                   src={movie.accessKey}
                   alt={movie.title}
-                  className="hover:brightness-50"
+                  className="hover:brightness-50 relative"
                 />
                 {hoveredMovie === movie && (
                   <div className="absolute text-white top-2/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-semibold text-lg">
