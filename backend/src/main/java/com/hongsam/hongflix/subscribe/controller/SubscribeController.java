@@ -1,6 +1,7 @@
 package com.hongsam.hongflix.subscribe.controller;
 
 
+import com.hongsam.hongflix.member.domain.LoginUserResponse;
 import com.hongsam.hongflix.subscribe.domain.SubscribeDto;
 import com.hongsam.hongflix.subscribe.domain.SubscribeUpdateDto;
 import com.hongsam.hongflix.subscribe.service.SubscribeService;
@@ -25,9 +26,13 @@ public class SubscribeController {
         return "OK";
     }
 
-    @PostMapping("/{memberId}")
-    public String update(@PathVariable Long memberId, @RequestBody SubscribeUpdateDto updateDto) {
-        subscribeService.update(memberId, updateDto);
+    @PostMapping
+    public String update(@SessionAttribute(required = false) LoginUserResponse loginUserResponse, @RequestBody SubscribeUpdateDto updateDto) {
+        subscribeService.update(loginUserResponse.getMemberId(), updateDto);
+
+        loginUserResponse.setAvailable(updateDto.getAvailable());
+        loginUserResponse.setPeriod(updateDto.getPeriod());
+
         return "OK";
     }
 }

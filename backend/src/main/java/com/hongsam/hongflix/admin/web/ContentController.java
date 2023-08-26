@@ -4,10 +4,10 @@ import com.hongsam.hongflix.admin.domain.content.Content;
 import com.hongsam.hongflix.admin.domain.content.ContentCreateResDto;
 import com.hongsam.hongflix.admin.domain.content.ContentUpdateMapperReqDto;
 import com.hongsam.hongflix.admin.domain.content.ContentUpdateReqDto;
-import com.hongsam.hongflix.admin.domain.movie.Movie;
-import com.hongsam.hongflix.admin.domain.movie.MovieUpdateReqDto;
 import com.hongsam.hongflix.admin.service.content.ContentService;
 import com.hongsam.hongflix.admin.service.s3.S3UploaderService;
+import com.hongsam.hongflix.member.domain.LoginUserResponse;
+import com.hongsam.hongflix.member.service.MemberMovieService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -27,9 +27,20 @@ public class ContentController {
 
     private final S3UploaderService s3UploaderService;
 
+    private final MemberMovieService memberMovieService;
+
     @GetMapping("/{movieId}")
-    public List<ContentCreateResDto> findAllByMovieId(@PathVariable Long movieId) {
-        return contentService.findAllByMovieId(movieId);
+    public List<ContentCreateResDto> findAllByMovieId(@PathVariable Long movieId, @SessionAttribute(required = false) LoginUserResponse loginUserResponse) throws Exception {
+//        return contentService.findAllByMovieId(movieId);
+
+        if (loginUserResponse == null) {
+            throw new Exception("로그인 안 한 사용자입니다.");
+        } else if (loginUserResponse.getAvailable() == 0) {
+            throw new Exception("구독 안 한 사용자입니다.");
+        } else {
+            memberMovieService.userMovieWatch(loginUserResponse.getMemberId(), movieId);
+            return contentService.findAllByMovieId(movieId);
+        }
     }
 
     @PutMapping("/{contentId}")
