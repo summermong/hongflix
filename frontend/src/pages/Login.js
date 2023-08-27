@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
-import styles from "./Auth.module.css";
-import { Link } from "react-router-dom";
+/** @format */
+
+import React, { useEffect, useState } from 'react';
+import styles from './Auth.module.css';
+import { Link } from 'react-router-dom';
 
 export default function Login({
   inputValue,
@@ -9,11 +11,14 @@ export default function Login({
   isLogin,
   url,
 }) {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
   const [isEmailFocused, setIsEmailFocused] = useState(false);
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
   const [isPassWordFocused, setIsPassWordFocused] = useState(false);
   const [isButtonActive, setIsButtonActive] = useState(false);
+
+  const emailReg = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+  const passwordReg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
 
   const FormSubmit = (e) => {
     e.preventDefault();
@@ -21,17 +26,18 @@ export default function Login({
       email: email,
       password: password,
     };
-    isLogin(loginInfo, `${url}/members/login`, "/");
-
+    isLogin(loginInfo, `${url}/members/login`, '/');
     console.log(`email : ${email}\npassword : ${password}`);
   };
 
   useEffect(() => {
-    email && password ? setIsButtonActive(true) : setIsButtonActive(false);
+    emailReg.test(email) && passwordReg.test(password)
+      ? setIsButtonActive(true)
+      : setIsButtonActive(false);
   });
   return (
     <>
-      <div className="sc-hYbzA-d iHTwyS w-full fixed flex flex-col gap-5">
+      <div className='sc-hYbzA-d iHTwyS w-full fixed flex flex-col gap-5'>
         <div
           className={`${styles.backgroundImage}`}
           style={{
@@ -112,25 +118,25 @@ export default function Login({
           <div
             className={`${styles.FormHeader} mt-10 text-center font-black flex flex-col gap-3 mb-3`}
           >
-            <h1 className="text-2xl">Hongflix</h1>
+            <h1 className='text-2xl'>Hongflix</h1>
             <p>동시방영 신작부터 역대 인기작까지</p>
             <p>한 곳에서 편안-하게!</p>
           </div>
-          <form className={`${styles.Form}`} action="" method="POST">
+          <form className={`${styles.Form}`} action='' method='POST'>
             <div
               className={`${styles.FormItem} ${
-                isEmailFocused ? styles.FormItemFocus : ""
+                isEmailFocused ? styles.FormItemFocus : ''
               } flex flex-col w-80`}
             >
-              <label className={`${styles.FormLabel}`} htmlFor="">
+              <label className={`${styles.FormLabel}`} htmlFor=''>
                 이메일
               </label>
               <div className={`relative`}>
                 <input
                   className={`${styles.FormInput}`}
-                  placeholder="이메일 입력해주세요"
-                  type="Email"
-                  value={email || ""}
+                  placeholder='이메일 입력해주세요'
+                  type='Email'
+                  value={email || ''}
                   onChange={(e) => {
                     inputValue(e, setEmail);
                   }}
@@ -158,18 +164,18 @@ export default function Login({
             </div>
             <div
               className={`${styles.FormItem} ${
-                isPassWordFocused ? styles.FormItemFocus : ""
+                isPassWordFocused ? styles.FormItemFocus : ''
               } relative`}
             >
-              <label className={`${styles.FormLabel}`} htmlFor="">
+              <label className={`${styles.FormLabel}`} htmlFor=''>
                 비밀번호
               </label>
               <div className={`relative`}>
                 <input
                   className={`${styles.FormInput}`}
-                  placeholder="비밀번호를 입력해주세요"
-                  type="password"
-                  value={password || ""}
+                  placeholder='비밀번호를 입력해주세요'
+                  type='password'
+                  value={password || ''}
                   onChange={(e) => {
                     inputValue(e, setPassword);
                   }}
@@ -196,12 +202,12 @@ export default function Login({
               </div>
             </div>
             <p className={`${styles.FormText} mt-2`}>
-              계정이 없으시다면 .. <Link to={"/signup"}> 가입하기</Link>
+              계정이 없으시다면 .. <Link to={'/signup'}> 가입하기</Link>
             </p>
-            <div className="mb-10">
+            <div className='mb-10'>
               <button
                 className={`${styles.FormBtn} ${
-                  isButtonActive ? styles.FormBtnCompletion : ""
+                  isButtonActive ? styles.FormBtnCompletion : ''
                 } flex items-center justify-cente w-full`}
                 disabled={!isButtonActive}
                 onClick={(e) => {

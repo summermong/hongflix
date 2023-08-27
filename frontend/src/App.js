@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useEffect, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -107,18 +109,18 @@ function App() {
 
   return (
     <div>
-      <div className="flex flex-col h-screen">
-        <div className="flex-1">
+      <div className='flex flex-col h-screen'>
+        <div className='flex-1'>
           {isUserRoll !== 'admin' ? <Header isLoggedIn={isLogined} /> : null}
 
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/category" element={<Category />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/mypage" element={<MyPage />} />
-            <Route path="/list" element={<List />} />
+            <Route path='/' element={<Home />} />
+            <Route path='/category' element={<Category />} />
+            <Route path='/search' element={<Search />} />
+            <Route path='/mypage' element={<MyPage />} />
+            <Route path='/list' element={<List />} />
             <Route
-              path="/login"
+              path='/login'
               element={
                 <Login
                   inputValue={inputValue}
@@ -130,7 +132,7 @@ function App() {
               }
             ></Route>
             <Route
-              path="/signup"
+              path='/signup'
               element={
                 <SignUp
                   inputValue={inputValue}
@@ -142,7 +144,7 @@ function App() {
               }
             ></Route>
             <Route
-              path="/admin/login"
+              path='/admin/login'
               element={
                 <LoginForAdmin
                   inputValue={inputValue}
@@ -154,7 +156,7 @@ function App() {
               }
             ></Route>
             <Route
-              path="/admin/signup"
+              path='/admin/signup'
               element={
                 <SignUpForAdmin
                   inputValue={inputValue}
@@ -165,12 +167,12 @@ function App() {
                 />
               }
             ></Route>
-            <Route path="/admin" element={<AdminHome />}></Route>
-            <Route path="/admin/movies" element={<AdminMovies />}></Route>
-            <Route path="/admin/members" element={<AdminMembers />}></Route>
-            <Route path="/admin/setting" element={<AdminSetting />}></Route>
+            <Route path='/admin' element={<AdminHome />}></Route>
+            <Route path='/admin/movies' element={<AdminMovies />}></Route>
+            <Route path='/admin/members' element={<AdminMembers />}></Route>
+            <Route path='/admin/setting' element={<AdminSetting />}></Route>
             <Route
-              path="/admin/movies/contents/:movieTitle/:movieId"
+              path='/admin/movies/contents/:movieTitle/:movieId'
               element={<AdminContents />}
             ></Route>
           </Routes>
