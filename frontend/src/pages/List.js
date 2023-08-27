@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -24,15 +26,15 @@ const List = () => {
       {data.map((item, index) => (
         <div
           key={index}
-          className="flex flex-col justify-between mb-5 border-2 p-5"
+          className='flex flex-col justify-between mb-5 border-2 p-5'
         >
-          <div className="flex gap-5 items-center">
+          <div className='flex gap-5 items-center'>
             <div style={{ flex: '0 0 250px' }}>
               <Link to={item.accessStreamingUrl}>
                 <img
                   src={item.accessUrl}
-                  alt="회차 이미지"
-                  className="w-full h-auto"
+                  alt='회차 이미지'
+                  className='w-full h-auto'
                 />
               </Link>
             </div>

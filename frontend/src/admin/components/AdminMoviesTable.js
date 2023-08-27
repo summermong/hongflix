@@ -1,5 +1,7 @@
-import React from "react";
-import styles from "../Admin.module.css";
+/** @format */
+
+import React from 'react';
+import styles from '../Admin.module.css';
 
 export default function AdminMoviesTable({
   movies,
@@ -13,54 +15,56 @@ export default function AdminMoviesTable({
   console.log(movies);
   return (
     <div>
-      <table className="border w-full text-center rounded-lg">
+      <table className='border w-full text-center rounded-lg'>
         <thead className={`${styles.adminTableHead} border`}>
           <tr>
-            <th className="p-2 border">영화제목</th>
-            <th className="p-2 border">영화 부제목</th>
-            <th className="p-2 border">내용</th>
-            <th className="p-2 border">장르</th>
-            <th className="p-2 border">수정</th>
-            <th className="p-2 border">삭제</th>
+            <th className='p-2 border w-2/12'>영화제목</th>
+            <th className='p-2 border w-1/12'>연령</th>
+            <th className='p-2 border w-4/12'>내용</th>
+            <th className='p-2 border w-2/12'>장르</th>
+            <th className='p-2 border w-1/12'>수정</th>
+            <th className='p-2 border w-1/12'>삭제</th>
           </tr>
         </thead>
-        <tbody className="">
+        <tbody className=''>
           {movies.map((el, i) => {
             return (
               <tr key={i}>
                 <td
-                  className="p-2 border"
+                  className='p-2 border '
                   onClick={() => {
-                    navigator(`contents/${el["title"]}/${el["id"]}`);
+                    navigator(`contents/${el['title']}/${el['id']}`);
                   }}
                 >
-                  {el["title"]}
+                  {el['title']}
                 </td>
-                <td className="p-2 border">{el["subTitle"]}</td>
-                <td className="p-2 border">{el["explanation"]}</td>
-                <td className="p-2 border">{el["genre"]}</td>
-                <td className="p-2 border w-14">
+                <td className='p-2 border'>{el['subTitle']}</td>
+                <td className='p-2 border'>
+                  <p className=''>{el['explanation']}</p>
+                </td>
+                <td className='p-2 border '>{el['genre']}</td>
+                <td className='p-2 border '>
                   <button
                     onClick={(e) => {
                       modalSwitch(
                         e,
                         updateModalView,
                         setUpdateModalView,
-                        +el["id"]
+                        +el['id']
                       );
                     }}
                   >
                     수정
                   </button>
                 </td>
-                <td className="p-2 border w-14">
+                <td className='p-2 border w-14'>
                   <button
                     onClick={(e) => {
                       modalSwitch(
                         e,
                         deleteModalView,
                         setDeleteModalView,
-                        +el["id"]
+                        +el['id']
                       );
                     }}
                   >

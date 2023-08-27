@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
-import styles from "./Auth.module.css";
-import axios from "axios";
+/** @format */
+
+import React, { useEffect, useState } from 'react';
+import styles from './Auth.module.css';
+import axios from 'axios';
 
 export default function SignUpForAdmin({
   inputValue,
@@ -14,33 +16,33 @@ export default function SignUpForAdmin({
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = seconds % 60;
 
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
   const [emailCheck, setEmailCheck] = useState(false);
   const [isEmailWarringTextView, setIsEmailWarringTextView] = useState(false);
   const [isEmailFocused, setIsEmailFocused] = useState(false);
   const [isEmailSameCheck, setIsEmailSameCheck] = useState(false);
 
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState(false);
   const [isPassWordFocused, setIsPassWordFocused] = useState(false);
   const [isPasswordWarringTextView, setIsPasswordWarringTextView] =
     useState(false);
 
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [isConfirmPassWordFocused, setIsConfirmPassWordFocused] =
     useState(false);
 
-  const [nickName, setNickName] = useState("");
+  const [nickName, setNickName] = useState('');
   const [isNickNameFocused, setIsNickNameFocused] = useState(false);
 
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [isPhoneNumberFocused, setIsPhoneNumberFocused] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [isPhoneNumberFocused, setIsPhoneNumberFocused] = useState('');
   const [isPhoneNumberReg, setIsPhoneNumberReg] = useState(false);
 
-  const [smsCode, setSmsCode] = useState("");
+  const [smsCode, setSmsCode] = useState('');
   const [isSmsCodeCheck, setIsSmsCodeCheck] = useState(false);
   const [isSmsCodeFocused, setIsSmsCodeFocused] = useState(false);
-  const [resSmsCode, setResSmsCode] = useState("");
+  const [resSmsCode, setResSmsCode] = useState('');
 
   const [phoneNumberCheck, setPhoneNumberCheck] = useState(false);
 
@@ -53,9 +55,9 @@ export default function SignUpForAdmin({
     e.preventDefault();
     setValue(
       e.target.value
-        .replace(/[^0-9]/g, "")
-        .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3")
-        .replace(/(\-{1,2})$/g, "")
+        .replace(/[^0-9]/g, '')
+        .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, '$1-$2-$3')
+        .replace(/(\-{1,2})$/g, '')
     );
   };
 
@@ -67,12 +69,12 @@ export default function SignUpForAdmin({
   const phoneNumberReq = async (e) => {
     e.preventDefault();
     setIsSmsCodeCheck(true);
-    console.log(`+82${phoneNumber.replaceAll("-", "")}`);
+    console.log(`+82${phoneNumber.replaceAll('-', '')}`);
     await axios
       .post(
         `${url}members/signup/message`,
         {
-          phoneNumber: `+82${phoneNumber.replaceAll("-", "")}`,
+          phoneNumber: `+82${phoneNumber.replaceAll('-', '')}`,
         },
         { withCredentials: true }
       )
@@ -118,8 +120,8 @@ export default function SignUpForAdmin({
   //password 최종 체크 함수
   const isValidPassword = () => {
     password === confirmPassword &&
-    password !== "" &&
-    confirmPassword !== "" &&
+    password !== '' &&
+    confirmPassword !== '' &&
     valueRegCheck(passwordReg, password)
       ? setPasswordCheck(true)
       : setPasswordCheck(false);
@@ -133,12 +135,12 @@ export default function SignUpForAdmin({
 
     if (smsCode === resSmsCode) {
       setPhoneNumberCheck(true);
-      alert("인증 완료");
+      alert('인증 완료');
     } else {
       setPhoneNumberCheck(false);
-      alert("인증번호를 확인해주세요");
+      alert('인증번호를 확인해주세요');
     }
-    console.log("전화번호 최종 체크 : ", phoneNumberCheck);
+    console.log('전화번호 최종 체크 : ', phoneNumberCheck);
   };
   //회원가입 완료 함수
   const FormSubmit = (e) => {
@@ -186,19 +188,19 @@ export default function SignUpForAdmin({
       setIsSmsCodeCheck(false);
     }
 
-    console.log("phoneReg : ", isPhoneNumberReg);
+    console.log('phoneReg : ', isPhoneNumberReg);
   }, [phoneNumber]);
   useEffect(() => {
     const timer = setInterval(() => {
-      if (seconds > 0 && !phoneNumberCheck && resSmsCode !== "") {
+      if (seconds > 0 && !phoneNumberCheck && resSmsCode !== '') {
         setSeconds(seconds - 1);
       }
     }, 1000);
     if (seconds === 0) {
       setIsPhoneNumberReg(false);
-      setResSmsCode("");
-      setPhoneNumber("");
-      alert("인증 버튼을 다시 눌러주세요");
+      setResSmsCode('');
+      setPhoneNumber('');
+      alert('인증 버튼을 다시 눌러주세요');
       setSeconds(180);
     }
     return () => {
@@ -209,7 +211,7 @@ export default function SignUpForAdmin({
   }, [seconds, resSmsCode]);
   return (
     <div
-      className={`${styles.BackGround} flex flex-col justify-center items-center w-screen h-4/5 font-['Pretendard-Bold']`}
+      className={`${styles.BackGround} flex flex-col justify-center items-center w-screen h-screen font-['Pretendard-Bold']`}
     >
       <div
         className={`${styles.Container} flex flex-col justify-center items-center rounded-lg`}
@@ -220,22 +222,22 @@ export default function SignUpForAdmin({
           <h1>Hongflix</h1>
           <p>관리자 회원가입</p>
         </div>
-        <form className={`${styles.Form}`} action="" method="POST">
+        <form className={`${styles.Form}`} action='' method='POST'>
           <div
             className={`${styles.FormItem} ${
-              isEmailFocused ? styles.FormItemFocus : ""
+              isEmailFocused ? styles.FormItemFocus : ''
             }`}
           >
-            <label className={`${styles.FormLabel}`} htmlFor="">
+            <label className={`${styles.FormLabel}`} htmlFor=''>
               이메일
             </label>
             <div className={`${styles.FormInputBox}`}>
               <input
                 className={`${styles.FormInput} `}
-                placeholder="이메일 입력해주세요"
-                type="email"
+                placeholder='이메일 입력해주세요'
+                type='email'
                 disabled={emailCheck}
-                value={email || ""}
+                value={email || ''}
                 onChange={(e) => {
                   inputValue(e, setEmail);
                 }}
@@ -280,18 +282,18 @@ export default function SignUpForAdmin({
           ) : null}
           <div
             className={`${styles.FormItem} ${
-              isNickNameFocused ? styles.FormItemFocus : ""
+              isNickNameFocused ? styles.FormItemFocus : ''
             }`}
           >
-            <label className={`${styles.FormLabel}`} htmlFor="">
+            <label className={`${styles.FormLabel}`} htmlFor=''>
               이름
             </label>
             <div className={`relative ${styles.FormInputBox}`}>
               <input
                 className={`${styles.FormInput}`}
-                placeholder="이름을 입력해주세요"
-                type="text"
-                value={nickName || ""}
+                placeholder='이름을 입력해주세요'
+                type='text'
+                value={nickName || ''}
                 onChange={(e) => {
                   inputValue(e, setNickName);
                 }}
@@ -320,18 +322,18 @@ export default function SignUpForAdmin({
 
           <div
             className={`${styles.FormItem} ${
-              isPassWordFocused ? styles.FormItemFocus : ""
+              isPassWordFocused ? styles.FormItemFocus : ''
             } flex flex-col w-80`}
           >
-            <label className={`${styles.FormLabel}`} htmlFor="">
+            <label className={`${styles.FormLabel}`} htmlFor=''>
               비밀번호
             </label>
             <div className={`${styles.FormInputBox}`}>
               <input
                 className={`${styles.FormInput} m-0 p-0`}
-                placeholder="비밀번호를 입력해주세요"
-                type="password"
-                value={password || ""}
+                placeholder='비밀번호를 입력해주세요'
+                type='password'
+                value={password || ''}
                 onChange={(e) => {
                   inputValue(e, setPassword);
                 }}
@@ -364,18 +366,18 @@ export default function SignUpForAdmin({
           ) : null}
           <div
             className={`${styles.FormItem} ${
-              isConfirmPassWordFocused ? styles.FormItemFocus : ""
+              isConfirmPassWordFocused ? styles.FormItemFocus : ''
             }`}
           >
-            <label className={`${styles.FormLabel}`} htmlFor="">
+            <label className={`${styles.FormLabel}`} htmlFor=''>
               비밀번호 확인
             </label>
             <div className={`${styles.FormInputBox}`}>
               <input
                 className={`${styles.FormInput}`}
-                placeholder="비밀번호를 한번 더 입력해주세요"
-                type="password"
-                value={confirmPassword || ""}
+                placeholder='비밀번호를 한번 더 입력해주세요'
+                type='password'
+                value={confirmPassword || ''}
                 onChange={(e) => {
                   inputValue(e, setConfirmPassword);
                 }}
@@ -409,19 +411,19 @@ export default function SignUpForAdmin({
           </div>
           <div
             className={`${styles.FormItem} ${
-              isPhoneNumberFocused ? styles.FormItemFocus : ""
+              isPhoneNumberFocused ? styles.FormItemFocus : ''
             }`}
           >
-            <label className={`${styles.FormLabel}`} htmlFor="">
+            <label className={`${styles.FormLabel}`} htmlFor=''>
               전화번호
             </label>
             <div className={`${styles.FormInputBox}`}>
               <input
                 className={`${styles.FormInput}`}
-                placeholder="전화번호를 입력해주세요"
-                type="text"
+                placeholder='전화번호를 입력해주세요'
+                type='text'
                 maxLength={`13`}
-                value={phoneNumber || ""}
+                value={phoneNumber || ''}
                 onChange={(e) => {
                   phoneNumberInputValueReg(e, setPhoneNumber);
                 }}
@@ -462,19 +464,19 @@ export default function SignUpForAdmin({
           {isSmsCodeCheck && isPhoneNumberReg ? (
             <div
               className={`${styles.FormItem} ${
-                isSmsCodeFocused ? styles.FormItemFocus : ""
+                isSmsCodeFocused ? styles.FormItemFocus : ''
               }`}
             >
-              <label className={`${styles.FormLabel}`} htmlFor="">
+              <label className={`${styles.FormLabel}`} htmlFor=''>
                 인증번호
               </label>
               <div className={`${styles.FormInputBox}`}>
                 <input
                   className={`${styles.FormInput}`}
-                  placeholder="인증번호를 입력해주세요"
-                  type="text"
+                  placeholder='인증번호를 입력해주세요'
+                  type='text'
                   maxLength={`4`}
-                  value={smsCode || ""}
+                  value={smsCode || ''}
                   disabled={phoneNumberCheck}
                   onChange={(e) => {
                     inputValue(e, setSmsCode);
@@ -512,19 +514,19 @@ export default function SignUpForAdmin({
             </div>
           ) : null}
           {isSmsCodeCheck && isPhoneNumberReg && !phoneNumberCheck ? (
-            <p className="mb-2">
-              남은 시간: {minutes < 10 ? "0" : ""}
-              {minutes}:{remainingSeconds < 10 ? "0" : ""}
+            <p className='mb-2'>
+              남은 시간: {minutes < 10 ? '0' : ''}
+              {minutes}:{remainingSeconds < 10 ? '0' : ''}
               {remainingSeconds}
             </p>
           ) : null}
 
-          <div className="mb-10">
+          <div className='mb-10'>
             <button
               className={`${styles.FormBtn} ${
-                isButtonActive ? styles.FormBtnCompletion : ""
+                isButtonActive ? styles.FormBtnCompletion : ''
               } flex items-center justify-cente w-full`}
-              type="submit"
+              type='submit'
               disabled={!isButtonActive}
               onClick={(e) => {
                 FormSubmit(e);

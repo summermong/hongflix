@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useEffect, useState } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from './home/Header';
 
@@ -30,6 +30,18 @@ function App() {
   const [isLogined, setIsLogined] = useState(false);
   const [isUserRoll, setIsUserRoll] = useState('');
   const [userInfo, setUserInfo] = useState({});
+
+  const location = useLocation();
+  const ShowHeaderAndFooter = !(
+    isUserRoll === 'admin' ||
+    location.pathname === '/admin' ||
+    location.pathname === '/login' ||
+    location.pathname === '/signup' ||
+    location.pathname === '/admin/login' ||
+    location.pathname === 'admin/signup'
+  );
+  console.log('헤더푸터 보여주기 : ', ShowHeaderAndFooter);
+
   useEffect(() => {});
   console.log('로그인 여부 : ', isLogined);
   console.log('유저 정보', userInfo);
@@ -111,13 +123,14 @@ function App() {
     <div>
       <div className='flex flex-col h-screen'>
         <div className='flex-1'>
-          {isUserRoll !== 'admin' ? <Header isLoggedIn={isLogined} /> : null}
-
+          {ShowHeaderAndFooter ? <Header isLoggedIn={isLogined} /> : null}
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/category' element={<Category />} />
             <Route path='/search' element={<Search />} />
-            <Route path='/mypage' element={<MyPage />} />
+            {isLogined ? (
+              <Route path='/mypage' element={<MyPage userInfo={userInfo} />} />
+            ) : null}
             <Route path='/list' element={<List />} />
             <Route
               path='/login'
@@ -177,7 +190,7 @@ function App() {
             ></Route>
           </Routes>
         </div>
-        {isUserRoll !== 'admin' ? <Footer /> : null}
+        {ShowHeaderAndFooter ? <Footer /> : null}
       </div>
     </div>
   );

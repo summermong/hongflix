@@ -3,12 +3,14 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Auth.module.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function SignUp({
   inputValue,
   handleFocus,
   inputClear,
   isSignUp,
+
   url,
 }) {
   const [email, setEmail] = useState('');
@@ -287,7 +289,7 @@ export default function SignUp({
         ></div>
       </div>
       <div
-        className={`${styles.BackGround} flex flex-col justify-center items-center w-screen h-4/5 font-['Pretendard-Bold']`}
+        className={`${styles.BackGround} flex flex-col justify-center items-center w-screen h-screen font-['Pretendard-Bold']`}
       >
         <div
           className={`${styles.Container} flex flex-col justify-center items-center rounded-lg`}
@@ -295,7 +297,9 @@ export default function SignUp({
           <div
             className={`${styles.FormHeader} mt-10 text-center font-black flex flex-col gap-3 mb-3`}
           >
-            <h1>Hongflix</h1>
+            <h1 className='text-2xl'>
+              <Link to={'/'}>Hongflix</Link>
+            </h1>
             <p>회원가입</p>
           </div>
           <form className={`${styles.Form}`} action='' method='POST'>

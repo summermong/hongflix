@@ -9,6 +9,7 @@ export default function Login({
   handleFocus,
   inputClear,
   isLogin,
+
   url,
 }) {
   const [email, setEmail] = useState('');
@@ -37,7 +38,7 @@ export default function Login({
   });
   return (
     <>
-      <div className='sc-hYbzA-d iHTwyS w-full fixed flex flex-col gap-5'>
+      <div className='sc-hYbzA-d iHTwyS w-full fixed flex flex-col gap-5 bg-black'>
         <div
           className={`${styles.backgroundImage}`}
           style={{
@@ -110,15 +111,17 @@ export default function Login({
         ></div>
       </div>
       <div
-        className={`${styles.BackGround} flex flex-col justify-center items-center w-screen h-4/5 font-['Pretendard-Bold']`}
+        className={`${styles.BackGround} flex flex-col justify-center items-center w-screen h-screen font-['Pretendard-Bold']`}
       >
         <div
-          className={`${styles.Container} flex flex-col justify-center items-center rounded-lg`}
+          className={`${styles.Container} flex flex-col justify-center items-center rounded-lg `}
         >
           <div
             className={`${styles.FormHeader} mt-10 text-center font-black flex flex-col gap-3 mb-3`}
           >
-            <h1 className='text-2xl'>Hongflix</h1>
+            <h1 className='text-2xl'>
+              <Link to={'/'}>Hongflix</Link>
+            </h1>
             <p>동시방영 신작부터 역대 인기작까지</p>
             <p>한 곳에서 편안-하게!</p>
           </div>
@@ -202,7 +205,7 @@ export default function Login({
               </div>
             </div>
             <p className={`${styles.FormText} mt-2`}>
-              계정이 없으시다면 .. <Link to={'/signup'}> 가입하기</Link>
+              <Link to={'/signup'}>회원가입</Link>
             </p>
             <div className='mb-10'>
               <button

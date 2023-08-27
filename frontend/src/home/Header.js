@@ -1,9 +1,10 @@
+/** @format */
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+const Header = ({ isLoggedIn }) => {
   // 로그인 여부 상태
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // 스크롤 시 헤더 배경색 변경
   const [isScrolled, setIsScrolled] = useState(false);
@@ -36,10 +37,10 @@ const Header = () => {
         transition: 'background-color 0.3s ease-in',
       }}
     >
-      <div className="container mx-auto flex justify-between items-center">
+      <div className='container mx-auto flex justify-between items-center'>
         <div className="flex space-x-6 items-center font-['Pretendard-Bold'] ">
           <Link
-            to="/"
+            to='/'
             className={`text-xl font-black  ${
               isScrolled ? 'text-white' : 'text-indigo-950'
             }`}
@@ -47,7 +48,7 @@ const Header = () => {
             Hongflix
           </Link>
           <Link
-            to="/category"
+            to='/category'
             className={`text-sm ${
               isScrolled ? 'text-white' : 'text-indigo-950'
             }`}
@@ -55,7 +56,7 @@ const Header = () => {
             카테고리
           </Link>
           <Link
-            to="/search"
+            to='/search'
             className={`text-sm ${
               isScrolled ? 'text-white' : 'text-indigo-950'
             }`}
@@ -63,11 +64,11 @@ const Header = () => {
             검색
           </Link>
         </div>
-        <nav className="space-x-4">
+        <nav className='space-x-4'>
           {isLoggedIn ? (
             <>
               <Link
-                to="/mypage"
+                to='/mypage'
                 className={`text-sm ${
                   isScrolled ? 'text-white' : 'text-indigo-950'
                 }`}
@@ -78,7 +79,7 @@ const Header = () => {
           ) : (
             <>
               <Link
-                to="/login"
+                to='/login'
                 className={`text-sm ${
                   isScrolled ? 'text-white' : 'text-indigo-950'
                 }`}

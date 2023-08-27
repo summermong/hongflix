@@ -1,17 +1,22 @@
-import React, { useEffect, useState } from "react";
-import AdminNavBar from "./components/AdminNavBar";
-import styles from "./Admin.module.css";
-import axios from "axios";
-import AdminMoviesTable from "./components/AdminMoviesTable";
-import AdminMovieCreateModal from "./components/AdminMovieCreateModal";
-import { useNavigate } from "react-router-dom";
-import AdminMovieUpdateModal from "./components/AdminMovieUpdateModal";
-import AdminMovieDeleteModal from "./components/AdminMovieDeleteModal";
+/** @format */
+
+import React, { useEffect, useState } from 'react';
+import AdminNavBar from './components/AdminNavBar';
+import styles from './Admin.module.css';
+import axios from 'axios';
+
+import { useNavigate } from 'react-router-dom';
+import AdminMovieUpdateModal from './components/AdminMovieUpdateModal';
+import AdminMovieDeleteModal from './components/AdminMovieDeleteModal';
+import AdminMoviesTable from './components/AdminMoviesTable';
+import AdminMovieCreateModal from './components/AdminMovieCreateModal';
+import AdminMovieDetail from './components/AdminMovieDetail';
 
 export default function AdminMovies() {
   const [updateModalView, setUpdateModalView] = useState(false);
   const [deleteModalView, setDeleteModalView] = useState(false);
   const [createModalView, setCreateModalView] = useState(false);
+  const [detailModalView, setDeatilModalView] = useState(false);
   const [seleteId, setSeletId] = useState(0);
   const [movies, setMovies] = useState([]);
 
@@ -25,12 +30,12 @@ export default function AdminMovies() {
 
   const updateText = () => {
     const movieIndex = movies.findIndex((el) => {
-      return el["id"] == seleteId;
+      return el['id'] == seleteId;
     });
     return movieIndex;
   };
 
-  const apiUrl = "https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/";
+  const apiUrl = 'https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/';
   const navigator = useNavigate();
 
   const fetchMovies = async () => {
@@ -54,13 +59,13 @@ export default function AdminMovies() {
       className={`w-screen h-full flex flex-col md:flex-row font-['Pretendard-Bold'] overscroll-y-auto  mb-10`}
     >
       <AdminNavBar></AdminNavBar>
-      <div className="flex flex-col items-center w-full h-5/6 md:h-full md:w-3/4">
+      <div className='flex flex-col items-center w-full h-5/6 md:h-full md:w-3/4'>
         <header className={`w-4/5 h-28 bg-white flex items-center`}>
-          <h1 className=" text-3xl">영화 목록</h1>
+          <h1 className=' text-3xl'>영화 목록</h1>
         </header>
-        <section className="w-4/5 h-32 bg-white flex items-center">
-          <form className="w-full flex flex-col" action="">
-            <input className="w-full border h-10 text-xl p-1" type="text" />
+        <section className='w-4/5 h-32 bg-white flex items-center'>
+          <form className='w-full flex flex-col' action=''>
+            <input className='w-full border h-10 text-xl p-1' type='text' />
             <div
               className={`${styles.contentFormBtnBox} flex flex-row justify-center items-center relative `}
             >
@@ -72,19 +77,19 @@ export default function AdminMovies() {
                 >
                   <div>
                     <svg
-                      className="h-4 w-4 text-black"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      strokeWidth="2"
-                      stroke="currentColor"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                      className='h-4 w-4 text-black'
+                      width='24'
+                      height='24'
+                      viewBox='0 0 24 24'
+                      strokeWidth='2'
+                      stroke='currentColor'
+                      fill='none'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
                     >
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <circle cx="10" cy="10" r="7" />
-                      <line x1="21" y1="21" x2="15" y2="15" />
+                      <path stroke='none' d='M0 0h24v24H0z' />
+                      <circle cx='10' cy='10' r='7' />
+                      <line x1='21' y1='21' x2='15' y2='15' />
                     </svg>
                   </div>
                   검색
@@ -105,7 +110,7 @@ export default function AdminMovies() {
           </form>
         </section>
         <section className={`border w-4/5 rounded-md`}>
-          <h1 className="text-3xl md:mt-10 md:mb-10 p-3">{movies.length}건</h1>
+          <h1 className='text-3xl md:mt-10 md:mb-10 p-3'>{movies.length}건</h1>
           <AdminMoviesTable
             movies={movies}
             navigator={navigator}
@@ -140,6 +145,9 @@ export default function AdminMovies() {
             fetchMovies={fetchMovies}
             apiUrl={apiUrl}
           ></AdminMovieDeleteModal>
+        ) : null}
+        {detailModalView ? (
+          <AdminMovieDetail movie={movies[updateText()]}></AdminMovieDetail>
         ) : null}
       </div>
     </div>

@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
-import styles from "./Auth.module.css";
-import { Link } from "react-router-dom";
+/** @format */
+
+import React, { useEffect, useState } from 'react';
+import styles from './Auth.module.css';
+import { Link } from 'react-router-dom';
 
 export default function LoginForAdmin({
   inputValue,
@@ -9,9 +11,9 @@ export default function LoginForAdmin({
   isLogin,
   url,
 }) {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
   const [isEmailFocused, setIsEmailFocused] = useState(false);
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
   const [isPassWordFocused, setIsPassWordFocused] = useState(false);
   const [isButtonActive, setIsButtonActive] = useState(false);
 
@@ -21,7 +23,7 @@ export default function LoginForAdmin({
       email: email,
       password: password,
     };
-    isLogin(loginInfo, `${url}members/admin/login`, "/admin");
+    isLogin(loginInfo, `${url}members/admin/login`, '/admin');
 
     console.log(`email : ${email}\npassword : ${password}`);
   };
@@ -32,7 +34,7 @@ export default function LoginForAdmin({
   return (
     <>
       <div
-        className={`${styles.BackGround} flex flex-col justify-center items-center w-screen h-4/5 font-['Pretendard-Bold']`}
+        className={`${styles.BackGround} flex flex-col justify-center items-center w-screen h-screen font-['Pretendard-Bold'] bg-black`}
       >
         <div
           className={`${styles.Container} flex flex-col justify-center items-center rounded-lg`}
@@ -40,24 +42,24 @@ export default function LoginForAdmin({
           <div
             className={`${styles.FormHeader} mt-10 text-center font-black flex flex-col gap-3 mb-5`}
           >
-            <h1 className="mb-1">Hongflix</h1>
+            <h1 className='mb-1'>Hongflix</h1>
             <p>관리자 로그인</p>
           </div>
-          <form className={`${styles.Form}`} action="" method="POST">
+          <form className={`${styles.Form}`} action='' method='POST'>
             <div
               className={`${styles.FormItem} ${
-                isEmailFocused ? styles.FormItemFocus : ""
+                isEmailFocused ? styles.FormItemFocus : ''
               } flex flex-col w-80`}
             >
-              <label className={`${styles.FormLabel}`} htmlFor="">
+              <label className={`${styles.FormLabel}`} htmlFor=''>
                 이메일
               </label>
               <div className={`relative`}>
                 <input
                   className={`${styles.FormInput}`}
-                  placeholder="이메일 입력해주세요"
-                  type="email"
-                  value={email || ""}
+                  placeholder='이메일 입력해주세요'
+                  type='email'
+                  value={email || ''}
                   onChange={(e) => {
                     inputValue(e, setEmail);
                   }}
@@ -85,18 +87,18 @@ export default function LoginForAdmin({
             </div>
             <div
               className={`${styles.FormItem} ${
-                isPassWordFocused ? styles.FormItemFocus : ""
+                isPassWordFocused ? styles.FormItemFocus : ''
               } relative`}
             >
-              <label className={`${styles.FormLabel}`} htmlFor="">
+              <label className={`${styles.FormLabel}`} htmlFor=''>
                 비밀번호
               </label>
               <div className={`relative`}>
                 <input
                   className={`${styles.FormInput}`}
-                  placeholder="비밀번호를 입력해주세요"
-                  type="password"
-                  value={password || ""}
+                  placeholder='비밀번호를 입력해주세요'
+                  type='password'
+                  value={password || ''}
                   onChange={(e) => {
                     inputValue(e, setPassword);
                   }}
@@ -123,10 +125,10 @@ export default function LoginForAdmin({
               </div>
             </div>
 
-            <div className="mb-10">
+            <div className='mb-10'>
               <button
                 className={`${styles.FormBtn} ${
-                  isButtonActive ? styles.FormBtnCompletion : ""
+                  isButtonActive ? styles.FormBtnCompletion : ''
                 } flex items-center justify-cente w-full`}
                 disabled={!isButtonActive}
                 onClick={(e) => {
