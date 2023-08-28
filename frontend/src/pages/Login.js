@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useEffect, useState } from 'react';
 import styles from './Auth.module.css';
 import { Link } from 'react-router-dom';
@@ -38,7 +36,7 @@ export default function Login({
   });
   return (
     <>
-      <div className='sc-hYbzA-d iHTwyS w-full fixed flex flex-col gap-5 bg-black'>
+      <div className="sc-hYbzA-d iHTwyS w-full fixed flex flex-col gap-5 bg-black">
         <div
           className={`${styles.backgroundImage}`}
           style={{
@@ -119,26 +117,26 @@ export default function Login({
           <div
             className={`${styles.FormHeader} mt-10 text-center font-black flex flex-col gap-3 mb-3`}
           >
-            <h1 className='text-2xl'>
+            <h1 className="text-2xl">
               <Link to={'/'}>Hongflix</Link>
             </h1>
             <p>동시방영 신작부터 역대 인기작까지</p>
             <p>한 곳에서 편안-하게!</p>
           </div>
-          <form className={`${styles.Form}`} action='' method='POST'>
+          <form className={`${styles.Form}`} action="" method="POST">
             <div
               className={`${styles.FormItem} ${
                 isEmailFocused ? styles.FormItemFocus : ''
               } flex flex-col w-80`}
             >
-              <label className={`${styles.FormLabel}`} htmlFor=''>
+              <label className={`${styles.FormLabel}`} htmlFor="">
                 이메일
               </label>
               <div className={`relative`}>
                 <input
                   className={`${styles.FormInput}`}
-                  placeholder='이메일 입력해주세요'
-                  type='Email'
+                  placeholder="이메일 입력해주세요"
+                  type="Email"
                   value={email || ''}
                   onChange={(e) => {
                     inputValue(e, setEmail);
@@ -162,17 +160,17 @@ export default function Login({
                   >
                     <div>
                       <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        fill='none'
-                        viewBox='0 0 24 24'
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
                         strokeWidth={1.5}
-                        stroke='currentColor'
-                        className='w-4 h-4'
+                        stroke="currentColor"
+                        className="w-4 h-4"
                       >
                         <path
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          d='M6 18L18 6M6 6l12 12'
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M6 18L18 6M6 6l12 12"
                         />
                       </svg>
                     </div>
@@ -185,14 +183,14 @@ export default function Login({
                 isPassWordFocused ? styles.FormItemFocus : ''
               } relative`}
             >
-              <label className={`${styles.FormLabel}`} htmlFor=''>
+              <label className={`${styles.FormLabel}`} htmlFor="">
                 비밀번호
               </label>
               <div className={`relative`}>
                 <input
                   className={`${styles.FormInput}`}
-                  placeholder='비밀번호를 입력해주세요'
-                  type='password'
+                  placeholder="비밀번호를 입력해주세요"
+                  type="password"
                   value={password || ''}
                   onChange={(e) => {
                     inputValue(e, setPassword);
@@ -216,17 +214,17 @@ export default function Login({
                   >
                     <div>
                       <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        fill='none'
-                        viewBox='0 0 24 24'
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
                         strokeWidth={1.5}
-                        stroke='currentColor'
-                        className='w-4 h-4'
+                        stroke="currentColor"
+                        className="w-4 h-4"
                       >
                         <path
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          d='M6 18L18 6M6 6l12 12'
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M6 18L18 6M6 6l12 12"
                         />
                       </svg>
                     </div>
@@ -242,7 +240,7 @@ export default function Login({
                 회원가입
               </Link>
             </p>
-            <div className='mb-10'>
+            <div className="mb-10">
               <button
                 className={`${styles.FormBtn} ${
                   isButtonActive ? styles.FormBtnCompletion : ''

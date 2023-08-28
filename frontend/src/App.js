@@ -139,6 +139,7 @@ function App() {
               <Route path="/mypage" element={<MyPage userInfo={userInfo} />} />
             ) : null}
             <Route path="/list/:modalId" element={<List />} />
+
             <Route
               path="/login"
               element={
