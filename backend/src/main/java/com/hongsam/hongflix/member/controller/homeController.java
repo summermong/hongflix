@@ -23,6 +23,7 @@ public class homeController {
 
         HttpSession session = request.getSession(false);
         IsLoginResponse isLoginResponse = new IsLoginResponse();
+        log.info("sessionId {}",session.getId());
         if (session == null || loginUserResponse == null) {
             log.info("미인증 사용자 접근");
             isLoginResponse.setLogin(false);
