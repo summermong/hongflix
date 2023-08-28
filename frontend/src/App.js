@@ -46,7 +46,24 @@ function App() {
         console.log(res.data.loginUserResponse);
         setIsLogined(res.data.login);
         setUserInfo(res.data.loginUserResponse);
-        isUserRoll(res.data.loginUserResponse.roll);
+        res.data.loginUserResponse === null
+          ? setIsUserRoll('')
+          : setIsUserRoll(res.data.loginUserResponse.roll);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const isLogout = async (e, navUrl) => {
+    e.preventDefault();
+    await axios
+      .post(`${url}members/logout`)
+      .then((res) => {
+        console.log(res.data);
+        fetchLogined();
+        navigator(navUrl);
+        alert(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -62,11 +79,10 @@ function App() {
     location.pathname === 'admin/signup'
   );
   console.log('헤더푸터 보여주기 : ', ShowHeaderAndFooter);
-
-  useEffect(() => {});
   console.log('로그인 여부 : ', isLogined);
   console.log('유저 정보', userInfo);
   console.log('유저 롤 : ', isUserRoll);
+
   const inputValue = (e, setValue) => {
     e.preventDefault();
     setValue(e.target.value);
@@ -152,7 +168,9 @@ function App() {
     <div>
       <div className='flex flex-col h-screen'>
         <div className='flex-1'>
-          {ShowHeaderAndFooter ? <Header isLoggedIn={isLogined} /> : null}
+          {ShowHeaderAndFooter ? (
+            <Header isLoggedIn={isLogined} isLogout={isLogout} />
+          ) : null}
           <Routes>
             <Route
               path='/'

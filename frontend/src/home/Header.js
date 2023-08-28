@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const Header = ({ isLoggedIn }) => {
+const Header = ({ isLoggedIn, isLogout }) => {
   // 로그인 여부 상태
 
   // 스크롤 시 헤더 배경색 변경
@@ -74,6 +74,16 @@ const Header = ({ isLoggedIn }) => {
                 }`}
               >
                 마이 페이지
+              </Link>
+              <Link
+                onClick={(e) => {
+                  isLogout(e, '/');
+                }}
+                className={`text-sm ${
+                  isScrolled ? 'text-white' : 'text-indigo-950'
+                }`}
+              >
+                로그아웃
               </Link>
             </>
           ) : (
