@@ -17,13 +17,12 @@ import javax.servlet.http.HttpSession;
 public class homeController {
 
     @GetMapping("/api/home")
-    public IsLoginResponse home(HttpServletRequest request, @SessionAttribute(required = false) LoginUserResponse loginUserResponse)  {
+    public IsLoginResponse home(HttpServletRequest request, @SessionAttribute(value = "loginMember",required = false) LoginUserResponse loginUserResponse)  {
         String requestURI = request.getRequestURI();
         log.info("인증 체크 실행 {}", requestURI);
 
         HttpSession session = request.getSession(false);
         IsLoginResponse isLoginResponse = new IsLoginResponse();
-        log.info("sessionId {}",session.getId());
         if (session == null || loginUserResponse == null) {
             log.info("미인증 사용자 접근");
             isLoginResponse.setLogin(false);
