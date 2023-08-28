@@ -22,15 +22,18 @@ const List = ({ userInfo, isLogined }) => {
       });
   }, [modalId]);
 
-  useEffect(() => {
+  const watchContent = ({ item }) => {
     if (!isLogined) {
       alert('로그인을 해주세요.');
       navigate('/login');
-    } else if (isLogined && userInfo['period'] !== '0') {
+    } else if (
+      (isLogined && userInfo['period'] === 0) ||
+      userInfo['available'] === 0
+    ) {
       alert('구독 결제를 해주세요.');
       navigate('/mypage');
     }
-  }, [isLogined, userInfo, navigate]);
+  };
 
   return (
     <div className="p-5 lg:p-8 mt-5 px-3 font-['Pretendard-Bold']">
@@ -46,6 +49,7 @@ const List = ({ userInfo, isLogined }) => {
                   src={item.accessUrl}
                   alt="회차 이미지"
                   className="w-full h-auto"
+                  onClick={() => watchContent({ item })}
                 />
               </Link>
             </div>
