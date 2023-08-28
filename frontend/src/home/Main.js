@@ -183,7 +183,7 @@ const Main = ({ userInfo, isLogined }) => {
 
   return (
     <div className="p-5 lg:p-8 mt-5 px-3 font-['Pretendard-Bold']">
-      {isLogined ? (
+      {isLogined && userInfo['available'] !== 0 ? (
         <div className="flex flex-col gap-1 mb-8">
           <div className="font-bold text-base mt-3 md:text-lg lg:text-xl">
             최근 시청한 콘텐츠(수정 필요)
