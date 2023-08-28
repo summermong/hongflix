@@ -1,8 +1,11 @@
 /** @format */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
-const MyPage = ({ userInfo }) => {
+const MyPage = ({ userInfo, fetchLogined }) => {
+  useEffect(() => {
+    fetchLogined();
+  }, []);
   return (
     <div>
       <div className="p-5 lg:p-8 font-['Pretendard-Bold']">

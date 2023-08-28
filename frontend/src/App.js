@@ -39,6 +39,20 @@ function App() {
   const [isUserRoll, setIsUserRoll] = useState('');
   const [userInfo, setUserInfo] = useState({});
 
+  const fetchLogined = async () => {
+    await axios
+      .get(`${url}api/home`, { withCredentials: true })
+      .then((res) => {
+        console.log(res.data.loginUserResponse);
+        setIsLogined(res.data.login);
+        setUserInfo(res.data.loginUserResponse);
+        isUserRoll(res.data.loginUserResponse.roll);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const ShowHeaderAndFooter = !(
     isUserRoll === 'admin' ||
     location.pathname === '/admin' ||
@@ -71,12 +85,16 @@ function App() {
     console.log('nickName : ', userInfo['nickName']);
     console.log('phoneNumber', userInfo['phoneNumber'].replaceAll('-', ''));
     await axios
-      .post(url, {
-        email: userInfo['email'],
-        password: userInfo['password'],
-        nickName: userInfo['nickName'],
-        phoneNumber: userInfo['phoneNumber'].replaceAll('-', ''),
-      })
+      .post(
+        url,
+        {
+          email: userInfo['email'],
+          password: userInfo['password'],
+          nickName: userInfo['nickName'],
+          phoneNumber: userInfo['phoneNumber'].replaceAll('-', ''),
+        },
+        { withCredentials: true }
+      )
       .then((res) => {
         console.log(res.data);
         alert(res.data.data);
@@ -124,6 +142,10 @@ function App() {
       });
   };
 
+  useEffect(() => {
+    fetchLogined();
+  }, []);
+
   axios.defaults.withCredentials = true;
 
   return (
@@ -139,7 +161,12 @@ function App() {
             <Route path='/category' element={<Category />} />
             <Route path='/search' element={<Search />} />
             {isLogined ? (
-              <Route path='/mypage' element={<MyPage userInfo={userInfo} />} />
+              <Route
+                path='/mypage'
+                element={
+                  <MyPage userInfo={userInfo} fetchLogined={fetchLogined} />
+                }
+              />
             ) : null}
             <Route
               path='/list/:modalId'

@@ -27,7 +27,7 @@ export default function Login({
       email: email,
       password: password,
     };
-    isLogin(loginInfo, `${url}/members/login`, '/');
+    isLogin(loginInfo, `${url}members/login`, '/');
     console.log(`email : ${email}\npassword : ${password}`);
   };
 
