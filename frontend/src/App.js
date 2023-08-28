@@ -132,7 +132,10 @@ function App() {
         <div className="flex-1">
           {ShowHeaderAndFooter ? <Header isLoggedIn={isLogined} /> : null}
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route
+              path="/"
+              element={<Home userInfo={userInfo} isLogined={isLogined} />}
+            />
             <Route path="/category" element={<Category />} />
             <Route path="/search" element={<Search />} />
             {isLogined ? (

@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import Modal from '../pages/Modal';
 import axios from 'axios';
 
-const Main = () => {
+const Main = ({ userInfo, isLogined }) => {
   // 구독 여부 상태
   const [modal, setModal] = useState(false);
   const [modalImage, setModalImage] = useState('');
@@ -91,7 +91,6 @@ const Main = () => {
   const [slide1, setSlide1] = useState([]);
   const [slide2, setSlide2] = useState([]);
   const [slide3, setSlide3] = useState([]);
-  const [slide4, setSlide4] = useState([]);
 
   // 최근 시청한 콘텐츠 (슬라이드 1)
   useEffect(() => {
@@ -150,7 +149,7 @@ const Main = () => {
       });
   }, []);
 
-  // 주간 인기작 (슬라이드 3)
+  // 스릴러 (슬라이드 3)
   useEffect(() => {
     axios
       .get(
@@ -169,70 +168,46 @@ const Main = () => {
               : item.explanation,
         }));
 
-        // "스릴러" 장르인 영화만 필터링하여 slide2에 설정
-        const thrillerMovies = slideData.filter(
+        // "스릴러" 장르인 영화만 필터링하여 slide3에 설정
+        const thrilerMovies = slideData.filter(
           (movie) => movie.genre === '스릴러'
         );
-        setSlide3(thrillerMovies);
+        setSlide3(thrilerMovies);
       })
       .catch((error) => {
         console.error('Error:', error);
       });
   }, []);
 
-  useEffect(() => {
-    axios
-      .get(
-        'https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies/all'
-      )
-      .then((response) => {
-        const slideData = response.data.map((item) => ({
-          id: item.id,
-          imageSrc: item.accessKey,
-          title: item.title,
-          genre: item.genre,
-          createdDate: item.createdDate,
-          explanation:
-            item.explanation.length > 238
-              ? item.explanation.slice(0, 238) + '...'
-              : item.explanation,
-        }));
-
-        // "스릴러" 장르인 영화만 필터링하여 slide2에 설정
-        const thrillerMovies = slideData.filter(
-          (movie) => movie.genre === '스릴러'
-        );
-        setSlide4(thrillerMovies);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  }, []);
+  console.log(isLogined);
 
   return (
     <div className="p-5 lg:p-8 mt-5 px-3 font-['Pretendard-Bold']">
-      <div className="flex flex-col gap-1 mb-8">
-        <div className="font-bold text-base mt-3 md:text-lg lg:text-xl">
-          최근 시청한 콘텐츠(수정 필요)
+      {isLogined ? (
+        <div className="flex flex-col gap-1 mb-8">
+          <div className="font-bold text-base mt-3 md:text-lg lg:text-xl">
+            최근 시청한 콘텐츠(수정 필요)
+          </div>
+          <Slider {...settings}>
+            {slide1.map((slide) => (
+              <div key={slide.id}>
+                <Slide
+                  id={slide.id}
+                  imageSrc={slide.imageSrc}
+                  title={slide.title}
+                  genre={slide.genre}
+                  createdDate={slide.createdDate}
+                  explanation={slide.explanation}
+                />
+              </div>
+            ))}
+          </Slider>
         </div>
-        <Slider {...settings}>
-          {slide1.map((slide) => (
-            <div key={slide.id}>
-              <Slide
-                id={slide.id}
-                imageSrc={slide.imageSrc}
-                title={slide.title}
-                genre={slide.genre}
-                createdDate={slide.createdDate}
-                explanation={slide.explanation}
-              />
-            </div>
-          ))}
-        </Slider>
-      </div>
+      ) : null}
+
       <div className="flex flex-col gap-1 mb-8">
         <div className="font-bold text-base mt-3 md:text-lg lg:text-xl">
-          따끈따끈한 신작(releaseDate순)
+          따끈따끈한 신작
         </div>
         <div>
           <Slider {...settings}>
@@ -253,32 +228,11 @@ const Main = () => {
       </div>
       <div className="flex flex-col gap-1 mb-8">
         <div className="font-bold text-base mt-3 md:text-lg lg:text-xl">
-          주간 인기작(수정 필요)
-        </div>
-        <div>
-          <Slider {...settings}>
-            {slide3.map((slide) => (
-              <div key={slide.id}>
-                <Slide
-                  id={slide.id}
-                  imageSrc={slide.imageSrc}
-                  title={slide.title}
-                  genre={slide.genre}
-                  createdDate={slide.createdDate}
-                  explanation={slide.explanation}
-                />
-              </div>
-            ))}
-          </Slider>
-        </div>
-      </div>
-      <div className="flex flex-col gap-1 mb-8">
-        <div className="font-bold text-base mt-3 md:text-lg lg:text-xl">
           스릴러/미스터리
         </div>
         <div>
           <Slider {...settings}>
-            {slide4.map((slide) => (
+            {slide3.map((slide) => (
               <div key={slide.id}>
                 <Slide
                   id={slide.id}
