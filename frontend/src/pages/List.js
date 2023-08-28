@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -48,15 +50,15 @@ const List = ({ userInfo, isLogined }) => {
       {data.map((item, index) => (
         <div
           key={index}
-          className="flex flex-col justify-between mb-5 border-2 p-5"
+          className='flex flex-col justify-between mb-5 border-2 p-5'
         >
-          <div className="flex gap-5 items-center">
+          <div className='flex gap-5 items-center'>
             <div style={{ flex: '0 0 250px' }}>
               {/* Link 래퍼를 제거하고 watchContent 함수를 호출합니다 */}
               <img
                 src={item.accessUrl}
-                alt="회차 이미지"
-                className="w-full h-auto cursor-pointer"
+                alt='회차 이미지'
+                className='w-full h-auto cursor-pointer'
                 onClick={() => watchContent({ item })}
               />
             </div>
