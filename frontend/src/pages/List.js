@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import VideoPlayer from '../Video/VideoPlayer';
 
 const List = ({ userInfo, isLogined }) => {
   const { modalId } = useParams();
@@ -18,7 +19,7 @@ const List = ({ userInfo, isLogined }) => {
         console.log(response.data);
       })
       .catch((error) => {
-        console.error('Error fetching data:', error);
+        console.error('데이터 가져오기 오류:', error);
       });
   }, [modalId]);
 
@@ -32,6 +33,13 @@ const List = ({ userInfo, isLogined }) => {
     ) {
       alert('구독 결제를 해주세요.');
       navigate('/mypage');
+    } else if (
+      isLogined &&
+      userInfo['period'] !== 0 &&
+      userInfo['available'] !== 0
+    ) {
+      console.log(item.accessStreamingUrl);
+      return <VideoPlayer videoUrl={item.accessStreamingUrl} />;
     }
   };
 
@@ -44,14 +52,13 @@ const List = ({ userInfo, isLogined }) => {
         >
           <div className="flex gap-5 items-center">
             <div style={{ flex: '0 0 250px' }}>
-              <Link to={item.accessStreamingUrl}>
-                <img
-                  src={item.accessUrl}
-                  alt="회차 이미지"
-                  className="w-full h-auto"
-                  onClick={() => watchContent({ item })}
-                />
-              </Link>
+              {/* Link 래퍼를 제거하고 watchContent 함수를 호출합니다 */}
+              <img
+                src={item.accessUrl}
+                alt="회차 이미지"
+                className="w-full h-auto cursor-pointer"
+                onClick={() => watchContent({ item })}
+              />
             </div>
             <div>
               <div>
