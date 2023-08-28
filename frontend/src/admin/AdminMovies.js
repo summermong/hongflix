@@ -1,24 +1,42 @@
 /** @format */
 
 import React, { useEffect, useState } from 'react';
-import AdminNavBar from './components/AdminNavBar';
+import { useNavigate } from 'react-router-dom';
 import styles from './Admin.module.css';
 import axios from 'axios';
 
-import { useNavigate } from 'react-router-dom';
 import AdminMovieUpdateModal from './components/AdminMovieUpdateModal';
 import AdminMovieDeleteModal from './components/AdminMovieDeleteModal';
 import AdminMoviesTable from './components/AdminMoviesTable';
 import AdminMovieCreateModal from './components/AdminMovieCreateModal';
 import AdminMovieDetail from './components/AdminMovieDetail';
+import AdminNavBar from './components/AdminNavBar';
 
-export default function AdminMovies() {
+export default function AdminMovies({ inputValue }) {
+  const apiUrl = 'https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/';
+  const navigator = useNavigate();
+
   const [updateModalView, setUpdateModalView] = useState(false);
   const [deleteModalView, setDeleteModalView] = useState(false);
   const [createModalView, setCreateModalView] = useState(false);
   const [detailModalView, setDeatilModalView] = useState(false);
+  const [searchInput, setSearchInput] = useState('');
   const [seleteId, setSeletId] = useState(0);
   const [movies, setMovies] = useState([]);
+
+  const isSerchButton = async (e, searchInput) => {
+    e.preventDefault();
+    console.log(searchInput);
+    const title = searchInput;
+    await axios
+      .get(`${apiUrl}movies/serch?title=${title}`)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const modalSwitch = (e, value, setValue, id) => {
     e.preventDefault();
@@ -34,9 +52,6 @@ export default function AdminMovies() {
     });
     return movieIndex;
   };
-
-  const apiUrl = 'https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/';
-  const navigator = useNavigate();
 
   const fetchMovies = async () => {
     await axios
@@ -65,7 +80,14 @@ export default function AdminMovies() {
         </header>
         <section className='w-4/5 h-32 bg-white flex items-center'>
           <form className='w-full flex flex-col' action=''>
-            <input className='w-full border h-10 text-xl p-1' type='text' />
+            <input
+              className='w-full border h-10 text-xl p-1'
+              type='text'
+              value={searchInput}
+              onChange={(e) => {
+                inputValue(e, setSearchInput);
+              }}
+            />
             <div
               className={`${styles.contentFormBtnBox} flex flex-row justify-center items-center relative `}
             >
@@ -74,6 +96,9 @@ export default function AdminMovies() {
               >
                 <button
                   className={`${styles.contentFormSerchBtn} flex items-center justify-center`}
+                  onClick={(e) => {
+                    isSerchButton(e, searchInput);
+                  }}
                 >
                   <div>
                     <svg
@@ -119,6 +144,8 @@ export default function AdminMovies() {
             setUpdateModalView={setUpdateModalView}
             deleteModalView={deleteModalView}
             setDeleteModalView={setDeleteModalView}
+            detailModalView={detailModalView}
+            setDeatilModalView={setDeatilModalView}
           ></AdminMoviesTable>
         </section>
         {createModalView ? (
@@ -147,7 +174,10 @@ export default function AdminMovies() {
           ></AdminMovieDeleteModal>
         ) : null}
         {detailModalView ? (
-          <AdminMovieDetail movie={movies[updateText()]}></AdminMovieDetail>
+          <AdminMovieDetail
+            movie={movies[updateText()]}
+            setDeatilModalView={setDeatilModalView}
+          ></AdminMovieDetail>
         ) : null}
       </div>
     </div>

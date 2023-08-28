@@ -38,6 +38,7 @@ input:focus {
 }
 .FormItemFocus {
   border-bottom: 2px solid rgb(129, 107, 255);
+  transition: 0.5s;
 }
 .FormBtn {
   background-color: rgb(50, 50, 50);
@@ -48,6 +49,7 @@ input:focus {
 
 .FormBtnCompletion {
   background-color: rgb(129, 107, 255);
+  transition: 0.5s;
 }
 .FormBtnCompletion:hover {
   background-color: rgb(110, 88, 255);
@@ -71,8 +73,9 @@ input:focus {
   background-color: rgb(50, 50, 50);
   border: none;
   color: rgb(18, 18, 18);
-  cursor: ter;
-  padding: 12px 8px;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
 }
 .InputButton:hover {
   background-color: rgb(129, 107, 255);

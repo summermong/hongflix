@@ -1,7 +1,13 @@
 /** @format */
 
 import React, { useEffect, useState } from 'react';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import axios from 'axios';
 import Header from './home/Header';
 
@@ -27,11 +33,12 @@ import AdminSetting from './admin/AdminSetting';
 function App() {
   const url = `https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/`;
   const navigator = useNavigate();
+  const location = useLocation();
+
   const [isLogined, setIsLogined] = useState(false);
   const [isUserRoll, setIsUserRoll] = useState('');
   const [userInfo, setUserInfo] = useState({});
 
-  const location = useLocation();
   const ShowHeaderAndFooter = !(
     isUserRoll === 'admin' ||
     location.pathname === '/admin' ||
@@ -180,8 +187,20 @@ function App() {
                 />
               }
             ></Route>
-            <Route path='/admin' element={<AdminHome />}></Route>
-            <Route path='/admin/movies' element={<AdminMovies />}></Route>
+            <Route
+              path='/admin'
+              element={
+                isLogined && isUserRoll === 'admin' ? (
+                  <AdminHome />
+                ) : (
+                  <Navigate to='/admin/login' />
+                )
+              }
+            ></Route>
+            <Route
+              path='/admin/movies'
+              element={<AdminMovies inputValue={inputValue} />}
+            ></Route>
             <Route path='/admin/members' element={<AdminMembers />}></Route>
             <Route path='/admin/setting' element={<AdminSetting />}></Route>
             <Route

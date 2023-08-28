@@ -151,17 +151,32 @@ export default function Login({
                   }}
                 />
                 {isEmailFocused ? (
-                  <button
-                    className={`${styles.InputButton} flex items-center rounded-full font-black absolute top-0 right-0 `}
+                  <div
+                    className={`${styles.InputButton} flex items-center justify-center rounded-full font-black absolute top-0 right-0`}
                     onMouseDown={(e) => {
-                      inputClear(e, setEmail);
+                      inputClear(e, setPassword);
                     }}
                     onClick={(e) => {
                       e.preventDefault();
                     }}
                   >
-                    X
-                  </button>
+                    <div>
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        strokeWidth={1.5}
+                        stroke='currentColor'
+                        className='w-4 h-4'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          d='M6 18L18 6M6 6l12 12'
+                        />
+                      </svg>
+                    </div>
+                  </div>
                 ) : null}
               </div>
             </div>
@@ -190,8 +205,8 @@ export default function Login({
                   }}
                 />
                 {isPassWordFocused ? (
-                  <button
-                    className={`${styles.InputButton} flex items-center rounded-full font-black absolute top-0 right-0`}
+                  <div
+                    className={`${styles.InputButton} flex items-center justify-center rounded-full font-black absolute top-0 right-0`}
                     onMouseDown={(e) => {
                       inputClear(e, setPassword);
                     }}
@@ -199,13 +214,33 @@ export default function Login({
                       e.preventDefault();
                     }}
                   >
-                    X
-                  </button>
+                    <div>
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        strokeWidth={1.5}
+                        stroke='currentColor'
+                        className='w-4 h-4'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          d='M6 18L18 6M6 6l12 12'
+                        />
+                      </svg>
+                    </div>
+                  </div>
                 ) : null}
               </div>
             </div>
             <p className={`${styles.FormText} mt-2`}>
-              <Link to={'/signup'}>회원가입</Link>
+              <Link
+                className={`${styles.FormBtn} ${styles.FormBtnCompletion} flex items-center justify-cente w-full`}
+                to={'/signup'}
+              >
+                회원가입
+              </Link>
             </p>
             <div className='mb-10'>
               <button

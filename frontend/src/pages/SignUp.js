@@ -340,17 +340,32 @@ export default function SignUp({
                 )}
 
                 {isEmailFocused ? (
-                  <button
-                    className={`${styles.InputButton} flex items-center rounded-full font-black`}
+                  <div
+                    className={`${styles.InputButton} flex items-center justify-center rounded-full font-black absolute top-0 right-0`}
                     onMouseDown={(e) => {
-                      inputClear(e, setEmail);
+                      inputClear(e, setPassword);
                     }}
                     onClick={(e) => {
                       e.preventDefault();
                     }}
                   >
-                    X
-                  </button>
+                    <div>
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        strokeWidth={1.5}
+                        stroke='currentColor'
+                        className='w-4 h-4'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          d='M6 18L18 6M6 6l12 12'
+                        />
+                      </svg>
+                    </div>
+                  </div>
                 ) : null}
               </div>
             </div>
@@ -384,17 +399,32 @@ export default function SignUp({
                   }}
                 />
                 {isNickNameFocused ? (
-                  <button
-                    className={`${styles.InputButton} flex items-center rounded-full font-black`}
+                  <div
+                    className={`${styles.InputButton} flex items-center justify-center rounded-full font-black absolute top-0 right-0`}
                     onMouseDown={(e) => {
-                      inputClear(e, setNickName);
+                      inputClear(e, setPassword);
                     }}
                     onClick={(e) => {
                       e.preventDefault();
                     }}
                   >
-                    X
-                  </button>
+                    <div>
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        strokeWidth={1.5}
+                        stroke='currentColor'
+                        className='w-4 h-4'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          d='M6 18L18 6M6 6l12 12'
+                        />
+                      </svg>
+                    </div>
+                  </div>
                 ) : null}
               </div>
             </div>
@@ -424,8 +454,8 @@ export default function SignUp({
                   }}
                 />
                 {isPassWordFocused ? (
-                  <button
-                    className={`${styles.InputButton} flex items-center rounded-full font-black`}
+                  <div
+                    className={`${styles.InputButton} flex items-center justify-center rounded-full font-black absolute top-0 right-0`}
                     onMouseDown={(e) => {
                       inputClear(e, setPassword);
                     }}
@@ -433,8 +463,23 @@ export default function SignUp({
                       e.preventDefault();
                     }}
                   >
-                    X
-                  </button>
+                    <div>
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        strokeWidth={1.5}
+                        stroke='currentColor'
+                        className='w-4 h-4'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          d='M6 18L18 6M6 6l12 12'
+                        />
+                      </svg>
+                    </div>
+                  </div>
                 ) : null}
               </div>
             </div>
@@ -474,17 +519,32 @@ export default function SignUp({
                   }}
                 />
                 {isConfirmPassWordFocused ? (
-                  <button
-                    className={`${styles.InputButton} flex items-center rounded-full font-black`}
+                  <div
+                    className={`${styles.InputButton} flex items-center justify-center rounded-full font-black absolute top-0 right-0`}
                     onMouseDown={(e) => {
-                      inputClear(e, setConfirmPassword);
+                      inputClear(e, setPassword);
                     }}
                     onClick={(e) => {
                       e.preventDefault();
                     }}
                   >
-                    X
-                  </button>
+                    <div>
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        strokeWidth={1.5}
+                        stroke='currentColor'
+                        className='w-4 h-4'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          d='M6 18L18 6M6 6l12 12'
+                        />
+                      </svg>
+                    </div>
+                  </div>
                 ) : null}
               </div>
             </div>
@@ -515,17 +575,32 @@ export default function SignUp({
                   disabled={phoneNumberCheck}
                 />
                 {isPhoneNumberFocused ? (
-                  <button
-                    className={`${styles.InputButton} flex items-center rounded-full font-black`}
+                  <div
+                    className={`${styles.InputButton} flex items-center justify-center rounded-full font-black absolute top-0 right-0`}
                     onMouseDown={(e) => {
-                      inputClear(e, setPhoneNumber);
+                      inputClear(e, setPassword);
                     }}
                     onClick={(e) => {
                       e.preventDefault();
                     }}
                   >
-                    X
-                  </button>
+                    <div>
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        strokeWidth={1.5}
+                        stroke='currentColor'
+                        className='w-4 h-4'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          d='M6 18L18 6M6 6l12 12'
+                        />
+                      </svg>
+                    </div>
+                  </div>
                 ) : null}
                 {isPhoneNumberReg ? (
                   <button
@@ -568,17 +643,32 @@ export default function SignUp({
                     }}
                   />
                   {isSmsCodeFocused ? (
-                    <button
-                      className={`${styles.InputButton} flex items-center rounded-full font-black`}
+                    <div
+                      className={`${styles.InputButton} flex items-center justify-center rounded-full font-black absolute top-0 right-0`}
                       onMouseDown={(e) => {
-                        inputClear(e, setSmsCode);
+                        inputClear(e, setPassword);
                       }}
                       onClick={(e) => {
                         e.preventDefault();
                       }}
                     >
-                      X
-                    </button>
+                      <div>
+                        <svg
+                          xmlns='http://www.w3.org/2000/svg'
+                          fill='none'
+                          viewBox='0 0 24 24'
+                          strokeWidth={1.5}
+                          stroke='currentColor'
+                          className='w-4 h-4'
+                        >
+                          <path
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
+                            d='M6 18L18 6M6 6l12 12'
+                          />
+                        </svg>
+                      </div>
+                    </div>
                   ) : null}
 
                   <button
