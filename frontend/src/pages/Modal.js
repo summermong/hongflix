@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Modal = ({
+  modalId,
   modalImage,
   modalTitle,
   modalGenre,
@@ -11,20 +13,30 @@ const Modal = ({
 }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isSubscribed, setIsSubscribed] = useState(true);
+  const [movieData, setMovieData] = useState(null);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // 모달 열릴 때 해당 영화 정보를 가져오는 API 호출
+    axios
+      .get(
+        `https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies/${modalId}`
+      )
+      .then((response) => {
+        setMovieData(response);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }, [modalId]);
+
   const handleSubscribe = () => {
-    // 로그인도 하고 구독도 한 경우
     if (isLoggedIn && isSubscribed) {
-      navigate('/list');
-    }
-    // 로그인 안 한 경우
-    else if (!isLoggedIn) {
+      navigate(`/list/${modalId}`);
+    } else if (!isLoggedIn) {
       alert('로그인을 해주세요.');
       navigate('/login');
-    }
-    // 로그인은 했는데 구독은 안 한 경우
-    else if (isLoggedIn && !isSubscribed) {
+    } else if (isLoggedIn && !isSubscribed) {
       alert('구독 결제를 해주세요.');
       navigate('/mypage');
     }
@@ -49,12 +61,14 @@ const Modal = ({
             className="w-2/3 mx-auto my-5 sm:w-2/5 md:w-1/3 lg:w-2/3"
           />
         </div>
-        <div className="text-white p-3 text-xs justify-center sm:text-sm md:text-base lg:text-base text-center">
-          <div className="font-semibold">{modalTitle}</div>
-          <div className="">장르: {modalGenre}</div>
-          <div className="">공개일: {modalCreatedDate}</div>
-          <div className="py-4 w-full break-words">{modalExplanation}</div>
-        </div>
+        {movieData && (
+          <div className="text-white p-3 text-xs justify-center sm:text-sm md:text-base lg:text-base text-center">
+            <div className="font-semibold">{modalTitle}</div>
+            <div className="">장르: {modalGenre}</div>
+            <div className="">공개일: {modalCreatedDate}</div>
+            <div className="py-4 w-full break-words">{modalExplanation}</div>
+          </div>
+        )}
         <div className="p-3">
           <button
             className="bg-white text-indigo-950 rounded-sm mb-3 w-full font-bold py-1 text-sm md:text-base lg:text-xl"

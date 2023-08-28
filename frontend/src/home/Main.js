@@ -7,17 +7,18 @@ import axios from 'axios';
 
 const Main = () => {
   // 구독 여부 상태
-  const [isSubscribed, setIsSubscribed] = useState(true);
   const [modal, setModal] = useState(false);
   const [modalImage, setModalImage] = useState('');
   const [modalTitle, setModalTitle] = useState('');
   const [modalGenre, setModalGenre] = useState('');
   const [modalCreatedDate, setModalCreatedDate] = useState('');
   const [modalExplanation, setModalExplanation] = useState('');
+  const [modalId, setModalId] = useState('');
 
   // openModal 함수 정의
-  const openModal = (imageSrc, title, genre, createdDate, explanation) => {
+  const openModal = (id, imageSrc, title, genre, createdDate, explanation) => {
     setModal(true);
+    setModalId(id);
     setModalImage(imageSrc);
     setModalTitle(title);
     setModalGenre(genre);
@@ -32,14 +33,14 @@ const Main = () => {
   };
 
   // 캐러셀 이미지 크기 & 타이틀
-  const Slide = ({ imageSrc, title, genre, createdDate, explanation }) => (
+  const Slide = ({ id, imageSrc, title, genre, createdDate, explanation }) => (
     <div className="relative mx-1 mb-1">
       <img
         className="object-cover"
         src={imageSrc}
         alt="carousel"
         onClick={() =>
-          openModal(imageSrc, title, genre, createdDate, explanation)
+          openModal(id, imageSrc, title, genre, createdDate, explanation)
         }
       />
       <div className="py-2 text-center">{title}</div>
@@ -100,6 +101,7 @@ const Main = () => {
       )
       .then((response) => {
         const slideData = response.data.map((item) => ({
+          id: item.id,
           imageSrc: item.accessKey,
           title: item.title,
           genre: item.genre,
@@ -125,6 +127,7 @@ const Main = () => {
       )
       .then((response) => {
         const slideData = response.data.map((item) => ({
+          id: item.id,
           imageSrc: item.accessKey,
           title: item.title,
           genre: item.genre,
@@ -155,6 +158,7 @@ const Main = () => {
       )
       .then((response) => {
         const slideData = response.data.map((item) => ({
+          id: item.id,
           imageSrc: item.accessKey,
           title: item.title,
           genre: item.genre,
@@ -183,6 +187,7 @@ const Main = () => {
       )
       .then((response) => {
         const slideData = response.data.map((item) => ({
+          id: item.id,
           imageSrc: item.accessKey,
           title: item.title,
           genre: item.genre,
@@ -211,9 +216,10 @@ const Main = () => {
           최근 시청한 콘텐츠(수정 필요)
         </div>
         <Slider {...settings}>
-          {slide1.map((slide, index) => (
-            <div key={index}>
+          {slide1.map((slide) => (
+            <div key={slide.id}>
               <Slide
+                id={slide.id}
                 imageSrc={slide.imageSrc}
                 title={slide.title}
                 genre={slide.genre}
@@ -230,9 +236,10 @@ const Main = () => {
         </div>
         <div>
           <Slider {...settings}>
-            {slide2.map((slide, index) => (
-              <div key={index}>
+            {slide2.map((slide) => (
+              <div key={slide.id}>
                 <Slide
+                  id={slide.id}
                   imageSrc={slide.imageSrc}
                   title={slide.title}
                   genre={slide.genre}
@@ -250,9 +257,10 @@ const Main = () => {
         </div>
         <div>
           <Slider {...settings}>
-            {slide3.map((slide, index) => (
-              <div key={index}>
+            {slide3.map((slide) => (
+              <div key={slide.id}>
                 <Slide
+                  id={slide.id}
                   imageSrc={slide.imageSrc}
                   title={slide.title}
                   genre={slide.genre}
@@ -270,9 +278,10 @@ const Main = () => {
         </div>
         <div>
           <Slider {...settings}>
-            {slide4.map((slide, index) => (
-              <div key={index}>
+            {slide4.map((slide) => (
+              <div key={slide.id}>
                 <Slide
+                  id={slide.id}
                   imageSrc={slide.imageSrc}
                   title={slide.title}
                   genre={slide.genre}
@@ -286,6 +295,7 @@ const Main = () => {
       </div>
       {modal && (
         <Modal
+          modalId={modalId}
           modalImage={modalImage}
           modalTitle={modalTitle}
           modalGenre={modalGenre}

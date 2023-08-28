@@ -128,19 +128,19 @@ function App() {
 
   return (
     <div>
-      <div className='flex flex-col h-screen'>
-        <div className='flex-1'>
+      <div className="flex flex-col h-screen">
+        <div className="flex-1">
           {ShowHeaderAndFooter ? <Header isLoggedIn={isLogined} /> : null}
           <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/category' element={<Category />} />
-            <Route path='/search' element={<Search />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/category" element={<Category />} />
+            <Route path="/search" element={<Search />} />
             {isLogined ? (
-              <Route path='/mypage' element={<MyPage userInfo={userInfo} />} />
+              <Route path="/mypage" element={<MyPage userInfo={userInfo} />} />
             ) : null}
-            <Route path='/list' element={<List />} />
+            <Route path="/list/:modalId" element={<List />} />
             <Route
-              path='/login'
+              path="/login"
               element={
                 <Login
                   inputValue={inputValue}
@@ -152,7 +152,7 @@ function App() {
               }
             ></Route>
             <Route
-              path='/signup'
+              path="/signup"
               element={
                 <SignUp
                   inputValue={inputValue}
@@ -164,7 +164,7 @@ function App() {
               }
             ></Route>
             <Route
-              path='/admin/login'
+              path="/admin/login"
               element={
                 <LoginForAdmin
                   inputValue={inputValue}
@@ -176,7 +176,7 @@ function App() {
               }
             ></Route>
             <Route
-              path='/admin/signup'
+              path="/admin/signup"
               element={
                 <SignUpForAdmin
                   inputValue={inputValue}
@@ -188,23 +188,23 @@ function App() {
               }
             ></Route>
             <Route
-              path='/admin'
+              path="/admin"
               element={
                 isLogined && isUserRoll === 'admin' ? (
                   <AdminHome />
                 ) : (
-                  <Navigate to='/admin/login' />
+                  <Navigate to="/admin/login" />
                 )
               }
             ></Route>
             <Route
-              path='/admin/movies'
+              path="/admin/movies"
               element={<AdminMovies inputValue={inputValue} />}
             ></Route>
-            <Route path='/admin/members' element={<AdminMembers />}></Route>
-            <Route path='/admin/setting' element={<AdminSetting />}></Route>
+            <Route path="/admin/members" element={<AdminMembers />}></Route>
+            <Route path="/admin/setting" element={<AdminSetting />}></Route>
             <Route
-              path='/admin/movies/contents/:movieTitle/:movieId'
+              path="/admin/movies/contents/:movieTitle/:movieId"
               element={<AdminContents />}
             ></Route>
           </Routes>
