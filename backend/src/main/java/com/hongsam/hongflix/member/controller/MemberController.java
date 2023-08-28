@@ -48,8 +48,8 @@ public class MemberController {
         session.setAttribute("loginMember", loginMember);
         log.info("일반 유저 세션 생성");
 
-//        session.getAttributeNames().asIterator()
-//                .forEachRemaining(name -> log.info("session name={}, value={}", name, session.getAttribute(name)));
+        session.getAttributeNames().asIterator()
+                .forEachRemaining(name -> log.info("session name={}, value={}", name, session.getAttribute(name)));
 ////        log.info("sessionId={}", session.getId());
 //        LoginUserResponse test = (LoginUserResponse) session.getAttribute("loginMember");
 //        log.info("memberId={}",test.getRoll());
