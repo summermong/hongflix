@@ -21,8 +21,9 @@ public class homeController {
         String requestURI = request.getRequestURI();
         log.info("인증 체크 실행 {}", requestURI);
 
+        HttpSession session = request.getSession(false);
         IsLoginResponse isLoginResponse = new IsLoginResponse();
-        if (loginUserResponse == null) {
+        if (session == null || loginUserResponse == null) {
             log.info("미인증 사용자 접근");
             isLoginResponse.setLogin(false);
             isLoginResponse.setLoginUserResponse(null);
