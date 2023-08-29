@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import {
+  BrowserRouter,
   Navigate,
   Route,
   Routes,
@@ -165,104 +166,98 @@ function App() {
   axios.defaults.withCredentials = true;
 
   return (
-    <div>
-      <div className='flex flex-col h-screen'>
-        <div className='flex-1'>
-          {ShowHeaderAndFooter ? (
-            <Header isLoggedIn={isLogined} isLogout={isLogout} />
-          ) : null}
-          <Routes>
-            <Route
-              path='/'
-              element={<Home userInfo={userInfo} isLogined={isLogined} />}
-            />
-            <Route path='/category' element={<Category />} />
-            <Route path='/search' element={<Search />} />
-            {isLogined ? (
-              <Route
-                path='/mypage'
-                element={
-                  <MyPage userInfo={userInfo} fetchLogined={fetchLogined} />
-                }
-              />
-            ) : null}
-            <Route
-              path='/list/:modalId'
-              element={<List userInfo={userInfo} isLogined={isLogined} />}
-            />
+    <div className="flex flex-col h-screen">
+      <div className="flex-1">
+        {ShowHeaderAndFooter ? (
+          <Header isLoggedIn={isLogined} isLogout={isLogout} />
+        ) : null}
+        <Routes>
+          <Route
+            path="/"
+            element={<Home userInfo={userInfo} isLogined={isLogined} />}
+          />
+          <Route path="/category" element={<Category />} />
+          <Route path="/search" element={<Search />} />
+          <Route
+            path="/mypage"
+            element={<MyPage userInfo={userInfo} fetchLogined={fetchLogined} />}
+          />
+          <Route
+            path="/list/:modalId"
+            element={<List userInfo={userInfo} isLogined={isLogined} />}
+          />
 
-            <Route
-              path='/login'
-              element={
-                <Login
-                  inputValue={inputValue}
-                  handleFocus={handleFocus}
-                  inputClear={inputClear}
-                  isLogin={isLogin}
-                  url={url}
-                />
-              }
-            ></Route>
-            <Route
-              path='/signup'
-              element={
-                <SignUp
-                  inputValue={inputValue}
-                  handleFocus={handleFocus}
-                  inputClear={inputClear}
-                  isSignUp={isSignUp}
-                  url={url}
-                />
-              }
-            ></Route>
-            <Route
-              path='/admin/login'
-              element={
-                <LoginForAdmin
-                  inputValue={inputValue}
-                  handleFocus={handleFocus}
-                  inputClear={inputClear}
-                  isLogin={isLogin}
-                  url={url}
-                />
-              }
-            ></Route>
-            <Route
-              path='/admin/signup'
-              element={
-                <SignUpForAdmin
-                  inputValue={inputValue}
-                  handleFocus={handleFocus}
-                  inputClear={inputClear}
-                  isSignUp={isSignUp}
-                  url={url}
-                />
-              }
-            ></Route>
-            <Route
-              path='/admin'
-              element={
-                isLogined && isUserRoll === 'admin' ? (
-                  <AdminHome />
-                ) : (
-                  <Navigate to='/admin/login' />
-                )
-              }
-            ></Route>
-            <Route
-              path='/admin/movies'
-              element={<AdminMovies inputValue={inputValue} />}
-            ></Route>
-            <Route path='/admin/members' element={<AdminMembers />}></Route>
-            <Route path='/admin/setting' element={<AdminSetting />}></Route>
-            <Route
-              path='/admin/movies/contents/:movieTitle/:movieId'
-              element={<AdminContents />}
-            ></Route>
-          </Routes>
-        </div>
-        {ShowHeaderAndFooter ? <Footer /> : null}
+          <Route
+            path="/login"
+            element={
+              <Login
+                inputValue={inputValue}
+                handleFocus={handleFocus}
+                inputClear={inputClear}
+                isLogin={isLogin}
+                url={url}
+              />
+            }
+          ></Route>
+          <Route
+            path="/signup"
+            element={
+              <SignUp
+                inputValue={inputValue}
+                handleFocus={handleFocus}
+                inputClear={inputClear}
+                isSignUp={isSignUp}
+                url={url}
+              />
+            }
+          ></Route>
+          <Route
+            path="/admin/login"
+            element={
+              <LoginForAdmin
+                inputValue={inputValue}
+                handleFocus={handleFocus}
+                inputClear={inputClear}
+                isLogin={isLogin}
+                url={url}
+              />
+            }
+          ></Route>
+          <Route
+            path="/admin/signup"
+            element={
+              <SignUpForAdmin
+                inputValue={inputValue}
+                handleFocus={handleFocus}
+                inputClear={inputClear}
+                isSignUp={isSignUp}
+                url={url}
+              />
+            }
+          ></Route>
+          <Route
+            path="/admin"
+            element={
+              isLogined && isUserRoll === 'admin' ? (
+                <AdminHome />
+              ) : (
+                <Navigate to="/admin/login" />
+              )
+            }
+          ></Route>
+          <Route
+            path="/admin/movies"
+            element={<AdminMovies inputValue={inputValue} />}
+          ></Route>
+          <Route path="/admin/members" element={<AdminMembers />}></Route>
+          <Route path="/admin/setting" element={<AdminSetting />}></Route>
+          <Route
+            path="/admin/movies/contents/:movieTitle/:movieId"
+            element={<AdminContents />}
+          ></Route>
+        </Routes>
       </div>
+      {ShowHeaderAndFooter ? <Footer /> : null}
     </div>
   );
 }

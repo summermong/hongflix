@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import videojs from 'video.js';
 
-const List = ({ userInfo, isLogined }) => {
+const List = ({ isLogined }) => {
   const { modalId } = useParams();
   const [data, setData] = useState([]);
-
+  const [movieData, setMovieData] = useState(null); // 추가: 영화 데이터 상태
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,6 +17,34 @@ const List = ({ userInfo, isLogined }) => {
       .then((response) => {
         setData(response.data);
         console.log(response.data);
+      })
+      .catch((error) => {
+        console.error('데이터 가져오기 오류:', error);
+      });
+
+    // 구독 정보 확인 및 영화 데이터 가져오기
+    axios({
+      method: 'get',
+      url: 'https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/api/home',
+      withCredentials: true,
+    })
+      .then((response) => {
+        let login = response.data.login;
+        if (login) {
+          let subscribe = response.data.loginUserResponse.available;
+          if (subscribe === 1) {
+            axios
+              .get(
+                `https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies/${modalId}`
+              )
+              .then((response) => {
+                setMovieData(response.data);
+              })
+              .catch((error) => {
+                console.error('영화 데이터 가져오기 오류:', error);
+              });
+          }
+        }
       })
       .catch((error) => {
         console.error('데이터 가져오기 오류:', error);
@@ -50,28 +79,20 @@ const List = ({ userInfo, isLogined }) => {
           var player = videojs('my-video', {
             techOrder: ['html5']
           });
-          
         </script>`;
     }
   };
 
-  const watchContent = ({ item }) => {
+  const watchContent = (item) => {
     if (!isLogined) {
       alert('로그인을 해주세요.');
       navigate('/login');
-    } else if (
-      isLogined &&
-      userInfo['period'] !== 0 &&
-      userInfo['available'] !== 0
-    ) {
+    } else if (movieData) {
+      // 수정: 영화 데이터가 있는 경우에만 실행
+      openVideoWindow(item.accessStreamingUrl);
+    } else {
       alert('구독 결제를 해주세요.');
       navigate('/mypage');
-    } else if (
-      isLogined &&
-      userInfo['period'] === 0 &&
-      userInfo['available'] === 0
-    ) {
-      openVideoWindow(item.accessStreamingUrl);
     }
   };
 
@@ -88,7 +109,7 @@ const List = ({ userInfo, isLogined }) => {
                 src={item.accessUrl}
                 alt="회차 이미지"
                 className="w-full h-auto cursor-pointer"
-                onClick={() => watchContent({ item })}
+                onClick={() => watchContent(item)}
               />
             </div>
             <div>

@@ -11,35 +11,25 @@ const Modal = ({
   modalExplanation,
   closeModal,
 }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [isSubscribed, setIsSubscribed] = useState(true);
   const [movieData, setMovieData] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // 모달 열릴 때 해당 영화 정보를 가져오는 API 호출
     axios
       .get(
         `https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies/${modalId}`
       )
       .then((response) => {
-        setMovieData(response);
+        setMovieData(response.data); // 수정: response.data로 변경
       })
       .catch((error) => {
         console.error('Error:', error);
       });
   }, [modalId]);
 
-  const handleSubscribe = () => {
-    if (isLoggedIn && isSubscribed) {
-      navigate(`/list/${modalId}`);
-    } else if (!isLoggedIn) {
-      alert('로그인을 해주세요.');
-      navigate('/login');
-    } else if (isLoggedIn && !isSubscribed) {
-      alert('구독 결제를 해주세요.');
-      navigate('/mypage');
-    }
+  // 수정: 버튼의 onClick에는 함수를 전달
+  const handleButtonClick = () => {
+    navigate(`/list/${modalId}`);
   };
 
   return (
@@ -72,7 +62,7 @@ const Modal = ({
         <div className="p-3">
           <button
             className="bg-white text-indigo-950 rounded-sm mb-3 w-full font-bold py-1 text-sm md:text-base lg:text-xl"
-            onClick={handleSubscribe}
+            onClick={handleButtonClick} // 수정: 버튼 클릭 핸들러 사용
           >
             지금 바로 보러 가기
           </button>
