@@ -1,48 +1,42 @@
-import React, { useEffect, useState } from "react";
-import AdminNavBar from "./AdminNavBar";
-import styles from "./Admin.module.css";
-import axios from "axios";
-import AdminMoviesTable from "./components/AdminMoviesTable";
-import AdminMovieCreateModal from "./components/AdminMovieCreateModal";
-import { useNavigate } from "react-router-dom";
-import AdminMovieUpdateModal from "./components/AdminMovieUpdateModal";
+/** @format */
 
-export default function AdminMovies() {
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styles from './Admin.module.css';
+import axios from 'axios';
+
+import AdminMovieUpdateModal from './components/AdminMovieUpdateModal';
+import AdminMovieDeleteModal from './components/AdminMovieDeleteModal';
+import AdminMoviesTable from './components/AdminMoviesTable';
+import AdminMovieCreateModal from './components/AdminMovieCreateModal';
+import AdminMovieDetail from './components/AdminMovieDetail';
+import AdminNavBar from './components/AdminNavBar';
+
+export default function AdminMovies({ inputValue }) {
+  const apiUrl = 'https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/';
+  const navigator = useNavigate();
+
   const [updateModalView, setUpdateModalView] = useState(false);
   const [deleteModalView, setDeleteModalView] = useState(false);
   const [createModalView, setCreateModalView] = useState(false);
-  const [seleteId, setSeletId] = useState(null);
+  const [detailModalView, setDeatilModalView] = useState(false);
+  const [searchInput, setSearchInput] = useState('');
+  const [seleteId, setSeletId] = useState(0);
+  const [movies, setMovies] = useState([]);
 
-  const [movies, setMovies] = useState([
-    {
-      id: 0,
-      title: "제목",
-      subTitle: "영화부제목",
-      content: "내용",
-      genre: "장르",
-    },
-    {
-      id: 1,
-      title: "제목2",
-      subTitle: "영화부제목",
-      content: "내용",
-      genre: "장르",
-    },
-    {
-      id: 3,
-      title: "제목3",
-      subTitle: "영화부제목",
-      content: "내용",
-      genre: "장르",
-    },
-    {
-      id: 11,
-      title: "제목11",
-      subTitle: "영화부제목",
-      content: "내용",
-      genre: "장르",
-    },
-  ]);
+  const isSerchButton = async (e, searchInput) => {
+    e.preventDefault();
+    console.log(searchInput);
+    const title = searchInput;
+    await axios
+      .get(`${apiUrl}movies/serch?title=${title}`)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const modalSwitch = (e, value, setValue, id) => {
     e.preventDefault();
@@ -54,41 +48,46 @@ export default function AdminMovies() {
 
   const updateText = () => {
     const movieIndex = movies.findIndex((el) => {
-      return el["id"] == seleteId;
+      return el['id'] == seleteId;
     });
     return movieIndex;
   };
-  console.log(updateText());
 
-  const apiUrl = "http://localhost:8080/";
-  const navigator = useNavigate();
+  const fetchMovies = async () => {
+    await axios
+      .get(`${apiUrl}/movies`)
+      .then((res) => {
+        console.log(res.data);
+        setMovies(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-  // const fetchMovies = async () => {
-  //   await axios
-  //     .get(`${apiUrl}/movies`)
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       setMovies(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
-  // useEffect(() => {
-  //   fetchMovies();
-  // }, []);
+  useEffect(() => {
+    fetchMovies();
+  }, []);
 
   return (
-    <div className={`w-screen h-screen flex flex-col md:flex-row`}>
+    <div
+      className={`w-screen h-full flex flex-col md:flex-row font-['Pretendard-Bold'] overscroll-y-auto  mb-10`}
+    >
       <AdminNavBar></AdminNavBar>
-      <div className="flex flex-col items-center w-full h-5/6 md:h-full md:w-3/4">
+      <div className='flex flex-col items-center w-full h-5/6 md:h-full md:w-3/4'>
         <header className={`w-4/5 h-28 bg-white flex items-center`}>
-          <h1 className=" text-3xl">영화 목록</h1>
+          <h1 className=' text-3xl'>영화 목록</h1>
         </header>
-        <section className="w-4/5 h-32 bg-white flex items-center">
-          <form className="w-full flex flex-col" action="">
-            <input className="w-full border h-10 text-xl p-1" type="text" />
+        <section className='w-4/5 h-32 bg-white flex items-center'>
+          <form className='w-full flex flex-col' action=''>
+            <input
+              className='w-full border h-10 text-xl p-1'
+              type='text'
+              value={searchInput}
+              onChange={(e) => {
+                inputValue(e, setSearchInput);
+              }}
+            />
             <div
               className={`${styles.contentFormBtnBox} flex flex-row justify-center items-center relative `}
             >
@@ -97,22 +96,25 @@ export default function AdminMovies() {
               >
                 <button
                   className={`${styles.contentFormSerchBtn} flex items-center justify-center`}
+                  onClick={(e) => {
+                    isSerchButton(e, searchInput);
+                  }}
                 >
                   <div>
                     <svg
-                      className="h-4 w-4 text-black"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      strokeWidth="2"
-                      stroke="currentColor"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                      className='h-4 w-4 text-black'
+                      width='24'
+                      height='24'
+                      viewBox='0 0 24 24'
+                      strokeWidth='2'
+                      stroke='currentColor'
+                      fill='none'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
                     >
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <circle cx="10" cy="10" r="7" />
-                      <line x1="21" y1="21" x2="15" y2="15" />
+                      <path stroke='none' d='M0 0h24v24H0z' />
+                      <circle cx='10' cy='10' r='7' />
+                      <line x1='21' y1='21' x2='15' y2='15' />
                     </svg>
                   </div>
                   검색
@@ -133,18 +135,24 @@ export default function AdminMovies() {
           </form>
         </section>
         <section className={`border w-4/5 rounded-md`}>
-          <h1 className="text-3xl md:mt-10 md:mb-10 p-3">{movies.length}건</h1>
+          <h1 className='text-3xl md:mt-10 md:mb-10 p-3'>{movies.length}건</h1>
           <AdminMoviesTable
             movies={movies}
             navigator={navigator}
             modalSwitch={modalSwitch}
             updateModalView={updateModalView}
             setUpdateModalView={setUpdateModalView}
+            deleteModalView={deleteModalView}
+            setDeleteModalView={setDeleteModalView}
+            detailModalView={detailModalView}
+            setDeatilModalView={setDeatilModalView}
           ></AdminMoviesTable>
         </section>
         {createModalView ? (
           <AdminMovieCreateModal
             setCreateModalView={setCreateModalView}
+            fetchMovies={fetchMovies}
+            movies={movies}
             apiUrl={apiUrl}
           ></AdminMovieCreateModal>
         ) : null}
@@ -152,8 +160,24 @@ export default function AdminMovies() {
           <AdminMovieUpdateModal
             setUpdateModalView={setUpdateModalView}
             movie={movies[updateText()]}
+            movieIndex={updateText()}
+            fetchMovies={fetchMovies}
             apiUrl={apiUrl}
           ></AdminMovieUpdateModal>
+        ) : null}
+        {deleteModalView ? (
+          <AdminMovieDeleteModal
+            setDeleteModalView={setDeleteModalView}
+            seleteId={seleteId}
+            fetchMovies={fetchMovies}
+            apiUrl={apiUrl}
+          ></AdminMovieDeleteModal>
+        ) : null}
+        {detailModalView ? (
+          <AdminMovieDetail
+            movie={movies[updateText()]}
+            setDeatilModalView={setDeatilModalView}
+          ></AdminMovieDetail>
         ) : null}
       </div>
     </div>

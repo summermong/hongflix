@@ -1,4 +1,4 @@
-import styles from "./Admin.module.css";
+import styles from "../Admin.module.css";
 
 import { Link, useLocation } from "react-router-dom";
 
@@ -7,7 +7,7 @@ export default function AdminLeftBar() {
 
   return (
     <div
-      className={`${styles.navBarBackground} md:w-1/4 md:h-full w-screen h-auto pb-5 flex justify-center md:block`}
+      className={`${styles.navBarBackground} md:w-1/4 md:h-full w-screen h-auto pb-5 flex justify-center md:block font-['Pretendard-Bold']`}
     >
       <nav
         className={`${styles.navBarContainer} flex md:flex-col w-full items-center justify-center gap-3 ml-3 md:ml-0`}
@@ -15,8 +15,18 @@ export default function AdminLeftBar() {
         <div
           className={`${styles.navBarProfileContainer} flex justify-center md:justify-start w-2/6 h-full md:w-5/6 gap-3`}
         >
-          <div className={`${styles.navProfileImg} `}>
-            <img className={`bg-black w-16 h-16 rounded-xl`} src="" alt="" />
+          <div
+            className={`${styles.navProfileImg} bg-black w-16 h-16 rounded-xl flex items-center`}
+          >
+            <svg
+              className="w-full h-4/6 text-gray-800 dark:text-white"
+              ariaHidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 14 18"
+            >
+              <path d="M7 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm2 1H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
+            </svg>
           </div>
           <div className={`${styles.navProfileText} mt-5 hidden md:block`}>
             <p className={`${styles.navProfileItem} md:pt-1`}>Administrator</p>
@@ -74,7 +84,10 @@ export default function AdminLeftBar() {
             <Link
               to={"/admin/movies"}
               className={`${styles.navItem} ${
-                location.pathname === "/admin/movies" ? styles.navItemCur : ""
+                location.pathname === "/admin/movies" ||
+                location.pathname === "/admin/movies/contents/"
+                  ? styles.navItemCur
+                  : ""
               } flex flex-col md:flex-row items-center pt-3 pb-3 pl-1`}
             >
               <div className={`md:mr-5`}>
