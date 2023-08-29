@@ -29,7 +29,7 @@ public class SubscribeController {
     }
 
     @PostMapping
-    public String update(@SessionAttribute(required = false) LoginUserResponse loginUserResponse, @RequestBody SubscribeUpdateDto updateDto) {
+    public String update(@SessionAttribute(value = "loginMember", required = false) LoginUserResponse loginUserResponse, @RequestBody SubscribeUpdateDto updateDto) {
         if(loginUserResponse == null) {
             log.info("세션이 비워져있습니다.");
         } else {
