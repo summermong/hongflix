@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/subscribe")
 @RequiredArgsConstructor
+@Slf4j
 public class SubscribeController {
 
     private final SubscribeService subscribeService;
@@ -28,8 +29,12 @@ public class SubscribeController {
 
     @PostMapping
     public String update(@SessionAttribute(required = false) LoginUserResponse loginUserResponse, @RequestBody SubscribeUpdateDto updateDto) {
+        if(loginUserResponse == null) {
+            log.info("세션이 비워져있습니다.");
+        } else {
+            log.info("세션은 문제 없습니다.");
+        }
         subscribeService.update(loginUserResponse.getMemberId(), updateDto);
-
         loginUserResponse.setAvailable(updateDto.getAvailable());
         loginUserResponse.setPeriod(updateDto.getPeriod());
 
