@@ -35,7 +35,8 @@ export default function Login({
     emailReg.test(email) && passwordReg.test(password)
       ? setIsButtonActive(true)
       : setIsButtonActive(false);
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[email,password]);
   return (
     <>
       <div className='sc-hYbzA-d iHTwyS w-full fixed flex flex-col gap-5 bg-black'>
