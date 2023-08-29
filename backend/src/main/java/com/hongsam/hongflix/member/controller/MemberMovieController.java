@@ -21,10 +21,11 @@ public class MemberMovieController {
     @GetMapping("/latest")
     public List<Movie> findLatestWatchMovies(@SessionAttribute(value = "loginMember", required = false) LoginUserResponse loginUserResponse) throws Exception {
 
-        if (loginUserResponse.getAvailable() == 0) {
-            throw new Exception("구독 안 한 사용자입니다.");
-        } else {
-            return memberMovieService.findLatestWatchMovies(loginUserResponse.getMemberId());
-        }
+//        if (loginUserResponse.getAvailable() == 0) {
+//            throw new Exception("구독 안 한 사용자입니다.");
+//        } else {
+//            return memberMovieService.findLatestWatchMovies(loginUserResponse.getMemberId());
+//        }
+        return memberMovieService.findLatestWatchMovies(loginUserResponse.getMemberId());
     }
 }
