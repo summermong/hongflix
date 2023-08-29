@@ -3,53 +3,48 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import videojs from 'video.js';
 
-const List = ({ isLogined }) => {
+const List = () => {
   const { modalId } = useParams();
   const [data, setData] = useState([]);
-  const [movieData, setMovieData] = useState(null); // 추가: 영화 데이터 상태
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(
-        `https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/contents/${modalId}`
-      )
-      .then((response) => {
-        setData(response.data);
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error('데이터 가져오기 오류:', error);
-      });
-
-    // 구독 정보 확인 및 영화 데이터 가져오기
-    axios({
-      method: 'get',
-      url: 'https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/api/home',
-      withCredentials: true,
-    })
-      .then((response) => {
-        let login = response.data.login;
-        if (login) {
-          let subscribe = response.data.loginUserResponse.available;
-          if (subscribe === 1) {
-            axios
-              .get(
-                `https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies/${modalId}`
-              )
-              .then((response) => {
-                setMovieData(response.data);
-              })
-              .catch((error) => {
-                console.error('영화 데이터 가져오기 오류:', error);
-              });
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          'https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/api/home',
+          {
+            withCredentials: true,
           }
+        );
+        const login = response.data.login;
+        if (login) {
+          const subscribe = response.data.loginUserResponse.available;
+          if (subscribe === 1) {
+            const contentResponse = await axios.get(
+              `https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/contents/${modalId}`
+            );
+            if (contentResponse.data.length === 0) {
+              alert('아직 등록된 회차가 없어요🥲');
+              navigate(-1);
+            } else {
+              setData(contentResponse.data);
+            }
+          } else {
+            alert('구독을 해주세요.');
+            navigate('/mypage');
+          }
+        } else {
+          alert('로그인을 해주세요.');
+          navigate('/login');
         }
-      })
-      .catch((error) => {
-        console.error('데이터 가져오기 오류:', error);
-      });
-  }, [modalId]);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, [modalId, navigate]);
 
   const openVideoWindow = (videoUrl) => {
     const newWindow = window.open('', '_blank');
@@ -73,26 +68,13 @@ const List = ({ isLogined }) => {
           }
         </style>
         <video id="my-video" class="video-js vjs-default-skin" controls>
-          <source src="${videoUrl}" type="application/x-mpegURL">
+          <source src="${videoUrl}" type="vnd.apple.mpegURL">
         </video>
         <script>
           var player = videojs('my-video', {
             techOrder: ['html5']
           });
         </script>`;
-    }
-  };
-
-  const watchContent = (item) => {
-    if (!isLogined) {
-      alert('로그인을 해주세요.');
-      navigate('/login');
-    } else if (movieData) {
-      // 수정: 영화 데이터가 있는 경우에만 실행
-      openVideoWindow(item.accessStreamingUrl);
-    } else {
-      alert('구독 결제를 해주세요.');
-      navigate('/mypage');
     }
   };
 
@@ -109,7 +91,7 @@ const List = ({ isLogined }) => {
                 src={item.accessUrl}
                 alt="회차 이미지"
                 className="w-full h-auto cursor-pointer"
-                onClick={() => watchContent(item)}
+                onClick={() => openVideoWindow(item.accessStreamingUrl)}
               />
             </div>
             <div>

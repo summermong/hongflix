@@ -182,10 +182,7 @@ function App() {
             path="/mypage"
             element={<MyPage userInfo={userInfo} fetchLogined={fetchLogined} />}
           />
-          <Route
-            path="/list/:modalId"
-            element={<List userInfo={userInfo} isLogined={isLogined} />}
-          />
+          <Route path="/list/:modalId" element={<List />} />
 
           <Route
             path="/login"
