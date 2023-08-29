@@ -156,6 +156,7 @@ export default function SignUp({
   useEffect(() => {
     isValidEmail();
     isValidPassword();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     isEmailFocused,
     isEmailSameCheck,
@@ -173,12 +174,31 @@ export default function SignUp({
     if (!email) {
       setIsEmailWarringTextView(false);
     }
-  });
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+
+  },[
+    isEmailFocused,
+    isEmailSameCheck,
+    isPassWordFocused,
+    confirmPassword,
+    isPassWordFocused,
+    isConfirmPassWordFocused,
+    isNickNameFocused,
+  ]);
   useEffect(() => {
     emailCheck && passwordCheck && nickName && phoneNumberCheck
       ? setIsButtonActive(true)
       : setIsButtonActive(false);
-  });
+          // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[
+    isEmailFocused,
+    isEmailSameCheck,
+    isPassWordFocused,
+    confirmPassword,
+    isPassWordFocused,
+    isConfirmPassWordFocused,
+    isNickNameFocused,
+  ]);
   useEffect(() => {
     if (phoneNumber.length > 12) {
       setIsPhoneNumberReg(true);
@@ -187,6 +207,7 @@ export default function SignUp({
       setIsSmsCodeCheck(false);
     }
     console.log('phoneReg : ', isPhoneNumberReg);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phoneNumber]);
 
   // 인증번호 3분 타이머
@@ -212,6 +233,7 @@ export default function SignUp({
         clearInterval(timer);
       }
     };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [seconds, resSmsCode]);
 
   return (
