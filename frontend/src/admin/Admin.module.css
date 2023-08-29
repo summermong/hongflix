@@ -1,6 +1,9 @@
+/** @format */
+
 a {
   text-decoration: none;
 }
+
 .navBarBackground {
   background-color: #eeeeee;
   min-width: 240px;
@@ -52,7 +55,7 @@ a {
   right: 0;
 }
 .modalContainer {
-  background-color: white;
+  background-color: #efefef;
   top: 20%;
   min-height: 600px;
 }
