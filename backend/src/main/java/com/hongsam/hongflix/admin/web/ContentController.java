@@ -30,7 +30,7 @@ public class ContentController {
     private final MemberMovieService memberMovieService;
 
     @GetMapping("/{movieId}")
-    public List<ContentCreateResDto> findAllByMovieId(@PathVariable Long movieId, @SessionAttribute(required = false) LoginUserResponse loginUserResponse) throws Exception {
+    public List<ContentCreateResDto> findAllByMovieId(@PathVariable Long movieId, @SessionAttribute(value = "loginMember", required = false) LoginUserResponse loginUserResponse) throws Exception {
 
 //        if (loginUserResponse.getAvailable() == 0) {
 //            throw new Exception("구독 안 한 사용자입니다.");
