@@ -19,7 +19,7 @@ public class MemberMovieController {
     private final MemberMovieService memberMovieService;
 
     @GetMapping("/latest")
-    public List<Movie> findLatestWatchMovies(@SessionAttribute(required = false) LoginUserResponse loginUserResponse) throws Exception {
+    public List<Movie> findLatestWatchMovies(@SessionAttribute(value = "loginMember", required = false) LoginUserResponse loginUserResponse) throws Exception {
 
         if (loginUserResponse.getAvailable() == 0) {
             throw new Exception("구독 안 한 사용자입니다.");
