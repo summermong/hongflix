@@ -30,7 +30,9 @@ export default function LoginForAdmin({
 
   useEffect(() => {
     email && password ? setIsButtonActive(true) : setIsButtonActive(false);
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+  },[email,password]);
   return (
     <>
       <div
