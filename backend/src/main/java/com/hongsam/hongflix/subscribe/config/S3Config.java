@@ -37,7 +37,7 @@
 //                .withCredentials(new AWSStaticCredentialsProvider(credentials))
 //                .build();
 //    }
-//
+////
 //    @Bean
 //    public MultipartProperties multipartProperties() {
 //        MultipartProperties properties = new MultipartProperties();
