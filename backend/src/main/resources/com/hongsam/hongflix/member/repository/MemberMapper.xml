@@ -36,7 +36,7 @@
     </select>
 
     <insert id="userMovieWatch">
-        insert into memberWatch (userId,movieId) values (#{memberId}, #{movieId});
+        insert ignore into memberWatch (userId,movieId) values (#{memberId}, #{movieId});
     </insert>
 
     <select id="findLatestWatchMovies" resultType="Movie">
