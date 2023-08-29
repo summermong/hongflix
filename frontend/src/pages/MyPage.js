@@ -41,6 +41,7 @@ const MyPage = ({ userInfo, fetchLogined }) => {
           .post(apiUrl, requestData, { withCredentials: true })
           .then((res) => {
             console.log('API 요청 성공:', res.data);
+            navigator(-1);
           })
           .catch((err) => {
             console.error('API 요청 실패:', err);

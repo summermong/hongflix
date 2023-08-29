@@ -35,7 +35,7 @@ const Modal = ({
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
       <div
-        className="relative flex flex-col justify-evenly w-3/4 h-4/5 bg-indigo-950 rounded-md shadow-2xl lg:w-1/3 lg:h-3/4"
+        className="relative flex flex-col justify-evenly w-3/4 h-4/5 bg-indigo-950 rounded-md shadow-2xl lg:w-1/3 lg:h-3/4 p-3"
         onClick={closeModal}
       >
         <div>
@@ -52,16 +52,18 @@ const Modal = ({
           />
         </div>
         {movieData && (
-          <div className="text-white p-3 text-xs justify-center sm:text-sm md:text-base lg:text-base text-center">
-            <div className="font-semibold">{modalTitle}</div>
+          <div className="text-white p-3 text-lg justify-center sm:text-sm md:text-base lg:text-base text-center">
+            <div className="font-semibold text-xl">{modalTitle}</div>
             <div className="">장르: {modalGenre}</div>
             <div className="">공개일: {modalCreatedDate}</div>
-            <div className="py-4 w-full break-words">{modalExplanation}</div>
+            <div className="py-4 px-3 text-center break-words">
+              {modalExplanation}
+            </div>
           </div>
         )}
-        <div className="p-3">
+        <div className="p-1">
           <button
-            className="bg-white text-indigo-950 rounded-sm mb-3 w-full font-bold py-1 text-sm md:text-base lg:text-xl"
+            className="bg-white text-indigo-950 rounded-sm w-full font-bold py-1 text-sm md:text-base lg:text-xl"
             onClick={handleButtonClick} // 수정: 버튼 클릭 핸들러 사용
           >
             지금 바로 보러 가기
