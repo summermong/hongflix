@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import styles from './Auth.module.css';
-import { Link } from 'react-router-dom';
 
 export default function LoginForAdmin({
   inputValue,
