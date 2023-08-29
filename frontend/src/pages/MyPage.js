@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 const MyPage = ({ userInfo, fetchLogined }) => {
   useEffect(() => {
     fetchLogined();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const Payment = () => {
