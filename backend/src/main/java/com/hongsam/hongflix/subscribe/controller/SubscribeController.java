@@ -6,6 +6,7 @@ import com.hongsam.hongflix.subscribe.domain.SubscribeDto;
 import com.hongsam.hongflix.subscribe.domain.SubscribeUpdateDto;
 import com.hongsam.hongflix.subscribe.service.SubscribeService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
