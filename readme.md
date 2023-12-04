@@ -19,6 +19,9 @@
 - DevOps: Docker, Jenkins, AWS
 - Com: Github, Slack, Discord, Notion
 
+## 인프라 구조
+![image](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fu8Jl4%2FbtssCvrvZge%2FPBg9E2pQldeEZxJVsKtpqk%2Fimg.png)
+
 ## 폴더 구조
 ```plaintext
 📦src
